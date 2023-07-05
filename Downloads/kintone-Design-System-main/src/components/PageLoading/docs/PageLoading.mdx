@@ -1,0 +1,49 @@
+import { Meta } from '@storybook/blocks';
+import * as PageLoadingStories from '../stories/PageLoading.stories';
+
+import anatomy from './images/anatomy.png';
+
+<Meta title="Components/PageLoading" of={PageLoadingStories} />
+
+# PageLoading
+
+[Figma](https://www.figma.com/file/0EL4UsBtC46KFG7WkKreiYi5/%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components?node-id=10848%3A7550)
+
+## 概要
+
+PageLoadingはページ全体に関わるユーザーアクションが実行中であること、またはページ全体が読み込み中であることを示します。
+
+## 構成
+
+<img src={anatomy} alt="Anatomy の図" />
+
+- Spinner
+  - 読み込み中を表現するアイコンです。アニメーションによって回転します。
+- Label
+  - 読み込み中を示すテキストです。
+  - テキストは「Now loadng…」で固定です。変更できません。
+
+## 操作の仕様
+
+- PageLoadingは閲覧専用のコンポーネントです。ユーザーの操作を受け付けません。
+- PageLoadingが表示されているとき、PageLoading以外のコンテンツは閲覧・操作できません。
+
+### マウス
+
+- PageLoading以外のコンテンツは、マウスで操作できません。
+
+### キーボード
+
+- PageLoading以外のコンテンツは、キーボードで操作できません。
+
+### スクリーンリーダー
+
+- PageLoading以外のコンテンツは、スクリーンリーダーで認識できません。
+- Spinnerはスクリーンリーダーに無視されます。
+- 読み込み開始時に、スクリーンリーダーはLabelを読み上げます。
+
+## 見た目の仕様
+
+### 表示位置
+
+PageLoadingは縦横ともにbody要素の中心に描画されます。

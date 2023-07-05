@@ -1,0 +1,132 @@
+{
+  "name": "@kintone-private/kintone-ui",
+  "author": "kintone Design System Team",
+  "license": "UNLICENSED",
+  "version": "7.6.0",
+  "main": "cjs/index.js",
+  "module": "es/index.js",
+  "types": "types/index.d.ts",
+  "sideEffect": false,
+  "exports": {
+    ".": {
+      "import": "./es/index.js",
+      "require": "./cjs/index.js"
+    }
+  },
+  "files": [
+    "es",
+    "cjs",
+    "types"
+  ],
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "engines": {
+    "node": ">=v18.13.0"
+  },
+  "scripts": {
+    "markdownlint": "markdownlint-cli2",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "NODE_ENV=development storybook build",
+    "lint": "eslint ./src --ext ts,tsx,js,jsx",
+    "lint:fix": "npm run lint -- --fix",
+    "textlint": "npx textlint ./src",
+    "textlint:fix": "npx textlint ./src --fix",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run lint && npm run typecheck",
+    "test": "jest",
+    "build": "run-p build:*",
+    "build:esm": "FORMAT=es vite build",
+    "build:cjs": "FORMAT=cjs vite build",
+    "build:type": "tsc -p tsconfig.build.json",
+    "chromatic": "chromatic --exit-zero-on-changes",
+    "token-transform": "token-transformer src/designTokens/tokens.json src/designTokens/_transformedTokens.json global,semantic global",
+    "build-style-dictionary": "style-dictionary build -c ./style-dictionary.config.js"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.22.6",
+    "clsx": "^1.2.1",
+    "dayjs": "1.11.8",
+    "dompurify": "^3.0.3",
+    "focus-options-polyfill": "1.6.0",
+    "immer": "^9.0.21",
+    "polished": "^4.2.2",
+    "textlint": "^13.3.2",
+    "textlint-filter-rule-allowlist": "^4.0.0",
+    "textlint-rule-preset-ja-spacing": "^2.3.0",
+    "textlint-rule-preset-ja-technical-writing": "^7.0.0",
+    "wicg-inert": "^3.1.2"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2 || ^18.0.0",
+    "react-dom": "^17.0.2 || ^18.0.0",
+    "styled-components": "^5.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.6",
+    "@babel/plugin-transform-runtime": "^7.22.6",
+    "@babel/plugin-transform-typescript": "^7.22.5",
+    "@babel/preset-env": "^7.22.6",
+    "@babel/preset-react": "^7.22.5",
+    "@babel/preset-typescript": "^7.22.5",
+    "@cybozu/eslint-config": "^18.0.3",
+    "@mdx-js/react": "^1.6.22",
+    "@storybook/addon-actions": "^7.0.20",
+    "@storybook/addon-docs": "^7.0.20",
+    "@storybook/addon-essentials": "^7.0.20",
+    "@storybook/addon-interactions": "^7.0.20",
+    "@storybook/addon-links": "^7.0.20",
+    "@storybook/jest": "^0.1.0",
+    "@storybook/react": "^7.0.20",
+    "@storybook/react-vite": "^7.0.22",
+    "@storybook/testing-library": "^0.1.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/dompurify": "^2.4.0",
+    "@types/jest": "^29.5.2",
+    "@types/jest-axe": "^3.5.5",
+    "@types/mdx": "^2.0.5",
+    "@types/node": "^18.16.18",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@types/styled-components": "^5.1.26",
+    "@vitejs/plugin-react": "^3.1.0",
+    "babel-jest": "^29.5.0",
+    "babel-plugin-styled-components": "^2.1.4",
+    "chromatic": "^6.19.9",
+    "eslint": "^8.43.0",
+    "eslint-plugin-storybook": "^0.6.12",
+    "jest": "^29.5.0",
+    "jest-axe": "^7.0.1",
+    "jest-environment-jsdom": "^29.5.0",
+    "jest-styled-components": "^7.1.1",
+    "markdownlint-cli2": "^0.8.1",
+    "mockdate": "^3.0.5",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.8.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-markdown": "^8.0.7",
+    "remark-breaks": "^3.0.3",
+    "remark-gfm": "^3.0.1",
+    "storybook": "^7.0.20",
+    "storybook-addon-pseudo-states": "^2.0.1",
+    "style-dictionary": "^3.8.0",
+    "styled-components": "^5.3.11",
+    "token-transformer": "^0.0.33",
+    "typescript": "5.1",
+    "vite": "^4.3.9"
+  },
+  "overrides": {
+    "@mdx-js/react": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    },
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@storybook/components": "^7.0.20",
+    "@storybook/theming": "^7.0.20"
+  }
+}

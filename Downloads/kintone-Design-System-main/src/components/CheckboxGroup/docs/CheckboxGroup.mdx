@@ -1,0 +1,42 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as CheckboxGroupStories from '../stories/CheckboxGroup.stories';
+
+import anatomy from './images/anatomy.png';
+
+<Meta title="Components/CheckboxGroup" of={CheckboxGroupStories} />
+
+# CheckboxGroup
+
+[Figma](https://www.figma.com/file/73iDlwTUsZNgarlcz2n2Mz/Anatomy%E3%81%AE%E5%9B%B3?node-id=373%3A776)
+
+## 概要
+
+CheckboxGroupは、複数の[Checkbox](?path=/docs/components-checkbox--docs)を持つセットグループです。
+
+以下の用途で用いられます：
+
+- 2個以上のCheckboxから特定のCheckboxを指定するとき
+
+## 構成
+
+<img src={anatomy} alt="CheckboxGroupの解剖図" />
+
+- CheckboxGroup
+  - 複数のCheckboxを持ちます
+  - [Checkbox（構成）のリンク](?path=/docs/components-checkbox--docs#構成)
+
+## 状態
+
+- [Checkbox（状態）のリンク](?path=/docs/components-checkbox--docs#状態)
+
+## 操作の仕様
+
+- [Checkbox（操作の仕様）のリンク](?path=/docs/components-checkbox--docs#操作の仕様)
+
+## 見た目の仕様
+
+- CheckboxGroupのなかで、Checkboxは横並びです
+- 表示幅が足りなくなったとき、Checkboxを下段に折り返していきます
+- 余白はCheckboxとCheckboxの間に、CheckboxGroupが余白を持ちます
+
+<Stories />

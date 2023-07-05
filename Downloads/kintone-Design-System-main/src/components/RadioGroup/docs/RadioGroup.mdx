@@ -1,0 +1,60 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as RadioGroupStories from '../stories/RadioGroup.stories';
+import { Notes } from '../../../docs/notes';
+import anatomy from './images/anatomy.png';
+import normal from './images/normal.png';
+import disabled from './images/disabled.png';
+
+<Meta title="Components/RadioGroup" of={RadioGroupStories} />
+
+# RadioGroup
+
+[Figma](https://www.figma.com/file/0EL4UsBtC46KFG7WkKreiYi5/%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components?node-id=9410%3A72038)
+
+## 概要
+
+RadioGroupは、複数の[Radio](?path=/docs/components-radio--docs)を持つセットグループです。
+
+以下の用途で用いられます：
+
+- 2個以上のRadioButtonから特定のRadioButtonを指定するとき
+
+<Notes>
+  {`現状、RadioGroupコンポーネントを使用せず、複数のRadioコンポーネントでRadioGroupを表現している場合があります。`}
+</Notes>
+
+## 構成
+
+<img src={anatomy} alt="RadioGroupの解剖図" />
+
+- RadioGroup
+  - 複数のRadioButtonを配置します
+  - 単体のRadioButtonについては、[RadioButton（構成）](?path=/docs/components-radio--docs#構成)を参照
+
+## 状態
+
+- 単体のRadioButtonについては[RadioButton（状態）](?path=/docs/components-radio--docs#状態)を参照
+
+### Normal
+
+- 個々のRadioButtonの操作を受け付けます
+
+<img src={normal} alt="Normalのスクリーンショット" />
+
+### Disabled
+
+- すべてのRadioButtonが無効になり、操作を受け付けません
+
+<img src={disabled} alt="Disabledのスクリーンショット" />
+
+## 操作の仕様
+
+[RadioButton（操作の仕様）](?path=/docs/components-radio--docs#操作の仕様)を参照。
+
+## 見た目の仕様
+
+- RadioButtonは横並びです
+- RadioButtonとRadioButtonの間に余白があります
+- 表示幅が足りなくなったとき折り返します
+
+<Stories />

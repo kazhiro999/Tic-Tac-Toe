@@ -1,0 +1,21 @@
+{
+  "config": {
+    // MD013 行の長さ
+    "line-length": false,
+    // MD024 同じheading階層で同じ名前のものがないようにする
+    "no-duplicate-header": {
+      "siblings_only": true
+    },
+    // MD041 mdxとしてimportなどが先頭にくるので抑止
+    "first-line-h1": false,
+    // MD038 バッククォートを使ったコード表現を使うことがあるので抑止
+    "no-space-in-code": false,
+    // MD029 番号リストの間に画像を入れるパターンでうまく動作しないので抑止
+    "ol-prefix": false,
+    // MD033 JSXやimageを利用するのでHML表現を許容
+    "no-inline-html": false,
+    // MD034 storybookが壊れるのでURLをリンクにしない
+    "no-bare-urls": false
+  },
+  "ignores": [".git", "node_modules"]
+}

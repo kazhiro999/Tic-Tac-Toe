@@ -1,0 +1,23 @@
+name: check markdown
+
+on:
+  pull_request:
+    paths:
+      - 'src/**/*.mdx?'
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.node-version'
+          registry-url: https://npm.pkg.github.com/
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run markdownlint 'src/**/*.md[x]'

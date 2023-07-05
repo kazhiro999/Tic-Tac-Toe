@@ -1,0 +1,43 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title='gettingStarted/developing/kintone-ui を取り込むときに参照するリンク' />
+
+# kintone-ui を取り込むときに参照するリンク
+
+## 仕様書
+
+### コンポーネントの仕様書
+
+kDSチームは、ストーリーブック上でコンポーネントのカタログと仕様書を管理しています。<br/>
+[Canvas]タブでカタログを、[Docs]タブで仕様書を閲覧できます。
+
+例：
+
+- [Button コンポーネントのカタログ](?path=/story/components-button--normal-size-large)
+- [Button コンポーネントの docs](?path=/docs/components-button--docs)
+- [Dropdown コンポーネントのカタログ](?path=/story/components-dropdown--normal)
+- [Dropdown コンポーネントの docs](?path=/docs/components-dropdown--docs)
+
+## リリース
+
+- [バージョニングポリシー](?path=/docs/contributing-バージョニングポリシー--docs)
+- [releases](https://github.com/kintone-private/kintone-Design-System/releases)
+
+## 試験関連
+
+コンポーネントの仕様書に記載されている操作や見た目については、kDSチームでテストしています。<br/>
+kintone-uiを取り込む利用者側は、取り込んだことで不具合やスタイル崩れが生じないかを確認してください。<br/>
+試験の影響範囲や観点を確認する手順を下記に記載します。
+
+1. どのバージョンを取り込むのかを確認します。
+1. [releases](https://github.com/kintone-private/kintone-Design-System/releases)から、該当のバージョンのリリースノートを確認します。リリースノートには、プルリクエストのタイトルとリンクが並んでいます。
+1. 各プルリクエストの「変更内容」と「kintone-uiを利用するチームへの申し送り」を確認します。
+1. デザイン変更やコード変更を伴うプルリクエストを取り込む場合は、必要に応じて試験をします。
+
+[（利用側で試験が必要なプルリクエストの例）Button コンポーネントの共通化・サイズの整理 #1228](https://github.com/kintone-private/kintone-Design-System/pull/1228)
+
+## 不具合・要望
+
+不具合報告や機能リクエストを受け付けています。<br/>
+登録いただいた不具合・要望は、kDSチームで優先度を設定して対応します。<br/>
+詳細は[不具合や要望をフィードバック](?path=/docs/contributing-不具合や要望をフィードバック--docs)を参照してください。

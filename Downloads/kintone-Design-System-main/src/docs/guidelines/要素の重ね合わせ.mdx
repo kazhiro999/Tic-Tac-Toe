@@ -1,0 +1,21 @@
+import { Meta } from '@storybook/addon-docs';
+import { Notes } from '../notes';
+
+<Meta title='guidelines/要素の重ね合わせ' />
+
+# 要素の重ね合わせ
+
+## ポップアップとヘッダー／ページアクションバーの重ね合わせ
+
+ポップアップは常にヘッダー／ページアクションバーより上に表示する。ここでポップアップとは、たとえば以下を指す：
+
+- ComboboxコンポーネントのListboxPopup
+- DropdownコンポーネントのDropdown Menu Popup Container
+- MenuコンポーネントのMenuPopup
+
+<Notes subtitle="ポップアップをヘッダー／ページアクションバーよりも上に表示する理由">
+  {`ポップアップをヘッダー／ページアクションバーより下に表示してしまうと、ポップアップの一部が隠れてしまい操作できなくなってしまうことがあるため。
+  ポップアップがヘッダー／ページアクションバーに隠れないようにポップアップの高さを調整するためには、kintone側からヘッダー／ページアクションバーの高さを受け取る必要があり、インターフェースとして不自然になってしまう。`}
+</Notes>
+
+詳しい調査結果は[Discussions](https://github.com/kintone-private/kintone-Design-System/discussions/993)を参照すること。

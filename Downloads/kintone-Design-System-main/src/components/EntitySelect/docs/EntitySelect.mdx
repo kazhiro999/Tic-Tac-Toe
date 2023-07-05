@@ -1,0 +1,786 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as EntitySelectStories from '../stories/EntitySelect.stories';
+import { Notes } from '../../../docs/notes.tsx';
+
+import anatomySearch from './images/anatomy_search.svg';
+import anatomySearchResultEntityPopup from './images/anatomy_SearchResultEntityPopup.svg';
+import anatomySelectedEntityList from './images/anatomy_SelectedEntityList.svg';
+import anatomyPickerDialog from './images/anatomy_PickerDialog.svg';
+import anatomyPickerDialogBody from './images/anatomy_PickerDialogBody.svg';
+import anatomyDirectoryTree from './images/anatomy_DirectoryTree.svg';
+import anatomyBelongedEntityList from './images/anatomy_BelongedEntityList.svg';
+import stateTabSelected from './images/state_TabSelected.svg';
+import stateTabFocusSelected from './images/state_TabFocusSelected.svg';
+import stateTabUnselected from './images/state_TabUnselected.svg';
+import stateSelectAllEntityCheckboxChecked from './images/state_SelectAllEntityCheckboxChecked.svg';
+import stateSelectAllEntityCheckboxUnchecked from './images/state_SelectAllEntityCheckboxUnchecked.svg';
+import stateDirectoryNodeActiveSelected from './images/state_DirectoryNodeActiveSelected.svg';
+import stateDirectoryNodeActiveUnselected from './images/state_DirectoryNodeActiveUnselected.svg';
+import stateDirectoryNodeInactiveSelected from './images/state_DirectoryNodeInactiveSelected.svg';
+import stateDirectoryNodeInactiveUnselected from './images/state_DirectoryNodeInactiveUnselected.svg';
+import stateDirectoryNodeExpanded from './images/state_DirectoryNodeExpanded.svg';
+import stateDirectoryNodeCollapse from './images/state_DirectoryNodeCollapse.svg';
+import stateBelongedEntityActiveSelected from './images/state_BelongedEntityActiveSelected.svg';
+import stateBelongedEntityActiveUnselected from './images/state_BelongedEntityActiveUnselected.svg';
+import stateBelongedEntitySelected from './images/state_BelongedEntitySelected.svg';
+import stateBelongedEntityUnselected from './images/state_BelongedEntityUnselected.svg';
+import stateAddEntityButton from './images/state_AddEntityButton.svg';
+import close from './images/close.png';
+import open from './images/open.png';
+import active from './images/active.png';
+
+<Meta title="Components/EntitySelect⚠️" of={EntitySelectStories} />
+
+# EntitySelect⚠️
+
+[Figma](<https://www.figma.com/file/700C41AgyFQyF4DT0X7jyi/kintone-Design-System-(%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%8D%E3%83%B3%E3%83%88%E3%83%AA%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%A2%E3%83%AB)?node-id=1097%3A1260&t=JpGo2v6kfqLzUOCo-1)>)
+
+<Notes
+  variant="WARNING"
+  children="React化したときに本体側にローカルコンポーネントとして作られたものを、後々kintone-uiに切り出しています。
+そのため実装に本体と密結合な部分が残っています（たとえば型定義がkintone-ui側とkintone本体側とで二重管理になっています）
+EntitySelectを修正するとき・利用時にわからないことがあれば [kDS Slack](https://cybozu.slack.com/archives/C02NWSGMZB8) までご連絡ください。"
+/>
+
+## 概要
+
+Entity（ユーザー、組織、グループ）を検索・選択するパーツです。
+
+## 構成
+
+Entityは、EntitySelectによって選択される、ユーザー、組織、グループを表します。
+
+Directoryは、Entityの候補を絞り込むための集合です。
+
+### Search
+
+<img src={anatomySearch} alt="Search部分のAnatomyの図" />
+
+- Search
+  - SearchBoxとSearchButtonの総称です
+- SearchBox
+  - Entityを検索するテキストボックスです
+- Value
+  - SearchBoxに入力したテキストです
+- Placeholder
+  - EntitySelectの使い方を示すヒントです
+  - Valueが未入力の時に表示されます
+- SearchButton
+  - SearchResultEntityPopupを開閉するボタンです
+- OpenPickerDialogButton
+  - PickerDialogをOpen状態にするボタンです
+
+### SearchResultEntityPopup
+
+<img
+  src={anatomySearchResultEntityPopup}
+  alt="SearchResultEntityPopup部分のAnatomyの図"
+/>
+
+- SearchResultEntityPopup
+  - 検索結果のSearchResultEntityが集合したポップアップです
+- SearchResultEntity
+  - EntityIcon、EntityLabelを含みます
+  - SearchBoxのValueで絞り込まれた個々の検索結果を表します
+- EntityIcon
+  - 検索結果のEntityの種別（ユーザー、組織、グループ）を表すアイコンです
+- EntityLabel
+  - 検索結果のEntityの名前を示すテキストです
+
+### SelectedEntityList
+
+<img
+  src={anatomySelectedEntityList}
+  alt="SelectedEntityList部分のAnatomyの図"
+/>
+
+- SelectedEntityList
+  - SelectedEntityが集合したリストです
+- SelectedEntity
+  - 選択しているEntityを表します
+  - EntityIcon、EntityLabel、RemoveEntityButtonを含みます
+- EntityIcon
+  - 選択しているEntityの種別（ユーザー、組織、グループ）を表すアイコンです
+- EntityLabel
+  - 選択しているEntityの名前を示すテキストです
+- RemoveEntityButton
+  - Entityを選択解除するボタンです
+
+### PickerDialog
+
+<img src={anatomyPickerDialog} alt="PickerDialog部分のAnatomyの図" />
+
+- PickerDialog
+  - Entityを選択するためのフォームが表示されます
+  - PickerDialogHeader、PickerDialogBody、PickerDialogActionsを含みます
+- PickerDialogHeader
+  - PickerDialogTitle、ClosePickerDialogButtonを含みます
+- PickerDialogTitle
+  - PickerDialogで完遂したいアクションを簡潔に説明するタイトルです
+- ClosePickerDialogButton
+  - PickerDialogをClose状態にするボタンです
+- PickerDialogBody
+  - アクションを完遂するために必要なフォームが表示されます
+- PickerDialogActions
+  - CancelButtonとAddEntityButtonを含みます
+- CancelButton
+  - 操作中のアクションを中断し、PickerDialogをClose状態にするボタンです
+- AddEntityButton
+  - Selected状態のBelongedEntityを追加するボタンです
+  - ラベルの末尾にSelected状態のBelongedEntityの件数が表示されます
+- Overlay
+  - PickerDialogの下に表示されているコンテンツを覆い隠します
+
+### PickerDialogBody の中身
+
+<img
+  src={anatomyPickerDialogBody}
+  alt="PickerDialogBody の中身の部分のAnatomyの図"
+/>
+
+- PickerDialogBody
+  - アクションを完遂するために必要なフォームが表示されます
+- TabList
+  - Tabの総称です
+- Tab
+  - TabPanelに表示するコンテンツを切り替えるための要素です
+  - 「組織」・「グループ」・「その他」の最大3つ表示されます
+  - ひとつだけTabをSelected状態にできます
+- TabPanel
+  - Selected状態のTabの内容が表示されます
+- SelectAllEntityCheckbox
+  - すべてのBelongedEntityをSelected状態またはUnSelected状態にするためのチェックボックスです
+- DirectoryTree
+  - Directoryをツリー構造で表示します
+  - Selected状態のTabに応じて内容が変化します
+- BelongedEntityList
+  - Selected状態のDirectoryNodeに応じて、所属するEntityの一覧を表示します
+
+### DirectoryTree
+
+<img src={anatomyDirectoryTree} alt="DirectoryTree部分のAnatomyの図" />
+
+- DirectoryTree
+  - Directoryをツリー構造で表示します
+  - Selected状態のTabに応じて内容が変化します
+- DirectoryNode
+  - 個々のDirectoryを表します
+  - SelectDirectoryButtonとCollapseAndExpandChildNodeButtonを含みます
+- SelectDirectoryButton
+  - DirectoryNodeをSelected状態にするためのボタンです
+- DirectoryLabel
+  - 対象のDirectoryの名称を表すテキストです
+- CollapseAndExpandChildNodeButton
+  - DirectoryNodeに紐づく子改装を開閉するボタンです
+  - Directoryの種類が組織の場合にのみ表示されます
+
+### BelongedEntityList
+
+<img
+  src={anatomyBelongedEntityList}
+  alt="BelongedEntityList部分のAnatomyの図"
+/>
+
+- BelongedEntityList
+  - BelongedEntityが集合した要素です
+  - Selected状態のDirectoryNodeに応じて、所属するEntityの一覧を表示します
+- BelongedEntity
+  - Selected状態のDirectoryNodeに所属する個々のEntityを表します
+  - EntityIcon、EntityLabelを含みます
+  - 互い違いに異なる背景色で表示されます
+- EntityIcon
+  - Entityの種別（ユーザー、組織、グループ）を表すアイコンです
+- EntityLabel
+  - Entityの名前を示すテキストです
+- ReadMoreButton
+  - BelongedEntityをさらに100件読み込み表示するボタンです
+  - BelongedEntityが101件以上ある時に表示されます
+
+## 状態
+
+### Close(SearchResultEntityPopup)
+
+- SearchResultEntityPopupが閉じている状態です
+
+<img src={close} alt="Close状態のスクリーンショット" />
+
+### Open(SearchResultEntityPopup)
+
+- SearchResultEntityPopupが開いている状態です
+- 検索でヒットしたSearchResultEntityが表示されます
+
+<img src={open} alt="SearchResultEntityPopupのOpen状態のスクリーンショット" />
+
+### Active(SearchResultEntity)
+
+- SearchResultEntityが操作対象にある状態です
+- SearchResultEntityの背景色が濃色に変わります
+
+<img src={active} alt="SearchResultEntityのActive状態のスクリーンショット" />
+
+### Inactive(SearchResultEntity)
+
+- SearchResultEntityが操作対象ではない状態です
+
+### Open(PickerDialog)
+
+- PickerDialogが開いている状態です
+- Open直後、PickerDialog全体にフォーカスします
+
+### Close(PickerDialog)
+
+- PickerDialogが閉じている状態です
+
+### Selected(Tab)
+
+- 該当のTabが選択された状態です
+- 背景色は白色です
+- Selected状態にしたTabに応じて、TabPanel内のDirectoryTreeとBelongedEntityListの内容が変化します
+
+Selected状態：
+
+<img src={stateTabSelected} alt="TabのSelected状態のスクリーンショット" />
+
+Selected状態かつFocus状態：
+
+<img
+  src={stateTabFocusSelected}
+  alt="TabがSelected状態の時、Focus状態にした時のスクリーンショット"
+/>
+
+### Unselected(Tab)
+
+- Tabが選択されていない状態です
+- 背景色は灰色で、Shadowがあります
+
+<img src={stateTabUnselected} alt="TabのUnselected状態のスクリーンショット" />
+
+### Checked(SelectAllEntityCheckbox)
+
+- チェックマーク付きのチェックボックスです
+- すべてのBelongedEntityがSelected状態になります
+
+<img
+  src={stateSelectAllEntityCheckboxChecked}
+  alt="Checked状態のスクリーンショット"
+/>
+
+<Notes>
+  {`ただし、チェック状態はBelongedEntityの選択状態に追従しません。
+  チェックボックスを操作した時のみChecked/Unchecked状態に切り替わります。`}
+</Notes>
+
+### Unchecked(SelectAllEntityCheckbox)
+
+- チェックマークなしのチェックボックスです
+- すべてのBelongedEntityがUnselected状態になります
+
+<img
+  src={stateSelectAllEntityCheckboxUnchecked}
+  alt="Unchecked状態のスクリーンショット"
+/>
+
+<Notes>
+  {`ただし、チェック状態はBelongedEntityの選択状態に追従しません。
+  チェックボックスを操作した時のみChecked/Unchecked状態に切り替わります。`}
+</Notes>
+
+### Selected(DirectoryNode)
+
+- 該当のDirectoryNodeを選択した状態です
+- 前景色は白色で、背景色は青色です
+- DirectoryNodeのSelected状態に応じて、BelongedEntityListの表示内容が切り替わります
+
+<img
+  src={stateDirectoryNodeInactiveSelected}
+  alt="DirectoryNodeがSelected状態の時、Inactive状態にした時のスクリーンショット"
+/>
+
+### Unselected(DirectoryNode)
+
+- DirectoryNodeが選択されていない状態です
+
+<img
+  src={stateDirectoryNodeInactiveUnselected}
+  alt="DirectoryNodeがUnselected状態の時、Inactive状態にした時のスクリーンショット"
+/>
+
+### Active(DirectoryNode)
+
+- DirectoryNodeが操作対象にある状態です
+- Inactive状態のときと比べて背景色が変化します
+
+<Notes variant="WARNING">
+  {`現状ではマウスホバーして Active状態になっても、キーボード操作対象になりません。
+  Issue登録済み：https://github.com/kintone-private/kintone-Design-System/issues/1254`}
+</Notes>
+
+Selected状態かつActive状態：
+
+<img
+  src={stateDirectoryNodeActiveSelected}
+  alt="DirectoryNodeがSelected状態の時、Active状態にした時のスクリーンショット"
+/>
+
+UnSelected状態かつActive状態：
+
+<img
+  src={stateDirectoryNodeActiveUnselected}
+  alt="DirectoryNodeがUnselected状態の時、Active状態にした時のスクリーンショット"
+/>
+
+### Inactive(DirectoryNode)
+
+- DirectoryNodeが操作対象ではない状態です
+
+### Collapse(DirectoryNode)
+
+- DirectoryNodeが閉じている状態です
+- 右矢印のアイコンでノードを展開できることを表します
+
+<img
+  src={stateDirectoryNodeCollapse}
+  alt="Collapsed状態のDirectoryNodeのスクリーンショット"
+/>
+
+### Expanded(DirectoryNode)
+
+- DirectoryNodeが開いている状態です
+- 子階層のDirectoryNodeが追加表示されます
+- 下矢印のアイコンでノードが展開されていることを表します
+
+<img
+  src={stateDirectoryNodeExpanded}
+  alt="Expanded状態のDirectoryNodeのスクリーンショット"
+/>
+
+### Selected(BelongedEntity)
+
+- 該当のBelongedEntityが選択された状態です
+- 単一選択の場合は、それ以外のBelongedEntityがUnselected状態になります
+
+<img
+  src={stateBelongedEntitySelected}
+  alt="BelongedEntityのSelected状態のスクリーンショット"
+/>
+
+### Unselected(BelongedEntity)
+
+- BelongedEntityが選択されていない状態です
+
+<img
+  src={stateBelongedEntityUnselected}
+  alt="BelongedEntityのUnselected状態のスクリーンショット"
+/>
+
+### Active(BelongedEntity)
+
+- BelongedEntityが操作対象にある状態です
+- 前景色・背景色が変化します
+- Active状態にする方法とSelected状態かどうかによって、前景色・背景色の変化がそれぞれ異なります
+
+Selected状態かつActive状態：
+
+<img
+  src={stateBelongedEntityActiveSelected}
+  alt="BelongedEntityのActive状態かつSelected状態のスクリーンショット"
+/>
+
+Unselected状態かつActive状態：
+
+<img
+  src={stateBelongedEntityActiveUnselected}
+  alt="BelongedEntityのActive状態かつUnselected状態のスクリーンショット"
+/>
+
+<Notes variant="WARNING">
+  {`現状ではマウスホバーして Active状態になっても、キーボード操作対象になりません。
+  Issue登録済み：https://github.com/kintone-private/kintone-Design-System/issues/1254`}
+</Notes>
+
+### Inactive(BelongedEntity)
+
+- BelongedEntityが操作対象ではない状態です
+
+### Disabled(AddEntityButton)
+
+- BelongedEntityが一つもSelected状態になっていない時の状態です
+- ボタンを押すことはできません
+
+<img
+  src={stateAddEntityButton}
+  alt="AddEntityButtonのDisabled状態のスクリーンショット"
+/>
+
+## 操作の仕様
+
+### マウス
+
+#### Combobox 周辺の操作
+
+- SearchButtonをクリック
+  - 検索結果がヒットしている且つClose状態の時、 Open状態になります
+- OpenPickerDialogButtonをクリック
+  - PickerDialogがOpen状態になります
+  - PickerDialog全体にフォーカスします
+- SearchResultEntityをホバー
+  - 該当のSearchResultEntityがActive状態になります
+  - 省略表示されることなく、EntityLabelの全文がツールチップで表示されます
+- SearchResultEntityをクリック
+  - 該当のSearchResultEntityがSelectedEntityListの末尾に追加されます。
+    ただし、すでにSelectedEntityListに追加済みの場合は、再度追加されることはありません
+  - Close状態になります
+  - SearchBoxのValueがクリアされます
+- SearchResultPopupの枠外をクリック
+  - Close状態になります
+- SelectedEntityのEntityLabelをホバー
+  - 省略表示されることなく、EntityLabelの全文がツールチップで表示されます
+- RemoveEntityButtonをクリック
+  - 該当のSelectedEntityが削除されます
+
+#### PickerDialog 内の操作
+
+- ClosePickerDialogButtonをクリック
+  - PickerDialogがClose状態になります
+  - OpenPickerDialogButtonにフォーカスします
+- CancelButtonをクリック
+  - PickerDialogがClose状態になります
+  - OpenPickerDialogButtonにフォーカスします
+- AddEntityButtonをクリック
+  - Selected状態のBelongedEntityが、SelectedEntityListの末尾に追加されます
+    ただし、すでにSelectedEntityListに追加済みの場合は、再度追加されることはありません
+  - PickerDialogがClose状態になります
+  - OpenPickerDialogButtonにフォーカスします
+- Tabをクリック
+  - そのTabがSelected状態になります
+- SelectDirectoryButtonをホバー
+  - DirectoryNodeがActive状態になります
+  - 省略表示されることなく、DirectoryLabelの全文がツールチップとして表示されます
+- SelectDirectoryButtonをクリック
+  - DirectoryNodeがSelected状態になります
+- CollapseAndExpandChildNodeButtonをクリック
+  - DirectoryNodeのCollapse状態、Expanded状態が切り替わります
+- SelectAllEntityCheckboxをクリック
+  - Unchecked状態、Checked状態が切り替わります
+- BelongedEntityをホバー
+  - 該当のBelongedEntityがActive状態になります
+  - 省略表示されることなく、EntityLabelの全文がツールチップで表示されます
+- BelongedEntityをクリック
+  - Selected状態、Unselected状態が切り替わります
+- ReadMoreButtonをクリック
+  - BelongedEntityが最大100件読み込まれます
+  - 読み込んだ先頭のBelongedEntityにフォーカスします
+
+### キーボード
+
+#### SearchBox
+
+- 文字入力
+  - 検索結果がヒットした場合、Open状態になりヒットしたSearchResultEntityが表示されます
+  - ヒットしない場合はClose状態になります
+- 下矢印
+  - 次のSearchResultEntityがActive状態になります
+- 上矢印
+  - 前のSearchResultEntityがActive状態になります
+- Tab
+  - Open状態の時Close状態になります
+  - 次の要素であるSearchButtonにフォーカスします
+- Shift+Tab
+  - Open状態の時Close状態になります
+  - 前の要素にフォーカスします
+- ESC
+  - Open状態の時Close状態になります
+- Enter
+  - Active状態のSearchResultEntityがSelectedEntityListの末尾に追加されます。
+    ただし、すでにSelectedEntityListに追加済みの場合は、再度追加されることはありません
+  - Close状態になります
+  - SearchBoxのValueがクリアされます
+
+#### SearchButton
+
+- Enter/Space
+  - 検索結果がヒットしている且つClose状態の時、 Open状態になります
+
+#### OpenPickerDialogButton
+
+- Enter/Space
+  - PickerDialogがOpen状態になります
+  - PickerDialog全体にフォーカスします
+
+#### RemoveEntityButton
+
+- Enter/Space
+  - 該当のSelectedEntityが削除されます
+
+#### PickerDialog
+
+- Tab
+  - 次の順序でフォーカスします
+    - ClosePickerDialogButton
+    - Selected状態のTab
+    - DirectoryNode
+    - SelectAllEntityCheckbox
+    - BelongedEntity
+    - CancelButton
+    - AddEntityButton(Disabled状態ではない時)
+  - PickerDialog内でフォーカスループします
+- Shift+Tab
+  - Tabの逆順でフォーカスします
+  - PickerDialog内でフォーカスループします
+- ESC
+  - PickerDialog内がClose状態になります
+  - OpenPickerDialogButtonにフォーカスします
+  - ただし、フォーカスがDirectoryNodeにある場合は、なにも起こりません。
+
+#### ClosePickerDialogButton
+
+- Enter/Space
+  - PickerDialogがClose状態になります
+  - OpenPickerDialogButtonにフォーカスします
+
+#### Tab
+
+TabListの中で、フォーカスできるのはSelected状態のTabひとつのみです。
+フォーカスループはしません。
+
+- 右矢印
+  - 次のTabがSelected状態になり、フォーカスがあたります
+- 左矢印
+  - 前のTabがSelected状態になり、フォーカスがあたります
+
+#### SelectAllEntityCheckbox
+
+- Space
+  - Checked/Unchecked状態が切り替わります
+
+#### DirectoryNode
+
+##### フォーカス対象
+
+フォーカスできるのは、ひとつのDirectoryNodeのみです。
+
+- キーボードで一度もActive状態にしていない時は、先頭のDirectoryNodeにフォーカスします
+- Active状態にしているなら、前回Active状態にしたDirectoryNodeにフォーカスします
+
+##### 操作
+
+- Enter/Space
+  - Selected状態になります
+- 下矢印
+  - 次のDirectoryNodeにフォーカスします
+- 上矢印
+  - 前のDirectoryNodeにフォーカスします
+- 右矢印
+  - 子改装がある時、Expanded状態になります
+- 左矢印
+  - 親改装がある時、現階層を閉じます
+  - Collapse状態の親改装にフォーカスします
+
+#### BelongedEntity
+
+##### フォーカス対象
+
+BelongedEntityListの中で、フォーカスできるのはひとつのBelongedEntityだけです。
+
+- キーボードで一度もActive状態にしていない時は、先頭のBelongedEntityにフォーカスします
+- Active状態にしているなら、前回Active状態にしたBelongedEntityにフォーカスします
+
+##### 操作
+
+- Enter/Space
+  - Selected状態、Unselected状態が切り替わります
+- 下矢印
+  - 次のBelongedEntityにフォーカスします
+  - フォーカスループします
+- 上矢印
+  - 前のBelongedEntityにフォーカスします
+  - フォーカスループします
+
+#### ReadMoreButton
+
+- Enter/Space
+  - BelongedEntityをさらに最大100件読み込み表示します
+  - 読み込んだ最初のBelongedEntityにフォーカスします
+
+#### CancelButton
+
+- Enter/Space
+  - PickerDialogがClose状態になります
+  - OpenPickerDialogButtonにフォーカスします
+
+#### AddEntityButton
+
+- Enter/Space
+  - Selected状態のBelongedEntityがSelectedEntityListの末尾に追加されます
+    ただし、すでにSelectedEntityListに追加済みの場合は、再度追加されることはありません
+  - PickerDialogがClose状態になります
+  - OpenPickerDialogButtonにフォーカスします
+
+## 見た目の仕様
+
+### 幅
+
+#### Search
+
+- すべての構成要素の幅は固定です
+
+#### SearchResultEntityPopup
+
+- wrapEntityLabelがtrueのとき
+  - 最低幅は280pxです
+  - EntityLabelの文字列長に応じて、最大480pxまで伸長します
+    - 最大幅については、280pxより大きすぎない範囲で8の倍数である480pxにしています
+  - EntityLabelの文字列長が幅を超過する場合は折り返し表示されます
+- wrapEntityLabelがfalseのとき
+  - 幅は280pxで固定です
+  - EntityLabelの文字列長が幅を超過する場合、省略記号を表示します
+
+#### SelectedEntityList
+
+- 幅は280pxです
+- wrapEntityLabelがtrueのとき
+  - EntityLabelの文字列長が幅を超過する場合は折り返し表示します
+- wrapEntityLabelがfalseのとき
+  - EntityLabelの文字列長が幅を超過する場合は、省略記号を表示します
+
+#### OpenPickerDialogButton
+
+- 幅は固定です
+
+#### PickerDialog
+
+- 最小幅は400pxです
+- PickerDialogのコンテンツに応じて幅が伸長します
+- PickerDialogHeader、PickerDialogBody、PickerDialogActionsの幅はPickerDialogの幅と同じです
+- ClosePickerDialogButtonの幅は固定です
+- CancelButton、AddEntityButtonの幅は文字列長に応じて伸長します
+
+#### Tablist
+
+- TabListの幅はPickerDialogのコンテンツに応じて伸長します
+- Tabの幅は160pxで固定です
+- PickerDialogの幅と同じです
+
+#### SelectAllEntityCheckbox
+
+- 文字列長に応じて伸長します
+
+#### DirectoryTree
+
+- DirectoryTreeの幅はDirectoryNodeの幅に応じて伸長します
+- 最大幅は320pxです
+- DirectoryNodeの幅はDirectoryLabelの文字列長に応じて伸長します
+- wrapEntityLabelがtrueのとき
+  - DirectoryLabelが幅を超過した場合、折り返し表示します
+- wrapEntityLabelがfalseのとき
+  - DirectoryLabelが幅を超過した場合、省略記号を表示します
+- DirectoryNodeは、階層が深くなるとインデントされます
+- CollapseAndExpandChildNodeButtonの幅は固定です
+
+#### BelongedEntityList
+
+- BelongedEntityListの幅は、BelongedEntityの幅に応じて伸長します
+- 最大幅は476pxです
+- BelongedEntityの幅は、EntityLabelの文字列長に応じて伸長します
+- wrapEntityLabelがtrueのとき
+  - EntityLabelが幅を超過する場合は、折り返し表示します
+- wrapEntityLabelがfalseのとき
+  - EntityLabelが幅を超過する場合は、省略記号を表示します
+- EntityIconの幅は固定です
+- ReadMoreButtonの幅は、文字列長に応じて伸長します
+
+### 高さ
+
+#### Search
+
+- すべての構成要素の高さは固定です
+
+#### SearchResultEntityPopup
+
+- SearchResultEntityの個数に応じて、SearchResultEntityPopupの高さが伸長します
+- 高さの最大値は560pxです
+- SearchResultEntityを表示しきれない場合は、スクロールバーを表示します
+- SearchResultEntityの高さは可変です
+
+#### SelectedEntityList
+
+- SelectedEntityの個数に応じて、SelectedEntityListの高さが伸長します
+- SelectedEntityの高さは可変です
+
+#### PickerDialog
+
+- PickerDialogの高さは、コンテンツの高さに応じて伸長します
+- 最大の高さは画面の高さです
+- PickerDialogHeaderの高さはコンテンツの高さに応じて伸長します
+- 最小幅は64pxです
+- PickerDialogActionsの高さはコンテンツの高さに応じて伸長します
+- PickerDialogBodyの高さはコンテンツの高さに応じて伸長します
+- ClosePickerDialogButtonの高さは固定です
+- CancelButton、AddEntityButtonの高さは、文字列の高さに応じて伸長します
+
+#### Tab
+
+- TabList、Tabの高さは固定です
+
+#### SelectAllEntityCheckbox
+
+- 文字列の高さに応じて伸長します
+
+#### DirectoryTree
+
+- DirectoryNodeの数に応じて伸長します
+- DirectoryNode、SelectDirectoryButtonの高さはコンテンツの高さに応じて伸長します
+- CollapseAndExpandChildNodeButtonの高さは固定です
+
+#### BelongedEntityList
+
+- BelongedEntityの数に応じて伸長します
+- BelongedEntity、ReadMoreButtonの高さはコンテンツの高さに応じて伸長します
+- EntityIconの高さは固定です
+
+### カーソル
+
+- SearchResultEntityをホバーした時、カーソルはPointerです
+- Tabにホバーした時、カーソルはPointerです
+- SelectDirectoryButtonをホバーした時、カーソルはPointerです
+- BelongedEntityをホバーした時、カーソルはPointerです
+- ReadMoreButtonをホバーした時、カーソルはPointerです
+
+### フォーカスインジケーター
+
+- SearchBoxにフォーカスした時、ブラウザ標準のフォーカスインジケーターが表示されます
+- SearchButtonにキーボードでフォーカスした時、ブラウザ標準のフォーカスインジケーターが表示されます
+- OpenPickerDialogButtonにキーボードでフォーカスした時、ブラウザ標準のフォーカスインジケーターが表示されます
+- RemoveEntityButtonにキーボードでフォーカスした時、ブラウザ標準のフォーカスインジケーターが表示されます
+- ClosePickerDialogButtonにキーボードでフォーカスした時、ブラウザ標準のフォーカスインジケーターが表示されます
+- PickerDialogのTabにキーボードでフォーカスした時、ブラウザ標準のフォーカスインジケーターが表示されます
+- CancelButtonにキーボードでフォーカスした時、背景色が変化します
+- AddEntityButtonにキーボードでフォーカスした時、背景色が変化します
+- SelectAllEntityCheckboxにキーボードでフォーカスした時、青い枠線が付きます
+- DirectoryNodeにフォーカスした時、前景色と背景色が変化します
+- BelongedEntityにフォーカスした時、前景色と背景色が変化します
+- ReadMoreButtonにフォーカスした時、背景色が変化します
+
+### 位置
+
+- SearchResultEntityPopupは、Searchの下に表示されます
+- PickerDialogは画面中央に表示されます
+
+### 表示要素の切り替え
+
+- EntityIconは、Entityの種類によって切り替わります
+  - ユーザーの場合は、ユーザーアイコンを表示します。アイコンの指定はアプリケーション側が行います
+  - 組織の場合は、 UserSelectOrganizationIconを表示します
+  - グループの場合は、 UserSelectGroupIconを表示します
+  - その他の場合は、 UserSelectOtherIconを表示します
+- OpenPickerDialogButtonのアイコンは、任意のアイコンを指定できます
+- PickerDialogに表示するTabの種類は、アプリケーション側が指定します
+- SelectAllEntityCheckboxは、複数選択が許可されているときのみ表示されます
+
+## 検索の仕様
+
+- Valueの先頭・末尾にある半角・全角スペースは、検索においてはないものとして扱われます
+- 検索対象のEntityはアプリケーション側が指定します
+- SearchBoxのValueをもとに、SearchResultEntityPopupに表示させるEntityはアプリケーション側が指定します
+
+<Stories />

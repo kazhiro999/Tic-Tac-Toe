@@ -1,0 +1,54 @@
+import { Meta } from '@storybook/addon-docs';
+import triage from './images/triage.jpg';
+
+<Meta title='contributing/不具合や要望をフィードバック' />
+
+# 不具合や要望をフィードバック
+
+随時フィードバックを受け付けています。
+
+- 不具合の報告は、 [🐛 bug report の issue template](https://github.com/kintone-private/kintone-Design-System/issues/new?assignees=&labels=%3Abug%3A+bug+report+%3Abug%3A&template=bug_report.md&title=%5B%F0%9F%90%9BBUG%5D+Bug+Report+Title) からissue登録をお願いします
+- 機能リクエストや要望は [✨ feature request の issue template](https://github.com/kintone-private/kintone-Design-System/issues/new?assignees=&labels=%3Asparkles%3A+feature+request+%3Asparkles%3A&template=feature_request.md&title=%5B%E2%9C%A8REQUEST%5D+Feature+Request+Title) からissue登録をお願いします
+
+## Issue 登録後のフローについて
+
+<img src={triage} alt="不具合/要望の登録からトリアージのフロー図" />
+
+画像は[miro](https://miro.com/app/board/uXjVO_l8Bss=/?moveToWidget=3458764522733526139&cot=14)でも確認できます。
+
+上記のissue templateを使用した場合と、[🐛 bug report 🐛](https://github.com/kintone-private/kintone-Design-System/labels/%3Abug%3A%20bug%20report%20%3Abug%3A)または[✨ feature request ✨](https://github.com/kintone-private/kintone-Design-System/labels/%3Asparkles%3A%20feature%20request%20%3Asparkles%3A)のラベルをissueに付与した場合にkintone Design Systemチームに自動で通知されます。
+
+issueに記載された締め切りを加味した上で、kintone Design Systemチームでトリアージを行います。
+トリアージ後、報告者と影響のあるチームにトリアージ結果を報告します。
+
+### 不具合登録
+
+issueに記載された締め切りを加味して以下の3種類にトリアージします。
+対応しないと判断した場合にはissueをcloseします。
+
+- 即対応
+  - スプリント中に割り込みで対応します
+  - [🐛 優先度：即対応 🐛](https://github.com/kintone-private/kintone-Design-System/labels/%F0%9F%90%9B%E5%84%AA%E5%85%88%E5%BA%A6%EF%BC%9A%E5%8D%B3%E5%AF%BE%E5%BF%9C%F0%9F%90%9B)ラベルを付与します
+- 次スプリント
+  - 次のスプリントで対応します
+  - [🐛 優先度：次のスプリントで対応 🐛](https://github.com/kintone-private/kintone-Design-System/labels/%F0%9F%90%9B%E5%84%AA%E5%85%88%E5%BA%A6%EF%BC%9A%E6%AC%A1%E3%81%AE%E3%82%B9%E3%83%97%E3%83%AA%E3%83%B3%E3%83%88%E3%81%A7%E5%AF%BE%E5%BF%9C%F0%9F%90%9B)ラベルを付与します
+- 余裕がある時にやる
+  - 直接影響を与えない不具合です
+  - 余裕のあるときに対応します
+  - [🐛 優先度：余裕がある時に対応 🐛](https://github.com/kintone-private/kintone-Design-System/labels/%F0%9F%90%9B%E5%84%AA%E5%85%88%E5%BA%A6%EF%BC%9A%E4%BD%99%E8%A3%95%E3%81%8C%E3%81%82%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E5%AF%BE%E5%BF%9C%F0%9F%90%9B)ラベルを付与します
+
+### 機能リクエスト
+
+issueに記載された締め切りを加味して以下の3種類にトリアージします。
+対応しないと判断した場合にはissueをcloseします。
+
+- Must
+  - 交渉の余地のない、kintone Design Systemや利用チームに必要であるもの
+  - [✨ 要望：Must ✨](https://github.com/kintone-private/kintone-Design-System/labels/%E2%9C%A8%E8%A6%81%E6%9C%9B%EF%BC%9AMust%E2%9C%A8)
+- Should
+  - 必要とまではいかないが、重要な価値を発揮するもの
+  - [✨ 要望：Should ✨](https://github.com/kintone-private/kintone-Design-System/labels/%E2%9C%A8%E8%A6%81%E6%9C%9B%EF%BC%9AShould%E2%9C%A8)
+- Could
+  - あるのなお良い機能
+  - 対応しない場合には多少の価値を損なうもの
+  - [✨ 要望：Could ✨](https://github.com/kintone-private/kintone-Design-System/labels/%E2%9C%A8%E8%A6%81%E6%9C%9B%EF%BC%9ACould%E2%9C%A8)

@@ -1,0 +1,104 @@
+import { Stories, Meta, ArgTypes } from '@storybook/blocks';
+import * as InputTextStories from '../stories/InputText.stories';
+
+import anatomy from './images/anatomy.svg';
+import focused from './images/focused.svg';
+import normal from './images/normal.svg';
+import disabled from './images/disabled.png';
+
+<Meta title="Components/InputText" of={InputTextStories} />
+
+# InputText
+
+[Figma](https://www.figma.com/file/0EL4UsBtC46KFG7WkKreiYi5/%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components?node-id=9421%3A65695)
+
+## 概要
+
+ユーザーからの入力を受け付ける単一行テキストフィールドです。
+
+## 構成
+
+<img src={anatomy} alt="InputTextのAnatomyの図" width={500} />
+
+- InputTextBox
+  - ユーザーの入力を受け付けるテキストフィールドです
+- Value
+  - 入力されたテキストです
+- Placeholder(optional)
+  - 入力の仕方や入力例を示すヒントです
+  - Valueが空の時のみ表示されます
+
+## 状態
+
+### Normal
+
+- 初期状態です
+
+<img src={normal} alt="Normal状態のInputText" />
+
+### Focused
+
+- InputTextBoxにフォーカスし、入力を受け付ける状態です
+
+<img src={focused} alt="Focused状態のInputText" />
+
+### Disabled
+
+- 無効化された状態です
+- ユーザーの操作を受け付けません
+  - マウスクリックしても何も起こりません
+  - キーボードでフォーカスもできません
+- InputTextBoxの背景色とValueの文字色がグレーになります
+
+<img src={disabled} alt="Disabled状態のInputText" />
+
+## 操作の仕様
+
+### マウス
+
+- InputTextBoxをクリック
+  - Focused状態になります
+  - 割り当てられたアクションが実行されます
+
+### キーボード
+
+- 文字入力
+  - Focused状態の時、文字入力を受け付けます
+- InputTextBoxにフォーカス
+  - Focused状態になります
+  - 割り当てられたアクションが実行されます
+- InputTextBoxからフォーカスを外す
+  - Normal状態になります
+  - 割り当てられたアクションが実行されます
+- キー押下
+  - 割り当てられたアクションが実行されます
+
+## 見た目の仕様
+
+### 幅
+
+- 親要素の100%です
+
+### 高さ
+
+- 2種類の高さを提供しています
+  - small: 32px
+  - medium: 40px
+
+### フォーカスインジケーター
+
+- ブラウザデフォルトのフォーカスインジケーターが表示されます
+- shadowが消え、背景色が変わります
+
+### 位置
+
+- Valueの水平方向の表示位置を変更できます
+
+## Props
+
+Descriptionで触れている各構成要素の名前については、[InputTextの構成](#構成)を参照。<br/>
+以下のprops以外に、`aria-label`、`aria-labelledby`などの任意のaria属性を指定できます。
+
+<ArgTypes/>
+
+<Stories />

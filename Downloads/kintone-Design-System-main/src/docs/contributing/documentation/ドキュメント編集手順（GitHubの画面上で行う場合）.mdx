@@ -1,0 +1,100 @@
+import { Meta } from '@storybook/addon-docs';
+import { Notes } from '../../notes';
+
+import addFile from './images/addFile.png';
+import addFileButton from './images/addFileButton.png';
+import chooseYourFiles from './images/chooseYourFiles.png';
+import commit from './images/commit.png';
+import commitImage from './images/commitImage.png';
+import editFile from './images/editFile.png';
+import editFileButton from './images/editFileButton.png';
+import showFeatureBranch from './images/showFeatureBranch.png';
+import uploadFiles from './images/uploadFiles.png';
+
+<Meta title='contributing/documentation/ドキュメント編集手順（GitHub の画面上で行う場合）' />
+
+# ドキュメント編集手順（GitHub の画面上で行う場合）
+
+## 既存のドキュメントを編集する
+
+編集したいドキュメントの`mdx`ファイルを開いたら、鉛筆アイコンの「Edit this file」ボタンをクリックしてください。
+
+<img
+  src={editFileButton}
+  alt="「Edit this file」ボタン場所を示したスクリーンショット"
+/>
+
+## 新規のドキュメントを追加する
+
+ドキュメントを追加したいディレクトリを開いたら、「Add File」ボタンをクリックします。<br/>
+オプションが表示されたら「Create new file」を選択します。
+
+<img
+  src={addFileButton}
+  alt="「Add File」ボタンの場所を示したスクリーンショット"
+/>
+
+画面上部のテキストフィールドに追加するファイルの名前を入力します。<br/>
+`ファイル名.mdx` のようにして入力してください。
+
+<img src={addFile} alt="Create new file画面のスクリーンショット" />
+
+## ドキュメントを編集・確認する
+
+画面のエディタ上でドキュメントを編集してください。<br/>
+意図通りにMarkdownが書けているかを確認するには、「Preview」タブに切り替えてください。
+
+<img src={editFile} alt="ファイル編集画面のスクリーンショット" />
+
+## 編集を終了してレビューを依頼する
+
+### 編集内容をコミットする
+
+ファイルの編集画面下部にあるコミット内容の入力欄から編集内容をコミットしてください。
+
+commit messageで変更内容を簡単に書いてください。一文で大丈夫です。<br/>
+`Add an optional extended description...` とある部分には特に入力しなくても大丈夫です。
+
+入力したら、「Propose changes」ボタンをクリックしてプルリクエストを作成します。
+
+<img src={commit} alt="commit内容の入力欄のスクリーンショット" />
+
+### プルリクエストを作成してレビューを依頼する
+
+具体的な記載事項やレビュー依頼の方法は[プルリクエストを作成してレビューを依頼する](?path=/docs/contributing-プルリクエストを作成してレビューを依頼する--docs)を参照してください。
+
+## 画像をアップロードする
+
+GitHubドキュメント上でドキュメントに画像を挿入するには、画像をアップロードする必要があります。<br />
+上記手順で作成したプルリクエストのページを開き、ブランチ名のリンクをクリックします。<br />
+
+<img
+  src={showFeatureBranch}
+  alt="プルリクエストのページのスクリーンショット。ブランチ名のリンクが強調表示されている。"
+/>
+
+ドキュメントと同じディレクトリにある`images`ディレクトリに移動し「Add file」ボタンをクリックします。<br/>
+オプションが表示されたら「Upload files」を選択します。
+
+<img
+  src={uploadFiles}
+  alt="「Add File」ボタンを押して「Upload files」オプションが表示されたスクリーンショット"
+/>
+
+「choose your files」ボタンを押して画像をアップロードします。複数の画像を一度にアップロードできます。<br />
+
+<img
+  src={chooseYourFiles}
+  alt="ファイルのアップロード画面。「choose your files」ボタンが強調表示されている。"
+/>
+
+アップロードしたら、commit messageで変更内容を簡単に書いてください。一文で大丈夫です。<br/>
+`Add an optional extended description...` とある部分には特に入力しなくても大丈夫です。
+
+ラジオボタンは「Commit directly to the (ブランチの名前) branch.」を選択します。<br />
+入力したら、「Commit changes」ボタンをクリックして画像をコミットします。
+
+<img src={commitImage} alt="画像をコミットするときの入力欄のスクリーンショット" />
+
+画像をアップロードするだけでは文中に画像が挿入されません、画像を挿入する箇所を指定する必要があります。<br />
+[画像を挿入する方法 - ドキュメント編集手順の概要](?path=/docs/contributing-documentation-ドキュメント編集の概要--docs#画像を挿入する方法)を参照してください。

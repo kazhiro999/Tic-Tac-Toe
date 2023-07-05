@@ -1,0 +1,52 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as TooltipStories from '../stories/Tooltip.stories';
+import { Notes } from '../../../docs/notes';
+import anatomy from './images/anatomy.svg';
+
+<Meta title="Components/Tooltip" of={TooltipStories} />
+
+# Tooltip
+
+[Figma](https://www.figma.com/file/0EL4UsBtC46KFG7WkKreiYi5/%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components?node-id=8797%3A25)
+
+## 概要
+
+ホバーしたりフォーカスした時に、追加の情報を伝えます。
+
+スペースの制約がある時に用います。
+
+ボタンなどのインタラクティブな要素と組み合わせて使用します。
+
+## 構成
+
+<img src={anatomy} alt="Tooltipコンポーネントの解剖図" width="150" />
+
+- Container
+  - Tooltipの領域を表します
+- HelperText
+  - 追加情報を示すテキストです
+
+## 見た目の仕様
+
+### 幅
+
+- HelperTextの文字列長に応じて伸長します
+
+### 高さ
+
+- HelperTextの改行の数に応じて伸長します
+
+### 位置
+
+- TriggerButtonの位置を起点に、スペースが広い方に表示されます
+  - 右上のスペースが広い場合、TriggerButtonの上側に左揃えで表示されます
+  - 左上のスペースが広い場合、TriggerButtonの上側に右揃えで表示されます
+  - 右下のスペースが広い場合、TriggerButtonの下側に左揃えで表示されます
+  - 左下のスペースが広い場合、TriggerButtonの下側に右揃えで表示されます
+
+<Notes>
+  {`なお、TriggerButtonとは、Tooltipと組み合わせて使用されるインタラクティブ要素です。
+  現状、kintone Design SystemはTriggerButtonの制御は管理していません。`}
+</Notes>
+
+<Stories />

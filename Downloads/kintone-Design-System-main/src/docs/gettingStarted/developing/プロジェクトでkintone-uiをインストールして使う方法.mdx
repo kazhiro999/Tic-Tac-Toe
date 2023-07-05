@@ -1,0 +1,67 @@
+import { Meta } from '@storybook/addon-docs';
+import { Notes, VARIANTS } from '../../notes';
+import generateToken from './images/generate_token.png';
+import configureSso from './images/configure_sso.png';
+import copyToken from './images/copy_token.png';
+
+<Meta title="gettingStarted/developing/プロジェクトでkintone-uiをインストールして使う方法" />
+
+# プロジェクトで kintone-ui をインストールして使う方法
+
+kintone-uiはGitHub Packagesを利用して、社内に限定公開しています。
+
+- [Package kintone-ui](https://github.com/kintone-private/kintone-Design-System/pkgs/npm/kintone-ui/)
+
+そのため、`npm install`を行う際に、プロジェクトと個人でGitHub Packagesの設定が必要です。
+
+## プロジェクト側の設定
+
+`package.json`と同階層に、`.npmrc`を作成し、次の1行を追記してください。
+
+```text
+@kintone-private:registry=https://npm.pkg.github.com
+```
+
+## 個人の環境設定
+
+### GitHub Token を発行
+
+1. GitHubの[New personal access token](https://github.com/settings/tokens/new)画面を開きます。
+2. ［Select scopes］で、［repo］と［read:packages］にチェックを入れ、Tokenを生成します。<br/>
+   <img src={generateToken} alt="画面キャプチャ：トークン生成画面" />
+3. ［Configure SSO］をクリックし、kintoneとkintone-privateを認証します。<br/>
+   <img
+     src={configureSso}
+     alt="画面キャプチャ：トークンを認証するドロップダウン"
+   />
+4. 生成されたTokenをコピーしておきます（画像で塗りつぶされた部分）。<br/>
+   <img
+     src={copyToken}
+     alt="画面キャプチャ：生成されたトークンの横にコピーボタンがある"
+   />
+
+### npm での認証
+
+ターミナルに次の情報を入力します。
+
+```bash
+npm login --scope=@kintone-private --registry=https://npm.pkg.github.com --auth-type=legacy
+
+> Username:  // GitHubのユーザーネーム
+> Password: // 先ほど生成したToken
+> Email: // GitHubに登録しているメールアドレス
+```
+
+これでローカルの`~/.npmrc`に情報が書き込まれます。
+
+<Notes variant={VARIANTS.WARNING}>
+  {`npm v9 以降では \`--auth-type=legacy\` オプションが必要。`}
+</Notes>
+
+## kintone-ui をインストール
+
+ターミナルに下記を入力します。
+
+```bash
+npm install @kintone-private/kintone-ui
+```

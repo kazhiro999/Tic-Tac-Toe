@@ -1,0 +1,306 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as InputDateStories from '../stories/InputDate.stories';
+import anatomy from './images/anatomy.svg';
+import close from './images/close.png';
+import open from './images/open.png';
+import date_format_normal from './images/date_format_normal.png';
+import date_format_us from './images/date_format_us.png';
+import order_year_and_month from './images/order_year_and_month.png';
+import order_month_and_year from './images/order_month_and_year.png';
+import unselected_DateCell from './images/unselected_DateCell.png';
+import selected_DateCell from './images/selected_DateCell.png';
+import today_DateCell from './images/today_DateCell.png';
+import outside_month_DateCell from './images/outside_month_DateCell.png';
+
+<Meta title="components/InputDate" of={InputDateStories} />
+
+# InputDate
+
+[Figma](https://www.figma.com/file/0EL4UsBtC46KFG7WkKreiYi5/%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components?node-id=9410%3A71756)
+
+## 概要
+
+DatePickerは、ひとつの日付を選択します。
+
+## 構成
+
+<img src={anatomy} alt="InputDateの構成図" />
+
+- DatePickerInput
+  - 日付を入力するテキストボックスです
+- DatePickerOpenSupportButton
+  - DatePickerPopupを開閉することを支援するButtonです
+  - キーボードフォーカスを受け取りますが、画面には表示されません
+- DatePickerPopup
+  - 日付を選択するパーツが集合した要素です
+- PreviousMonthButton
+  - 左矢印のIconButtonです
+  - Calendarの表示を先月に切り替えます
+- FollowingMonthButton
+  - 右矢印のIconButtonです
+  - Calendarの表示を翌月に切り替えます
+- YearDropdown
+  - Calendarの表示年を選択するDropdownです
+  - Dropdownの選択肢の範囲は、カレンダーで表示されている年から前後100年です
+- MonthDropdown
+  - Calendarの表示月を選択するDropdownです
+- Calendar
+  - 選択された１か月を表形式で表示します
+  - 週をまたがる先月・翌月の日付が表示され、文字色は灰色です。
+- HeaderCell
+  - Calendarの見出しで、曜日を表示します
+  - 日曜日を先頭に、左に曜日が並びます
+  - 日曜日と土曜日の文字色は灰色、それ以外の曜日の文字色は黒色です
+- DateCell
+  - 選択可能な日付です
+- TodayButton
+  - 今日のDateCellを選択するButtonです
+- ClearButton
+  - 選択された日付を解除するButtonです
+
+## 種類
+
+### Normal Date Format
+
+- DatePickerInputの値は「YYYY-MM-DD」形式です
+- 「YYYY/MM/DD」形式でも入力できます。
+
+<img
+  src={date_format_normal}
+  alt="Normal Date Formatのスクリーンショット"
+  width="300"
+/>
+
+### US Date Format
+
+- DatePickerInputの値は「MM/DD/YYYY」形式です
+
+<img
+  src={date_format_us}
+  alt="US Date Formatのスクリーンショット"
+  width="300"
+/>
+
+### Year and Month
+
+- CalenderのDropdownがYearDropdown → MonthDropdownの順に並びます
+
+<img
+  src={order_year_and_month}
+  alt="Year and Monthのスクリーンショット"
+  width="300"
+/>
+
+### Month and Year
+
+- CalenderのDropdownがMonthDropdown → YearDropdownの順に並びます
+
+<img
+  src={order_month_and_year}
+  alt="Month and Yearのスクリーンショット"
+  width="300"
+/>
+
+## 状態
+
+### Close
+
+<img src={close} alt="Close状態のスクリーンショット" width="300" />
+
+- DatePickerPopupが閉じている状態です
+- 初期表示時は、Close状態になっています
+
+### Open
+
+- DatePickerPopupが開いている状態です
+
+<img src={open} alt="Open状態のスクリーンショット" width="300" />
+
+### Unselected(DateCell)
+
+- DateCellが選択されていない状態です
+
+<img src={unselected_DateCell} alt="Unselected状態のスクリーンショット" />
+
+### Selected(DateCell)
+
+- DateCellが選択されている状態です
+- borderが青色に変わります
+
+<img src={selected_DateCell} alt="Selected状態のスクリーンショット" />
+
+### Today(DateCell)
+
+- DateCellの日付が今日だったときの状態です
+- 背景色が灰色、文字色が白色に変わります
+
+<img src={today_DateCell} alt="Today状態のスクリーンショット" />
+
+### Outside Month(DateCell)
+
+- DateCellの日付が表示されている月の範囲外だったときの状態です
+- 文字色が薄い灰色に変わります
+
+<img src={outside_month_DateCell} alt="Outside Month状態のスクリーンショット" />
+
+## 操作の仕様
+
+### マウス
+
+- DatePickerInputをクリック
+  - Open状態になります
+  - Calendarには以下の月のカレンダーが表示されます
+    - DatePickerInputに正しい日付が入力されている場合、その日付を含む月のカレンダー
+    - DatePickerInputが空欄か正しい日付が入力されていない場合、現在のブラウザ上でのシステム日付の月のカレンダー
+- PreviousMonthButtonをクリック
+  - Calendarの表示期間が先月になります
+- FollowingMonthButtonをクリック
+  - Calendarの表示期間が翌月になります
+- YearDropdownをクリック
+  - Calendarの表示期間が指定した年に変更されます
+  - [Dropdown のマウス操作](?path=/docs/components-dropdown--docs#マウス)を参照
+- MonthDropdown
+  - Calendarの表示期間が指定した月に変更されます
+  - [Dropdown のマウス操作](?path=/docs/components-dropdown--docs#マウス)を参照
+- DateCellをクリック
+  - そのDateCellがSelected状態になり、それ以外のDateCellはUnselected状態になります
+  - DatePickerInputに選択した日付が入力されます
+  - Close状態になります
+  - DatePickerInputにフォーカスします
+- TodayButtonをクリック
+  - 今日の日付のDateCellがSelected状態になり、それ以外のDateCellがUnselected状態になります
+  - 今日の日付がDatePickerInputに入力されます
+  - Close状態になります
+  - DatePickerInputにフォーカスします
+- ClearButtonをクリック
+  - すべてのDateCellがUnselected状態になります
+  - DatePickerInputの値が空欄になります
+  - Close状態になります
+  - DatePickerInputにフォーカスします
+- DatePickerPopupの外側をクリック
+  - Close状態になります
+
+### キーボード
+
+#### DatePickerInput にフォーカスがある時
+
+- 文字入力
+  - 任意の文字を入力します
+- エスケープ
+  - Open状態の時、Close状態になります
+
+#### DatePickerOpenSupportButton にフォーカスがある時
+
+- エンター・スペース
+  - Close状態の時、Open状態になります
+  - Open状態の時、Close状態になり、DatePickerInputにフォーカスします
+
+#### DatePickerPopup 内 ( Calendar 以外 ) のキーボード操作
+
+- PreviousMonthButtonでエンター・スペース
+  - Calendarの表示月が先月になります
+- FollowingMonthButtonでエンター・スペース
+  - Calendarの表示月が翌月になります
+- YearDropdownの操作
+  - Calendarの表示期間が指定した年に変更されます
+  - [DropDown のキーボード操作](?path=/docs/components-dropdown--docs#キーボード)を参照
+- MonthDropdownを操作
+  - Calendarの表示期間が指定した月に変更されます
+  - [DropDown のキーボード操作](?path=/docs/components-dropdown--docs#キーボード)を参照
+- TodayButtonでエンター・スペース
+  - 今日の日付のDateCellがSelected状態になり、それ以外のDateCellがUnselected状態になります
+  - 今日の日付がDatePickerInputに入力されます
+  - Close状態になります
+  - DatePickerInputにフォーカスします
+- ClearButtonでエンター・スペース
+  - すべてのDateCellがUnselected状態になります
+  - DatePickerInputの値が空欄になります
+  - Close状態になります
+  - DatePickerInputにフォーカスします
+  - DatePickerPopupからフォーカスを外す
+    - Close状態になります
+- エスケープ
+  - Close状態になります
+  - DatePickerInputにフォーカスします
+
+#### Calendar のキーボード操作
+
+個々のDateCellにはTabキーでフォーカスします。
+表示されているすべてのDateCellがフォーカスを受け取ります。
+
+- DateCellでエンター・スペース
+  - そのDateCellがSelected状態になり、それ以外のDateCellがUnselected状態になります
+  - DatePickerInputに選択した日付が入力されます
+  - Close状態になります
+  - DatePickerInputにフォーカスします
+
+### スクリーンリーダー
+
+- DatePickerPopupにさしかかると、指定された文言とダイアログであることを読み上げます
+- DatePickerOpenSupportButtonにさしかかると、指定された文言とボタンであることを読み上げます
+- DatePickerOpenSupportButtonにさしかかると、DatePickerPopupの開閉状態を読み上げます
+- 今日のDateCellにさしかかると、今日であることを読み上げます
+
+## 見た目の仕様
+
+### 幅と高さ
+
+- DatePickerInputの幅と高さは固定です
+- DatePickerPopupの幅と高さは固定です
+
+### カーソル
+
+- DatePickerInputにhoverしたときカーソルはI-beamになります
+- 以下の箇所にフォーカスしたときカーソルはlink pointerになります
+  - PreviousMonthButton
+  - FollowingMonthButton
+  - YearDropdown
+  - MonthDropdown
+  - DateCell
+  - TodayButton
+  - ClearButton
+
+### フォーカスインジケーター
+
+- 以下の箇所にフォーカスしたときにはブラウザデフォルトのフォーカスインジケーターが表示されます
+  - PreviousMonthButton
+  - FollowingMonthButton
+  - YearDropdown
+  - MonthDropdown
+  - DateCell
+  - TodayButton
+  - ClearButton
+
+### 位置
+
+- 画面下部にDatePickerPopupを表示するための十分なスペースがある場合、 DatePickerPopupがDatePickerInputの下に表示される
+- 画面下部にDatePickerPopupを表示するための十分なスペースがない場合、 DatePickerPopup DatePickerInputの上に表示される
+
+## バリデーション
+
+- 次のタイミングで入力値のバリデーションを行います
+  - フォーカスがDatePickerInputから外れたとき
+- 日付が以下の場合はバリデーションエラーとして、割り当てられたアクションを実行します
+  - 規定のフォーマット以外のフォーマットのとき（※桁数が足りない場合は0で補完し、バリデーションエラーとしません）
+    - ただし、前方にスペースが含まれる場合はトリムしエラーとしません。後方にスペースが含まれる場合はエラーとします
+  - 年月日の部分で、それぞれ以下の範囲を超えた場合
+    - 年：[1 - 9999]
+    - 月：[1 - 12]
+    - 日：[1 - 31]（※該当月によって入力できる範囲の上限が28 ~ 31の間で変動します）
+
+## フォーマット
+
+- 次のタイミングで前方トリム、桁数の0埋め、スラッシュ（/）からハイフン（-）への置換を行います
+  - DatePickerInputをクリックした時
+  - DatePickerInputにフォーカスした時
+  - DatePickerInputからフォーカスを外した時
+- 前方トリムする条件
+  - 前方にスペースが含まれる場合
+  - 後方にスペースが含まれる場合はトリムしません
+- 桁数の0埋めをする条件
+  - 年月日それぞれで桁数が足りない場合(年は4桁、月日は2桁)
+- スラッシュ（/）からハイフン（-）への置換条件
+  - 日付の形式がNormal Date Format(YYYY/MM/DD)の時
+  - 日付の形式がUS Date Format(MM/DD/YYYY)の時は置換しません
+
+<Stories />

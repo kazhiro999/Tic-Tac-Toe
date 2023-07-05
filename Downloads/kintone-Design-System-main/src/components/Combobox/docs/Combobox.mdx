@@ -1,0 +1,244 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as ComboboxStories from '../stories/Combobox.stories';
+import { Notes, VARIANTS } from '../../../docs/notes';
+
+import anatomy from './images/anatomy.svg';
+import active from './images/active.png';
+import close from './images/close.png';
+import combobox from './images/combobox.png';
+import open from './images/open.png';
+import selected from './images/selected.png';
+import withIcon from './images/with_icon.png';
+
+<Meta title="Components/Combobox" of={ComboboxStories} />
+
+# Combobox
+
+## 概要
+
+Comboboxはユーザーが多くの選択肢の中から項目を見つけるのを手助けします。
+
+## 構成
+
+<img src={anatomy} alt="Comboboxコンポーネントの解剖図" />
+
+- Search
+  - SearchBoxとSearchButtonを合わせた要素です
+- SearchBox
+  - ListboxOptionを絞り込むキーワードを入力する要素です
+- SearchButton
+  - ListboxPopupを開閉するボタンです
+- ListboxPopup
+  - Searchの結果により絞り込まれたListboxOptionが集合したポップアップです
+  - ListboxPopupContainer, ListboxOptionを総称したものです
+- ListboxPopupContainer
+  - popup全体の要素で、shadowを持ちます
+- ListboxOption
+  - 選択可能な項目です
+- SelectedIcon
+  - ListboxOptionがSelectedであることを示すアイコンです
+- Label
+  - ListboxOptionのテキストラベルです
+
+## 種類
+
+### Combobox
+
+- 汎用的なComboboxです
+
+<img src={combobox} alt="Comboboxのスクリーンショット" />
+
+<Notes
+  variant={VARIANTS.INFO}
+  subtitle="アイコンあり"
+  children={`
+
+- InputTextの左端にアイコンが表示されます
+- 選択肢一つ一つにアイコンが表示されます
+ ![アイコンありのComboboxのスクリーンショット](${withIcon})
+- アイコンありは現在 kintone Design System からは提供されていません。
+- 以下の見出し項目では、アイコンありの説明は省きます。
+- アイコンありと Combobox では現在動作が異なる部分があり、将来的に動作を統一する予定です。
+  `}
+/>
+
+## 状態
+
+### Close
+
+- 初期状態です
+- Searchboxには選択されている項目が入力されています
+- ListboxPopupは閉じています
+
+<img src={close} alt="close状態のComboboxのスクリーンショット" width="300" />
+
+### Open
+
+- ListboxPopupが開いている状態です
+- Open直後はSelected状態のListboxOptionがActive状態になります
+
+<img src={open} alt="open状態のComboboxのスクリーンショット" width="300" />
+
+### Focused(Searchbox)
+
+- SearchboxにFocusした状態です
+- マウスクリックでFocused状態にした場合は、Open状態になります
+- TabキーでFocused状態にした場合はClose状態のままです
+- backgroundが濃色になり、shadowが消えます
+
+### Focused(SearchButton)
+
+- SearchButtonにFocusした状態です
+- SearchButtonの周囲にフォーカスインジケーターがつきます
+
+### Active
+
+- ListboxOptionが操作対象にある状態です
+- ListboxOptionに青色のbackgroundがつきます
+
+<img src={active} alt="active状態のComboboxのスクリーンショット" width="300" />
+
+### Selected
+
+- ListboxOptionが選択されているときの状態です
+- Labelの前にSelectedIconが表示されます
+
+<img
+  src={selected}
+  alt="selected状態のComboboxのスクリーンショット"
+  width="300"
+/>
+
+## 操作の仕様
+
+### マウス
+
+- Searchboxをclick
+  - ListboxPopupが開閉します
+- Searchboxに文字入力
+  - ListboxPopupに表示されるListboxOptionが絞りこまれます
+- SearchButtonをclick
+  - ListboxPopupが開閉します
+- ListboxOptionにHover
+  - そのListboxOptionがActive状態になります
+- ListboxOptionをclick
+  - そのListboxOptionがSelected状態になります
+  - ListboxPopupがClose状態になります
+  - Searchboxの値がSelected状態にしたListboxOptionのLabelになります
+- ListboxPopup外をclick
+  - Open状態の時、Close状態になります
+
+### キーボード
+
+#### Searchbox（ListboxPopup が閉じている時）
+
+- 文字入力
+  - ListboxOptionが絞り込まれます
+- 上下矢印キー
+  - ListboxPopupがOpen状態になり、Selected状態のListboxOptionがActive状態になります
+
+#### Searchbox（ListboxPopup が開いている時）
+
+Focusは常にSearchboxにあります。
+
+- 下矢印キー
+  - 次のListboxOptionがActive状態になります
+  - 次のListboxOptionがない場合は、先頭のListboxOptionがActive状態になります
+- 上矢印キー
+  - 前のListboxOptionがActive状態になります
+  - 前のListboxOptionがない場合は、末尾のListboxOptionがActive状態になります
+- Homeキー
+  - 先頭のListboxOptionがActive状態になります
+- Endキー
+  - 末尾のListboxOptionがActive状態になります
+- ESCキー
+  - ListboxPopupがClose状態になります
+- Tabキー
+  - ListboxPopupがClose状態になります
+- Enterキー
+  - Active状態のListboxOptionがSelected状態になります
+  - ListboxPopupがClose状態になります
+  - Searchboxの値がSelected状態にしたListboxOptionのLabelになります
+
+#### SearchButton
+
+- Enter/Spaceキー（Close状態の時）
+  - ListboxPopupがOpen状態になります
+  - SearchboxがFocused状態になります
+- Enter/Spaceキー（Open状態の時）
+  - ListboxPopupがClose状態になります
+
+<Notes variant={VARIANTS.WARNING}>
+  {'※なお、アイコンありのComboboxは、キーボード操作がサポートされていません。'}
+</Notes>
+
+### スクリーンリーダー
+
+- Searchboxにfocusしている時、ListboxPopupの開閉状態を読み上げます
+- ListboxOptionがActive状態の時、選択状態を読み上げます
+
+## 絞り込みの仕様
+
+### ListboxPopup と ListboxOption の状態変化
+
+- Open状態になった直後は、すべてのListboxOptionを表示します
+- Open状態でSearchboxの入力値を編集して、ヒットした場合、ヒットしたListboxOptionを表示します
+- Open状態でSearchboxの入力値を編集して、ヒットしない場合、ListboxPopupがClose状態になります
+- このとき、以下の操作をしても、ListboxPopupはOpen状態になりません
+  - SearchBoxをクリックする
+  - 上下キーを押す
+
+### ヒットする条件
+
+- Searchboxの入力値がListboxOptionのLabelと部分一致したとき、そのListboxOptionがヒットします
+- Searchboxの入力値が空文字のとき、すべてのListboxOptionにヒットします
+- Searchboxの入力値が半角全角スペースの組み合わせのとき、すべてのListboxOptionがヒットします
+- 大文字小文字は区別しません
+
+### 入力値の初期化
+
+以下の操作をしたとき、Searchboxの入力値がSelected状態のListboxOptionのLabelに初期化されます。
+
+- Tabキーを押す
+- コンポーネント外をクリックする
+- SearchButtonを押す
+
+## 見た目の仕様
+
+### 横幅
+
+- Searchboxの横幅は固定です
+- SelectedなListboxOptionがSearchboxの横幅を超えるとき表示できる文字数の分だけ表示されます
+- ListboxPopupには最小幅があります
+- ListboxOptionがListboxPopupの最小幅を超えるときListboxPopupはListboxOptionに合わせて伸長します
+
+### 高さ
+
+- Searchboxの高さは固定値です
+- ListboxOptionには最大の高さがありListboxOptionの個数が最大の高さを超えるときListboxOptionはスクロールします
+
+### カーソル
+
+- SearchboxにhoverしたときカーソルはI-beamになります
+- ListboxOptionにhoverしたときカーソルはlink pointerになります
+
+### フォーカスインジケーター
+
+- Searchboxは背景色が変わりshadowが消えます
+- SearchButtonはブラウザ標準のフォーカスインジケーターです
+- Listbox Optionは背景色が変わります
+
+### クリック範囲
+
+- Searchbox全体がクリック範囲です
+- ListboxOptionのhover時にbackgroundがつく範囲がクリック範囲です
+
+### 位置
+
+- Selected状態のListbox Optionが画面外にある場合は画面に収まる位置までスクロールされます
+
+## 複数のオプションから 1 つを選択するコンポーネントの使い分け
+
+[RadioButton | 複数のオプションから 1 つを選択するコンポーネントの使い分け](?path=/docs/components-radio--docs#複数のオプションから-1-つを選択するコンポーネントの使い分け)
+
+<Stories />

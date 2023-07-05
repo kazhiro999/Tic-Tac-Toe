@@ -1,0 +1,57 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as BreadcrumbStories from '../stories/Breadcrumb.stories';
+
+import anatomy from './images/anatomy.png';
+
+<Meta title="Components/Breadcrumb" of={BreadcrumbStories} />
+
+# Breadcrumb
+
+[Figma](https://www.figma.com/file/0EL4UsBtC46KFG7WkKreiYi5/%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components?node-id=9410%3A69638)
+
+## 概要
+
+Breadcrumb は、アプリ内のユーザーの場所の階層をユーザーに示し、親レベルまたは前のステップにすばやく移動できるようにします。
+
+## 構成
+
+<img src={anatomy} alt="Breadcrumbコンポーネントの解剖図" />
+
+- Separator
+  - Breadcrumb ItemとBreadcrumb Itemの間に挿入されます。
+- Breadcrumb Item
+  - ページの種類を示すテキストとページリンク（[Link](?path=/docs/components-link--docs)）で構成されます。
+  - 末尾のBreadcrumb Itemは現在開いてるページに該当するため、ページタイトルはリンクになっていません。
+
+## 状態
+
+Breadcrumb Itemのページリンクの状態は [Link（状態）](?path=/docs/components-link--docs#状態)を参照してください。
+
+## 操作の仕様
+
+### マウス
+
+- Breadcrumb Item内のリンクをクリックすると、当該のリンクに遷移します。
+- Breadcrumb Item内のリンクをホバーすると、ツールチップが表示されます。
+
+### キーボード
+
+- TabキーでBreadcrumb Item内のリンクにフォーカスできます。
+- Breadcrumb Item内のリンクにフォーカスがある時、エンターキーを押すと、当該のリンクに遷移します。
+
+### スクリーンリーダー
+
+- Breadcrumb Item内のリンクにフォーカスした時、当該のリンクを読み上げます。
+- 末尾のBreadcrumb Itemにフォーカスしている時、現在のページであることを通知します
+
+## 見た目の仕様
+
+### 幅
+
+- Breadcrumb Item内のリンクの最大幅は300pxです。最大幅を超えた場合、省略表示されます。
+
+### 折り返し
+
+- コンポーネントは折り返しません。
+
+<Stories />

@@ -1,0 +1,108 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as LinkStories from '../stories/Link.stories';
+import { Notes } from '../../../docs/notes';
+
+import anatomy from './images/anatomy.png';
+import hover from './images/hover.png';
+import focus from './images/focus.png';
+import defaultLink from './images/default.png';
+import underline from './images/underline.png';
+
+<Meta title="Components/Link" of={LinkStories} />
+
+# Link
+
+[Figma](https://www.figma.com/file/73iDlwTUsZNgarlcz2n2Mz/Anatomy%E3%81%AE%E5%9B%B3?node-id=510%3A1058)
+
+## 概要
+
+Linkはナビゲーションに使用します。
+kintoneドメイン内であれば同一タブで遷移し、kintoneドメイン外なら別タブを開いて遷移します。
+文中で使用する場合と、単独で使用する場合があります。
+
+## 構成
+
+<img src={anatomy} alt="Linkコンポーネントの構成図" />
+
+- Label
+  - リンク先を伝えるテキストです
+
+## 種類
+
+### Default
+
+- 通常のLinkです
+- 文の中に含まれないリンク（リンク単独で存在する箇所など）に使用します
+
+<img src={defaultLink} alt="DefaultのLinkのスクリーンショット" />
+
+### Underline
+
+- Hover/Focus状態でなくても下線が引かれたLinkです
+- 文の中に含まれるリンクに使用します（ただしスレッドの投稿やアプリの説明など、ユーザーが入力する文章は例外）
+
+<img src={underline} alt="UnderlineのLinkのスクリーンショット" />
+
+<Notes
+  subtitle="LinkのDefaultとUnderlineの使い分けの理由"
+  children="
+
+- リンクかリンクでないかは、ホバーする前から、色以外の手がかりがあったほうが基本的に望ましい。
+   色が見分けづらい人や閲覧環境であっても、ホバーせずにリンクかどうか視認できるため。
+- リンクが文の中に含まれるときは、ホバーしなくてもリンクだと視認できるように下線を引くとよさそう。
+- でも、すでにユーザーがリッチエディタで入力する箇所については、下線を強調の意味で使っている場合もある。ユーザーの影響を考えて、ユーザーが入力する文章では下線はホバー時にのみひくのがよい。
+- リンクが文の中に含まれず、リンクであるとパッと理解できるのであれば、下線はひかないか、ホバー時のみ下線を表示するで十分。"
+/>
+
+## 状態
+
+### Hover
+
+- 濃色になり下線がつきます
+
+<img src={hover} alt="LinkのHover状態のスクリーンショット" />
+
+### Focus
+
+- 濃色になります
+- 種類がDefaultのとき下線はつきません。ただしFocus状態かつHover状態のときには下線がつきます
+- あわせてブラウザ標準のフォーカスインジケーターが表示されます
+
+<img src={focus} alt="Focus状態のスクリーンショット" />
+
+## 操作の仕様
+
+### マウス
+
+- Labelをクリック
+  - リンク先に遷移します
+
+### キーボード
+
+- エンター
+  - リンク先に遷移します
+
+## 見た目の仕様
+
+### 幅
+
+- Labelの文字列長に応じて伸長します
+
+### 高さ
+
+- Labelの改行に応じて伸長します
+
+<Notes>
+  {`現状のLinkコンポーネントでは、Labelに任意のHTMLを指定できます。
+  そのためHTMLによって、見た目が異なってきます。`}
+</Notes>
+
+### フォーカスインジケーター
+
+- 背景色が変化します
+
+### カーソル
+
+- カーソルはPointerです
+
+<Stories />

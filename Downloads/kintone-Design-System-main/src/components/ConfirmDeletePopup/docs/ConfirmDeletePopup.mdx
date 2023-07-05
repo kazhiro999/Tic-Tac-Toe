@@ -1,0 +1,54 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as ConfirmDeletePopupStories from '../stories/ConfirmDeletePopup.stories';
+
+import anatomy from './images/anatomy.svg';
+
+<Meta title="Components/ConfirmDeletePopup" of={ConfirmDeletePopupStories} />
+
+# ConfirmDeletePopup
+
+[Figma](https://www.figma.com/file/0EL4UsBtC46KFG7WkKreiYi5/%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components?node-id=5595%3A11)
+
+## 概要
+
+ユーザーに削除確認を求めるUIです。× アイコンのアイコンボタンなど、削除アクションを実行するボタンをクリックした際に表示されます。
+
+## 構成
+
+<img src={anatomy} alt="ConfirmDeletePopupコンポーネントの解剖図" />
+
+- PopupContainer
+  - Popup全体の要素です
+  - shadowを持ちます
+- Message
+  - 削除を確認する文言を表示します
+- CancelButton
+  - 削除をキャンセルするボタンです
+  - ButtonコンポーネントのNormalと同様のスタイルです
+- DeleteButton
+  - 削除を実行するボタンです
+  - ButtonコンポーネントのDeleteと同様のスタイルです
+
+## 操作の仕様
+
+### マウス
+
+- CancelButtonをクリックすると、ConfirmDeletePopupを閉じます
+- DeleteButtonをクリックすると、対象を削除し、ConfirmDeletePopupを閉じます。開閉ボタンにフォーカスします
+- PopupContainerの外をクリックするとConfirmDeletePopupを閉じます
+
+### キーボード
+
+- TabキーでCancelButton/DeleteButtonにフォーカスできます
+- CancelButtonにフォーカスがある時、エンターキーおよびスペースキーを押すと、ConfirmDeletePopupが閉じます。開閉ボタンにフォーカスします
+- DeleteButtonにフォーカスがある時、エンターキーおよびスペースキーを押すと、対象を削除し、ConfirmDeletePopupを閉じます。
+- ESCキーを押すと、ConfirmDeletePopupが閉じます。開閉ボタンにフォーカスします
+
+## 見た目の仕様
+
+### 表示位置
+
+デフォルトの状態では、開閉ボタンの下に左揃えで表示されます。
+利用時に表示位置の調整が可能です。
+
+<Stories />

@@ -1,0 +1,293 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as DialogStories from '../stories/Dialog.stories';
+
+import anatomy from './images/DialogAnatomy.svg';
+import normal from './images/normal.png';
+import warning from './images/warning.png';
+
+<Meta title="Components/Dialog" of={DialogStories} />
+
+# Dialog
+
+[Figma](https://www.figma.com/file/0EL4UsBtC46KFG7WkKreiYi5/%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components?node-id=9410%3A69396)
+
+## 概要
+
+Dialogはページ上のレイヤーにコンテンツを表示します。ユーザーに確認や操作を要求するときに使います。
+
+## 構成
+
+<img src={anatomy} alt="Dialogコンポーネントの解剖図" />
+
+- DialogHeader
+  - DialogTitleとCloseButtonを含みます
+- DialogTitle
+  - Dialogで完遂したいアクションを簡潔に説明するタイトルです
+- CloseButton
+  - Dialogを閉じるボタンです
+- DialogBody
+  - Dialogのアクションを完遂するために必要な情報やフォームを表示します
+  - コンテンツは基本的に左揃えにします
+- DialogActions
+  - NormalButtonとPrimaryButtonを含みます
+  - 省略する場合もあります
+- Overlay
+  - Dialogの下に表示されているコンテンツを覆い隠します
+
+## 種類
+
+### Normal
+
+<img src={normal} alt="スクリーンショット Normal の Dialog" />
+
+- 通常のモーダルダイアログです。
+
+### Warning
+
+<img src={warning} alt="スクリーンショット Warning の Dialog" />
+
+- 重大な変更をユーザーに警告するときに使うダイアログです。
+- DialogTitleの先頭にアイコンが表示されます。
+
+## 操作の仕様
+
+### マウス
+
+- CloseButtonをクリックするとDialogが閉じます
+- DialogActionsのNormalButton、PrimaryButtonをクリックするとそれぞれのButtonに割り当てられたアクションを実行します
+- Dialog外の要素は操作できません
+- OverlayをクリックしてもDialogは閉じません
+
+### キーボード
+
+- ESCキー押下でDialogが閉じます
+- CloseButtonにフォーカスがある時、Enterキーまたはスペースキー押下でDialogが閉じます
+- DialogActionsのNormalButton、PrimaryButtonにフォーカスがある時、Enterキーまたはスペースキー押下でそれぞれのButtonに割り当てられたアクションを実行します
+- フォーカスがDialog内にあるときにTabキーまたはShiftキー+Tabキーでキーボードフォーカスを移動させたとき、フォーカスはDialogのコンテンツにとどまり循環します
+- Dialog外の要素は操作できません
+- Overlayにはフォーカスできません
+
+### スクリーンリーダー
+
+- Dialog外の要素は読み上げません
+
+## 見た目の仕様
+
+### サイズ
+
+- 最小幅は400pxで、DialogBodyのコンテンツに応じて伸長します。任意の最大幅を設定することも可能です。
+- 最大の高さは画面の高さです。画面の高さを超えそうなときはDialogBodyがスクロールします。
+
+### 背景色
+
+DialogHeaderの背景色は任意の色に変更できます。
+例：EntitySelectのPickerDialog。
+
+### 表示位置
+
+画面の中央に表示されます。
+
+## Props
+
+Descriptionで触れている各構成要素の名前については、[Dialog の構成](?path=/docs/components-dialog--docs#構成)を参照。
+
+### Dialog
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Required</th>
+    <th>Type</th>
+    <th>Default</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>
+      <code>open</code>
+    </td>
+    <td>○</td>
+    <td>
+      <code>boolean</code>
+    </td>
+    <td>-</td>
+    <td>
+      Open状態にするなら<code>true</code>、Close状態にするなら<code>false</code>。
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>onClose</code>
+    </td>
+    <td>○</td>
+    <td>
+      <code>() => void</code>
+    </td>
+    <td>-</td>
+    <td>CloseButton、CancelButton押下時のコールバック。</td>
+  </tr>
+  <tr>
+    <td>
+      <code>variant</code>
+    </td>
+    <td></td>
+    <td>
+      <code>'normal' | 'warning'</code>
+    </td>
+    <td>
+      <code>'normal'</code>
+    </td>
+    <td>
+      Dialogの種別。<code>'normal'</code>は通常のダイアログ、
+      <code>'warning'</code>はアイコン付きの警告ダイアログ。
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>dialogTitle</code>
+    </td>
+    <td>○</td>
+    <td>
+      <code>React.ReactNode</code>
+    </td>
+    <td>-</td>
+    <td>DialogHeaderに表示するタイトル文字列。</td>
+  </tr>
+  <tr>
+    <td>
+      <code>headerBackgroundColor</code>
+    </td>
+    <td></td>
+    <td>
+      <code>string</code>
+    </td>
+    <td>-</td>
+    <td>DialogHeaderの背景色。</td>
+  </tr>
+  <tr>
+    <td>
+      <code>headerCloseButtonAlternativeText</code>
+    </td>
+    <td>○</td>
+    <td>
+      <code>string</code>
+    </td>
+    <td>-</td>
+    <td>CloseButtonの代替テキスト。</td>
+  </tr>
+  <tr>
+    <td>
+      <code>maxWidth</code>
+    </td>
+    <td></td>
+    <td>
+      <code>number</code>
+    </td>
+    <td>-</td>
+    <td>
+      Dialogの最大幅（px）。指定しない場合はDialogBodyのコンテンツに応じて伸長します。
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>children</code>
+    </td>
+    <td>○</td>
+    <td>
+      <code>React.ReactNode</code>
+    </td>
+    <td>-</td>
+    <td>Dialogのコンテンツ。DialogBodyとDialogActionを含みます。</td>
+  </tr>
+</table>
+
+### DialogBody
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Required</th>
+    <th>Type</th>
+    <th>Default</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>
+      <code>children</code>
+    </td>
+    <td>○</td>
+    <td>
+      <code>React.ReactNode</code>
+    </td>
+    <td>-</td>
+    <td>DialogBodyのコンテンツ。</td>
+  </tr>
+</table>
+
+### DialogActions
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Required</th>
+    <th>Type</th>
+    <th>Default</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>
+      <code>labelOkButton</code>
+    </td>
+    <td>○</td>
+    <td>
+      <code>string</code>
+    </td>
+    <td>-</td>
+    <td>PrimaryButtonのボタンテキスト。</td>
+  </tr>
+  <tr>
+    <td>
+      <code>onClickOkButton</code>
+    </td>
+    <td>○</td>
+    <td>
+      <code>React.MouseEventHandler&lt;HTMLButtonElement&gt;</code>
+    </td>
+    <td>-</td>
+    <td>PrimaryButton押下時のコールバック。</td>
+  </tr>
+  <tr>
+    <td>
+      <code>okButtonDisabled</code>
+    </td>
+    <td></td>
+    <td>
+      <code>boolean</code>
+    </td>
+    <td>
+      <code>false</code>
+    </td>
+    <td>PrimaryButtonをDisabled状態にするかどうか。</td>
+  </tr>
+  <tr>
+    <td>
+      <code>labelCancelButton</code>
+    </td>
+    <td>○</td>
+    <td>
+      <code>string</code>
+    </td>
+    <td>-</td>
+    <td>NormalButtonのボタンテキスト。</td>
+  </tr>
+  <tr>
+    <td>
+      <code>onClickCancelButton</code>
+    </td>
+    <td>○</td>
+    <td>
+      <code>React.MouseEventHandler&lt;HTMLButtonElement&gt;</code>
+    </td>
+    <td>-</td>
+    <td>NormalButton押下時のコールバック。</td>
+  </tr>
+</table>

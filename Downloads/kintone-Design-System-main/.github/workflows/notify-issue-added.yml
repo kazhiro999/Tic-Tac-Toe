@@ -1,0 +1,31 @@
+name: Notify feature request or bug report added
+on:
+  issues:
+    types: [opened, labeled]
+jobs:
+  notify-feature-request:
+    if: "${{github.event.label.name == ':sparkles: feature request :sparkles:'}}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Notify to slack
+        id: slack
+        uses: slackapi/slack-github-action@e28cf165c92ffef168d23c5c9000cffc8a25e117 # v1.24.0
+        with:
+          channel-id: 'C03835LCSD9'
+          slack-message: ":sparkles: Feature request added by ${{github.event.issue.user.login}}\n${{github.event.issue.title}}: ${{github.event.issue.html_url}}"
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+  notify-bug-report:
+    if: "${{github.event.label.name == ':bug: bug report :bug:'}}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Notify to slack
+        id: slack
+        uses: slackapi/slack-github-action@e28cf165c92ffef168d23c5c9000cffc8a25e117 # v1.24.0
+        with:
+          channel-id: 'C03835LCSD9'
+          slack-message: "<!subteam^S02P3RD4THR> :eyes: 不具合登録 :eyes: \n :bug: Bug report added by ${{github.event.issue.user.login}}\n${{github.event.issue.title}}: ${{github.event.issue.html_url}}"
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}

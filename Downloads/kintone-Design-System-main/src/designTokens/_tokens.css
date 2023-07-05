@@ -1,0 +1,35 @@
+/**
+ * Do not edit directly
+ * Generated on Tue, 16 May 2023 06:13:59 GMT
+ */
+
+:root {
+  --color-text-white: #ffffff;
+  --color-text-accent: #0176d3;
+  --color-text-neutral-disabled: #747474;
+  --color-background-accent-default: #0176d3;
+  --color-background-accent-hover: #0b5cab;
+  --color-background-danger-default: #d83a00;
+  --color-background-danger-hover: #aa3001;
+  --color-background-action-default: #fafcff;
+  --color-background-action-hover: #c8d6df;
+  --color-background-neutral-disabled: #c9c9c9;
+  --color-border-action: #e2e4e7;
+  --typography-line-height-text: 150%;
+  --typography-font-size-button-large: 1rem;
+  --typography-font-size-button-medium: 1rem;
+  --typography-font-size-button-small: 0.75rem;
+  --typography-font-family-text-en: 'HelveticaNeueW02-45Ligh', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+  --typography-font-family-text-ja: 'メイリオ', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+  --typography-font-family-text-zh: '微软雅黑', 'Microsoft YaHei', '新宋体', NSimSun, STHeiti, Hei, 'Heiti SC', sans-serif;
+  --typography-font-family-text-zh-tw: '微軟正黑體', 'Microsoft JhengHei', '新宋体', NSimSun, STHeiti, Hei, 'Heiti SC', sans-serif;
+  --spacing-button-large: 1rem;
+  --spacing-button-medium: 1rem;
+  --spacing-button-small: 0.5rem;
+  --size-button-large-min-width: 10rem;
+  --size-button-large-height: 3rem;
+  --size-button-medium-min-width: 7.5rem;
+  --size-button-medium-height: 2.5rem;
+  --size-button-small-min-width: 6rem;
+  --size-button-small-height: 2rem;
+}

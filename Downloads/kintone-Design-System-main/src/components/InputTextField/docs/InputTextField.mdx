@@ -1,0 +1,113 @@
+import { Stories, Meta, ArgTypes } from '@storybook/blocks';
+import * as InputTextFieldStories from '../stories/InputTextField.stories';
+import { Notes } from '../../../docs/notes';
+
+import anatomy from './images/anatomy.png';
+import normal from './images/normal.png';
+import focused from './images/focused.png';
+
+<Meta title="Components/InputTextField" of={InputTextFieldStories} />
+
+# InputTextField
+
+[Figma](https://www.figma.com/file/0EL4UsBtC46KFG7WkKreiYi5/%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components?node-id=9421%3A65849)
+
+## 概要
+
+ユーザーからの入力を受け付ける単一行テキストフィールドです。
+
+## 構成
+
+<img src={anatomy} alt="InputTextFieldのAnatomyの図" />
+
+- Label(optional)
+  - InputTextBoxに入力する内容を知らせるテキストです
+  - Labelは可能な限り必須です
+- RequiredIcon(optional)
+  - 入力が必須であることを表します
+- InputTextBox
+  - ユーザーの入力を受け付けるテキストフィールドです
+- Value
+  - 入力されたテキストです
+- HelperText(optional)
+  - 入力を支援するメッセージです
+  - SuccessとErrorの２種類のメッセージがあります
+  - Successは入力が正常に完了したことを伝えます
+  - Errorは入力に誤りがあることを伝えます
+
+<Notes>現状、Successは使用されていません。</Notes>
+
+## 状態
+
+### Normal
+
+- 初期状態です
+
+<img src={normal} alt="Normal状態のInputTextField" />
+
+### Focused
+
+- InputTextBoxにフォーカスし、入力を受け付ける状態です
+
+<img src={focused} alt="Focused状態のInputTextField" />
+
+## 操作の仕様
+
+### マウス
+
+- InputTextBoxをクリック
+  - Focused状態になります
+  - 割り当てられたアクションが実行されます
+
+### キーボード
+
+- 文字入力
+  - Focused状態の時、文字入力を受け付けます
+- InputTextBoxにフォーカス
+  - Focused状態になります
+  - 割り当てられたアクションが実行されます
+- InputTextBoxからフォーカスを外す
+  - Normal状態になります
+  - 割り当てられたアクションが実行されます
+- キー押下
+  - 割り当てられたアクションが実行されます
+
+### スクリーンリーダー
+
+- InputTextBoxにフォーカス
+  - Labelが表示されている時、Labelの内容を読み上げます
+  - Labelが表示されていない時、代わりにaria-labelの内容を読み上げます
+  - HelperTextが表示されている時、HelperTextの内容を読み上げます
+  - HelperTextがErrorである時、不正な値であることを読み上げます
+  - RequiredIconが表示されている時、入力必須であることを読み上げます
+
+## 見た目の仕様
+
+### 幅
+
+- 親要素の100%です
+- Label、HelperTextは、幅を超過すると折り返されます
+
+### 高さ
+
+- InputTextBoxの高さは2種類提供しています
+  - small: 32px
+  - medium: 40px
+- LabelとHelperTextの高さは、文字列長によって伸長します
+
+### フォーカスインジケーター
+
+- ブラウザデフォルトのフォーカスインジケーターが表示されます
+- shadowが消え、背景色が変わります
+
+### 位置
+
+- Valueの水平方向の表示位置を変更できます
+
+## Props
+
+Descriptionで触れている各構成要素の名前については、[InputTextFieldの構成](#構成)を参照。
+
+<ArgTypes />
+
+<Stories />

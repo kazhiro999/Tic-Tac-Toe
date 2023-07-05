@@ -1,0 +1,73 @@
+import { Meta } from '@storybook/addon-docs';
+import { Notes, VARIANTS } from '../notes';
+
+import sizeTokenInFigma from './images/sizeTokenInFigma.png';
+import spacingTokenInFigma from './images/spacingTokenInFigma.png';
+
+<Meta title='designTokens/Size & Spacing' />
+
+# Size & Spacing
+
+<Notes variant={VARIANTS.DANGER} children="
+現在、このデザイントークンは整備中です。Figmaでも実装でも提供されていません。
+現在利用できるデザイントークンは以下です。
+
+- [Figma](https://www.figma.com/file/giGOxQP14cAhVgxUaqoLXA/%E2%9C%A8-%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components-(Copy)?type=design&node-id=9410-69640&t=dFgxnftazbLyG0S0-0)
+- [実装](https://github.com/kintone-private/kintone-Design-System/blob/main/src/designTokens/index.ts)
+" />
+
+## Size
+
+### Global tokens
+
+トークン名は `size.{index}` で記述します。例えば `size.2000x` という名前です。<br />
+indexには`0.5rem`を100％とした割合（パーセンテージ）が入ります。
+
+### Semantic tokens
+
+トークン名は `size.{property}.{modifiers}` で記述します。modifiersは省略可能です。<br/>
+例えば `size.button.large.minWidth` という名前です。
+
+<Notes
+  children="
+propertyはコンポーネントに依存しない名前が入ることが望ましいです。
+    "
+/>
+
+### Tokens Studio for Figma を用いたスタイルの適用方法
+
+Width/Heightにそれぞれ異なるSizeトークンを指定するときには、トークンを右クリックしてWidth/Heightのどちらかを選びます。<br/>
+トークンを左クリックで選択すると、Width/Heightの両方に同じトークンが使われるので注意してください。
+
+<img
+  src={sizeTokenInFigma}
+  alt="FigmaでSizeトークンのWidth/Heightを選択するスクリーンショット"
+/>
+
+## Spacing
+
+### Global tokens
+
+トークン名は `spacing.{index}` で記述します。例えば `spacing.200x` という名前です。<br />
+indexには`0.5rem`を100％とした割合（パーセンテージ）が入ります。
+
+### Semantic tokens
+
+トークン名は `spacing.{property}.{modifiers}` で記述します。modifiersは省略可能です。<br/>
+例えば `spacing.button.large` という名前です。
+
+<Notes
+  children="
+propertyはコンポーネントに依存しない名前が入ることが望ましいです。
+    "
+/>
+
+### Tokens Studio for Figmaを用いたスタイルの適用方法
+
+Top/Right/Bottom/Leftにそれぞれ異なるSpacingトークンを指定するときには、トークンを右クリックしてTop/Right/Bottom/Leftのいずれかを選びます。<br/>
+トークンを左クリックで選択すると、Top/Right/Bottom/Leftそれぞれに同じトークンが使われるので注意してください。
+
+<img
+  src={spacingTokenInFigma}
+  alt="FigmaでSpacingトークンのTop/Right/Bottom/Leftを選択するスクリーンショット"
+/>

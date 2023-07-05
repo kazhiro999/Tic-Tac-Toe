@@ -1,0 +1,162 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as NotifierStories from '../stories/Notifier.stories';
+import { Notes, VARIANTS } from '../../../docs/notes';
+
+import anatomy from './images/anatomy.png';
+import errorLinkHover from './images/error_link_hover.png';
+import errorLink from './images/error_link.png';
+import error from './images/error.png';
+import info from './images/info.png';
+import infoLinkHover from './images/info_link_hover.png';
+import infoLink from './images/info_link.png';
+import oldError from './images/old_error.png';
+import oldInfo from './images/old_info.png';
+import oldSuccess from './images/old_success.png';
+import successLinkHover from './images/success_link_hover.png';
+import successLink from './images/success_link.png';
+import success from './images/success.png';
+
+<Meta title="Components/Notifier" of={NotifierStories} />
+
+# Notifier
+
+[Figma](https://www.figma.com/file/0EL4UsBtC46KFG7WkKreiYi5/%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components?node-id=9410%3A71638)
+
+## 概要
+
+Notifierは、ユーザーに重要な情報をフィードバックするためのコンポーネントです。
+Notifierはユーザーにフィードバックが必要な状況で自動的に開きます。フィードバックが必要な状況には「ユーザーのアクション」と「システムエラー」の２種類があります。
+
+- ユーザーのアクション：アクションボタンが押されたとき、ドラッグ＆ドロップで要素を並び替えたときなど。
+- システムエラー：APIエラー・JSエラーが発生したときなど。
+
+Notifierは画面上に同時に1つだけ開きます。新しいNotifierが開くと古いNotifierは閉じます。
+
+## 構成
+
+<img src={anatomy} alt="Notifier の構成図" />
+
+- Title
+  - ユーザーに伝えたい情報の概要。
+- Message Lines
+  - ユーザーに伝えたい情報の詳細。
+  - 複数の「Message Line（後述）」で構成されたリスト。
+  - Message Linesは任意です。省略される場合もあります。
+- Message Line
+  - １行のテキスト。テキストの任意の箇所に「リンク」を含められます。
+  - 場合によっては任意のHTMLをとることがあります。
+- Close Button
+  - IconButton。押すとNotifierが閉じます。
+
+## 種類
+
+Notifierの種類には、Success / Error / Infoがあります。
+
+### Success
+
+<img src={success} alt="スクリーンショット Success の Notifier" />
+
+- ユーザのアクションが成功したときに使用します。
+- 背景色：緑。文字色：白。Message Lines内のリンクは白色で、下線が表示されます。
+- 開いてから7秒経過すると自動的に閉じます（ホバー・フォーカスしている場合は自動で閉じない場合があります。後述の「操作の仕様」を参照してください）。
+
+### Error
+
+<img src={error} alt="スクリーンショット Error の Notifier" />
+
+- ユーザのアクションが失敗したりシステムエラーが発生したときに使用します。
+- 背景色：赤。文字色：白。Message Lines内のリンクは白色で、下線が表示されます。
+- 閉じるボタンが押されるまで閉じません。
+- Message Linesが省略された場合、画面上にFormFieldMessageがあわせて表示されます。
+
+### Info
+
+<img src={info} alt="スクリーンショット Info の Notifier" />
+
+- SuccessやError以外の状況で、情報を伝えるために使用します。
+- 背景色：青。文字色：白。Message Lines内のリンクは白色で、下線が表示されます。
+- 開いてから7秒経過すると自動的に閉じます（ホバー・フォーカスしている場合は自動で閉じない場合があります。後述の「操作の仕様」を参照してください）。
+
+<Notes variant={VARIANTS.WARNING}>
+  {`Closureでは、Infoであっても自動的に閉じない場合があります。`}
+</Notes>
+
+### （参考）旧デザイン
+
+- 旧デザインでは、Notifierのデザインが異なります。
+- 旧デザインでは、Notifierの種類を、背景色ではなくアイコンによって表します。
+
+<ul style={{ listStyle: 'none' }}>
+  <li>
+    Success<br />
+    <img src={oldSuccess} alt="スクリーンショット. Success の Notifier. 緑色のチェックアイコンが表示されている" />
+  </li>
+  <li>
+    Error<br />
+    <img src={oldError} alt="スクリーンショット. Error の Notifier. 緑色のチェックアイコンが表示されている" />
+  </li>
+  <li>
+    Info<br />
+    <img src={oldInfo} alt="スクリーンショット. Info の Notifier. 緑色のチェックアイコンが表示されている" />
+  </li>
+</ul>
+
+## 状態
+
+### Hover
+
+- Notifier内にホバーしているとNotifierは自動的に閉じません（Closureのみ）。
+- 「リンク」「閉じるボタン」にホバーすると、カーソルはリンクポインターに変化します。「リンク」では文字色も変化します。
+
+<ul style={{ listStyle: 'none' }}>
+  <li><img src={errorLink} alt="リンクを含んだErrorのスクリーンショット" /></li>
+  <li><img src={errorLinkHover} alt="リンクのHover状態のErrorのスクリーンショット" /></li>
+  <li><img src={successLink} alt="リンクを含んだSuccessのスクリーンショット" /></li>
+  <li><img src={successLinkHover} alt="リンクのHover状態のSuccessのスクリーンショット" /></li>
+  <li><img src={infoLink} alt="リンクを含んだInfoのスクリーンショット" /></li>
+  <li><img src={infoLinkHover} alt="リンクのHover状態のInfoのスクリーンショット" /></li>
+</ul>
+
+### Focus
+
+- Notifier内にフォーカスしているとNotifierは自動的に閉じません（Closureのみ）。
+- 「リンク」「閉じるボタン」にフォーカスすると、フォーカスインジケーターが表示されます。
+
+## 操作の仕様
+
+### マウス
+
+- 「Close Button」をクリックすると、Notifierが閉じます。
+
+### キーボード
+
+- 「Close Button」にフォーカスしてエンターキー・スペースキーを押すと、Notifierが閉じます。
+
+### スクリーンリーダー
+
+- Notifierが開くと支援技術に通知されます。通知の優先度はNotifierの種類によらずpoliteです。スクリーンリーダーはNotifier内のすべての要素を読み上げます（Title、Message Lines、Close Button（代替テキスト））。
+
+## 見た目の仕様
+
+### 開閉
+
+- Notifierはアニメーションしながら開閉します。
+
+### 幅
+
+- 幅はコンポーネント内部の要素に合わせて伸長します。
+- Reactoneでは、最小値は300pxです。最大値は画面幅の80%です。
+- Closureでは、最小値・最大値ともにありません。
+
+### 高さ
+
+- 高さはコンポーネント内部の要素に合わせて伸長します。
+- 最小値・最大値ともにありません。
+
+### 配置される箇所
+
+- Notifierはどのランドマーク要素（header要素, main要素, footer要素など）にも属しません。
+- 現状ではページごとにNotifierが配置される箇所が違います。
+  - Reactone: header要素の直後。
+  - Mira: header要素の直前。
+  - Closure: body要素の末尾。

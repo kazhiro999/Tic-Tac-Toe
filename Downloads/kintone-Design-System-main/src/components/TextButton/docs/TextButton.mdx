@@ -1,0 +1,117 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as TextButtonStories from '../stories/TextButton.stories';
+import { Notes, VARIANTS } from '../../../docs/notes';
+
+import active from './images/active.png';
+import anatomy from './images/anatomy.png';
+import defaultImage from './images/default.png';
+import deleteImage from './images/delete.png';
+import hover from './images/hover.png';
+import mediumExample1 from './images/medium_example1.png';
+import mediumExample2 from './images/medium_example2.png';
+import medium from './images/medium.png';
+import normal from './images/normal.png';
+import smallExample1 from './images/small_example1.png';
+import smallExample2 from './images/small_example2.png';
+import small from './images/small.png';
+
+<Meta title="Components/TextButton" of={TextButtonStories} />
+
+# TextButton
+
+[Figma](https://www.figma.com/file/0EL4UsBtC46KFG7WkKreiYi5/%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components?node-id=9410%3A69260)
+
+## 概要
+
+Normalボタンの次に重要度が低いアクションボタンです。単体でも、他のボタンと組み合わせて使うこともできます。
+
+## 構成
+
+<img src={anatomy} alt="TextButton の Anatomy の図" />
+
+- Label
+  - ボタンのテキストラベルです。ボタンを押すことで実行されるアクションを示します。
+
+## 種類
+
+### Normal
+
+- 汎用なアクションに対して使います。
+
+<img src={normal} alt="normalのスクリーンショット" />
+
+### Delete
+
+- データ削除などの破壊的なアクションに対して使います。
+
+<img src={deleteImage} alt="deleteのスクリーンショット" />
+
+## 状態
+
+### Default
+
+- 通常のスタイルです。
+
+<img src={defaultImage} alt="default状態のスクリーンショット" />
+
+### Hover
+
+- マウスカーソルがボタン上に触れた時のスタイルです。
+
+<img src={hover} alt="hover状態のスクリーンショット" />
+
+### Active
+
+- ボタンを押し下げたときのスタイルです。
+
+<img src={active} alt="active状態のスクリーンショット" />
+
+### Focus
+
+Active状態のスタイルに対して、各ブラウザ毎に設定されているアウトラインが表示されます。
+
+## 操作の仕様
+
+### マウス
+
+- ラベル部分をクリックすることで、ボタンに割り当てられたアクションを実行できます
+
+### キーボード
+
+- Tabキーでボタンにフォーカスできます（disabledの状態を除く）
+- フォーカスがある時、エンターキーおよびスぺースキーでボタンに割り当てられたアクションを実行できます
+
+### スクリーンリーダー
+
+- フォーカスした時、ボタンのラベルを読み上げます
+- フォーカスがある時、エンターキーおよびスペースキーでボタンに割り当てられたアクションを実行できます
+
+## 見た目の仕様
+
+### 横幅はラベルに対して可変
+
+ボタンの横幅はLabelに応じて可変です。
+
+### カーソル
+
+カーソルはリンクポインターを表示します。
+
+### クリック範囲
+
+Label部分がクリック可能範囲です。
+
+<Notes
+  children="
+一応、ボタンのクリック可能範囲エリアは、44px以上が推奨されてたりします。
+[Web Content Accessibility Guidelines (WCAG) 2.1](https://waic.jp/docs/WCAG21/#target-size)
+[モバイルサイトに最適なボタンサイズは？使いやすいモバイルサイトを目指して | ビジネスとIT活用に役立つ情報](https://www.asobou.co.jp/blog/web/mobile-tap-size)"
+/>
+
+| ドキュメント                                                                                                                                                                                                        | ターゲットサイズ |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| [Material Design Guideline](https://material.io/design/usability/accessibility.html#layout-and-typography)                                                                                                          | 48dp × 48dp 以上 |
+| [Human Interface Guideline](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/adaptivity-and-layout/)                                                                                 | 44pt × 44pt 以上 |
+| [WCAG 2.1 達成基準 2.5.5「ターゲットのサイズ」（レベル AAA）](https://waic.jp/docs/WCAG21/Understanding/target-size.html)                                                                                           | 44px × 44px 以上 |
+| [WCAG 2.2 達成基準 2.5.8「ターゲットのサイズ(最小)」（レベル AA）](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html) <br/> ※WCAG 2.2 は現在策定中のため、この基準は変更・削除される可能性がある | 24px × 24px 以上 |
+
+<Stories />

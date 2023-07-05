@@ -1,0 +1,141 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as MultipleSelectStories from '../stories/MultipleSelect.stories';
+
+import active from './images/active.png';
+import anatomy from './images/anatomy.png';
+import disabled from './images/disabled.png';
+import focused from './images/focused.png';
+import normal from './images/normal.png';
+import selected from './images/selected.png';
+
+<Meta title="Components/MultipleSelect" of={MultipleSelectStories} />
+
+# MultipleSelect
+
+[Figma](https://www.figma.com/file/0EL4UsBtC46KFG7WkKreiYi5/%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components?node-id=9410%3A71988)
+
+## 概要
+
+MultipleSelectは、オプションのリストから複数の項目を選択できるドロップダウンです。
+
+## 構成
+
+<img src={anatomy} alt="MultipleSelectのanatomyの図" />
+
+- Listbox
+  - ListboxOptionが集合したドロップダウンです
+  - ListboxContainer, ListboxOptionを総称したものです
+- ListboxContainer
+  - Listbox全体の要素で、Listboxの内側にシャドーをもちます
+- ListboxOption
+  - 選択可能なアイテムです
+- SelectedIcon
+  - ListboxOptionがSelectedであることを示すアイコンです
+- OptionLabel
+  - ListboxOptionのテキストラベルです
+
+## 状態
+
+### Normal
+
+- ListboxOptionの初期状態です
+
+<img src={normal} alt="normal状態のスクリーンショット" />
+
+### Disabled
+
+- Listboxが無効化された状態です
+- マウス・キーボードでもユーザー操作はできません
+- OptionLabelとSelectedIconがグレーになり、backgroundがライトグレーになります
+
+<img src={disabled} alt="disabled状態のスクリーンショット" />
+
+### Focused (Listbox)
+
+- Listboxにフォーカスしている状態です
+- フォーカスした直後は、1番上のListboxOptionがActive状態となります
+
+<img src={focused} alt="focused状態のスクリーンショット" />
+
+### Active (ListboxOption)
+
+- ListboxOptionが操作対象にある状態です
+- ListboxOptionの背景色が青色に変わります
+
+<img src={active} alt="active状態のスクリーンショット" />
+
+### Selected (ListboxOption)
+
+- ListboxOptionが選択されている状態です
+- OptionLabelが濃い青色に変わります
+- OptionLabelの左にSelectedIconがつきます
+
+<img src={selected} alt="selected状態のスクリーンショット" />
+
+## 操作の仕様
+
+### マウス
+
+- ListboxOptionにHover：
+  - そのListbox OptionがActive状態になります
+  - OptionLabelがツールチップとして表示されます
+- ListboxOptionをClick：
+  - そのListboxOptionがSelected状態になります
+  - Selected状態のListboxOptionを再度clickすると、Selected状態が解除されます
+
+### キーボード
+
+#### Listbox が Focused 状態のとき
+
+- 下矢印キー：
+  - 次のListboxOptionがActive状態になります
+  - 次のListboxOptionがない場合は、先頭のListboxOptionがActive状態になります
+- 上矢印キー：
+  - 前のListboxOptionがActive状態になります
+  - 前のListboxOptionがない場合は、末尾のListboxOptionがActive状態になります
+- Spaceキー：
+  - そのListboxOptionがSelected状態になります
+  - Selected状態の時、Selected状態が解除されます
+- Homeキー：
+  - 先頭のListboxOptionがActive状態になります
+- Endキー：
+  - 末尾のListboxOptionがActive状態になります
+
+### スクリーンリーダー
+
+- ListboxOptionがActive状態のとき、そのListboxOptionがSelected状態かを読み上げます
+- ListboxOptionがActive状態に切り替わったとき、Active状態に切り替わったListboxOptionのOptionLabelを読み上げます
+
+## 見た目の仕様
+
+### 幅
+
+- Listboxの横幅は親要素の100％です
+- ListboxOptionの幅
+  - Listboxの幅の100%です
+  - OptionLabelが幅を超過した場合、省略記号を表示し、超過分は見切れます
+
+### 高さ
+
+- Listboxの高さは固定値です
+- ListboxOptionの高さは固定値です
+- すべてのListboxOptionの高さの合計がListboxの高さを超えるとき、ListboxOptionは縦スクロールします
+
+### カーソル
+
+- Disabledではない時、ListboxOptionにhoverしたとき、カーソルはpointerになります
+- Disabledの時、ListboxOptionにhoverしたとき、カーソルはnot-allowedになります
+
+### フォーカスインジケーター
+
+- ListboxがFocused状態のとき、ブラウザ標準のフォーカスインジケーターが表示されます
+
+### ツールチップ
+
+- ブラウザ標準のツールチップでOptionLabelが表示されます
+
+### クリック範囲
+
+- ListboxOptionがクリック範囲です
+
+<Stories />

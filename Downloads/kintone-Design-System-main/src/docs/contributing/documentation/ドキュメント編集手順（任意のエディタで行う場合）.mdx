@@ -1,0 +1,37 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title='contributing/documentation/ドキュメント編集手順（任意のエディタで行う場合）' />
+
+# ドキュメント編集手順（任意のエディタで行う場合）
+
+## （初回のみ）kintone Design System リポジトリのインストール
+
+[セットアップドキュメント](?path=/docs/gettingstarted-developing-kintone-design-system-セットアップ--docs)に従ってセットアップしてください。
+
+## ドキュメント編集用のブランチを作成する
+
+mainブランチから切ってください。<br/>
+ブランチ名は任意でよいです。
+
+```bash
+git checkout -b edit-document-button
+```
+
+## 編集したドキュメントを確認する
+
+```bash
+npm run storybook
+```
+
+## ブランチをプッシュする
+
+```bash
+git add .
+git commit -m "ドキュメントを更新"
+git push origin edit-document-button
+```
+
+## プルリクエストを作成してレビューを依頼する
+
+[GitHub の kintone-Design-System レポジトリ](https://github.com/kintone-private/kintone-Design-System)にアクセスしプルリクエストを作成します。<br/>
+具体的な記載事項やレビュー方法は[プルリクエストを作成してレビューを依頼する](?path=/docs/contributing-プルリクエストを作成してレビューを依頼する--docs)を参照してください。

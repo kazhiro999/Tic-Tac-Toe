@@ -1,0 +1,109 @@
+name: 'build-assets-check'
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+
+jobs:
+  build_assets_on_base:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: "contains(github.event.pull_request.labels.*.name, 'renovate')"
+    steps:
+      - name: ⬇️ Checkout base branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          clean: 'git reset --hard HEAD'
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.node-version'
+          registry-url: https://npm.pkg.github.com/
+          cache: 'npm'
+
+      - name: 📦 Install base dependencies
+        run: npm ci
+
+      - name: 🔧 Build assets on base branch
+        run: npm run build
+
+      - name: Upload assets on base branch
+        uses: actions/upload-artifact@v3
+        with:
+          name: assets-on-base
+          path: |
+            cjs/
+            es/
+            types/
+          retention-days: 1
+
+  build_assets_on_head:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: "contains(github.event.pull_request.labels.*.name, 'renovate')"
+    steps:
+      - name: ⬇️ Checkout head branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.node-version'
+          registry-url: https://npm.pkg.github.com/
+          cache: 'npm'
+
+      - name: 📦 Install head dependencies
+        run: npm ci
+
+      - name: 🔧 Build assets on head branch
+        run: npm run build
+
+      - name: Upload assets on head branch
+        uses: actions/upload-artifact@v3
+        with:
+          name: assets-on-head
+          path: |
+            cjs/
+            es/
+            types/
+          retention-days: 1
+
+  compare_assets:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [build_assets_on_base, build_assets_on_head]
+    env:
+      GH_PR_NUM: ${{ github.event.pull_request.number }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: Download assets created on base branch
+        uses: actions/download-artifact@v3
+        with:
+          name: assets-on-base
+          path: dist_base
+
+      - name: Download assets created on head branch
+        uses: actions/download-artifact@v3
+        with:
+          name: assets-on-head
+          path: dist_head
+
+      - name: 🔎 Compare current assets with develop assets
+        id: compare
+        run: |
+          echo 'compare ${{github.event.pull_request.head.sha}} with ${{github.event.pull_request.base.sha}}'
+          diff -r dist_head dist_base
+      - name: ✉️ Send success notification
+        if: steps.compare.outcome == 'success'
+        run: |
+          gh pr comment ${GH_PR_NUM} --body '🎉 No difference in build results'
+      - name: ✉️ Send failure notification
+        if: failure() && steps.compare.outcome == 'failure'
+        run: |
+          gh pr comment ${GH_PR_NUM} --body '⚠️ There was a difference between ${{github.event.pull_request.head.sha}} and ${{github.event.pull_request.base.sha}}'
+          exit 1

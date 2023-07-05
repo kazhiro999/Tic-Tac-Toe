@@ -1,0 +1,271 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as DropdownStories from '../stories/Dropdown.stories';
+import { Notes, VARIANTS } from '../../../docs/notes';
+
+import active from './images/active.png';
+import anatomy from './images/anatomy.svg';
+import close from './images/close.png';
+import disabled from './images/disabled.png';
+import focused from './images/focused.png';
+import open from './images/open.png';
+import selectedActive from './images/selected_active.png';
+import selected from './images/selected.png';
+
+<Meta title="Components/Dropdown" of={DropdownStories} />
+
+# Dropdown
+
+[Figma](https://www.figma.com/file/0EL4UsBtC46KFG7WkKreiYi5/%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components?node-id=9410%3A71981)
+
+## 概要
+
+複数の選択可能なオプションリストを提示します。
+ユーザーはひとつのオプションを選択することができます。
+選択されたオプションは、フォームの値として使用されます。
+
+## 構成
+
+<img src={anatomy} alt="Dropdownコンポーネントの解剖図" />
+
+- Dropdown Button
+  - Dropdown Menu Popupを開閉するButtonです
+- Dropdown Button Label
+  - Dropdownの入力結果を表すテキストです
+  - 表示しきれない部分は省略記号で表します
+  - 以下のいずれかの文字列を表示します：
+    - Selected状態のDropdown OptionのOption Label
+    - Placeholder Label OptionのLabel
+- Arrow Down Icon
+  - 展開できることを示すIconです
+  - Dropdown Button Labelの右に表示します
+- Dropdown Menu Popup Container
+  - 0個以上のDropdown Optionを持つコンテナです
+- Dropdown Option
+  - 選択可能なDropdownの選択肢です
+  - 先頭のDropdown Optionはコンポーネントの役割や入力を支援するための用途で用いられる場合があります。これを「Placeholder Label Option」といいます
+- Option Label
+  - Dropdown Optionの選択肢名を表すテキストです
+- Selected Icon
+  - Dropdown OptionがSelected状態であることを表すIconです
+
+## 状態
+
+### Close
+
+- Dropdown Menu Popupが閉じた状態です
+- Dropdownを画面に描画したときの初期状態です
+- Dropdown ButtonにはSelected状態のDropdown OptionのOption Labelが表示されています
+- Open状態からClose状態になると、Dropdown Buttonにフォーカスします（TabキーでClose状態にした場合を除く）。
+
+<img src={close} alt="Close状態のスクリーンショット" />
+
+### Open
+
+- Dropdown Menu Popupが開いた状態です
+- Dropdown Menu Popupが開いた直後は、Selected状態のDropdown OptionがActive状態になります
+- Dropdown ButtonにはSelected状態のDropdown OptionのOption Labelが表示されています
+
+<img src={open} alt="open状態のスクリーンショット" />
+
+### Disabled
+
+- Dropdownが無効化された状態です
+- ユーザーの操作を受け付けません。マウスクリックしても何も起こりません。キーボードでフォーカスもできません。
+- Dropdown Buttonの文字色がグレーになり、backgroundがライトグレーになります
+- Dropdownは常にClose状態です。Open状態にはできません
+
+<img src={disabled} alt="Disabled状態のスクリーンショット" />
+
+### Focused (Dropdown Button)
+
+- Dropdown ButtonにFocusした状態です
+- Dropdown Buttonの周囲に青枠が表示されます
+
+<img src={focused} alt="focused状態のスクリーンショット" />
+
+### Active (Dropdown Option)
+
+- Dropdown Optionが操作対象にある状態です
+- Dropdown Optionのbackgroundが変わります
+
+<img src={active} alt="active状態のスクリーンショット" />
+
+### Selected (Dropdown Option)
+
+- Dropdown Optionが選択されている状態です
+- 文字色がダークグレーから青色に代わります
+- Option Labelの左にSelected Iconがつきます
+
+<img src={selected} alt="selected状態のスクリーンショット" />
+<img src={selectedActive} alt="selectedでActive状態のスクリーンショット" />
+
+## 操作の仕様
+
+### マウス
+
+- Dropdown Buttonをclick（Disabled状態を除く）：
+  - DropdownがClose状態のとき、Open状態になります
+  - Selected状態のDropdown OptionがActive状態になります
+  - DropdownがOpen状態のとき、Close状態になります
+- Dropdown ButtonにHover（オプション）：
+  - Dropdownの役割を示すツールチップが表示されます
+    ※Dropdownの役割を示すツールチップの表示ルールは、現在決まっていません。
+- Dropdown ButtonとDropdown Menu Popup以外をclick：
+  - DropdownがOpen状態のとき、Dropdown Menu PopupがClose状態になります
+- Dropdown OptionにHover：
+  - そのDropdown OptionがActive状態になります
+  - Option Labelがツールチップとして表示されます
+- Dropdown Optionをclick：
+  - そのDropdown OptionがSelected状態になります
+  - Dropdown Menu PopupがClose状態になります
+
+### キーボード
+
+#### focus が Dropdown Button にあるとき
+
+- Enterキー／Spaceキー：
+  - DropdownがClose状態のとき、Open状態になります
+  - Selected状態のDropdown OptionがActive状態になります
+  - DropdownがOpen状態のとき、Close状態になります
+- 下矢印キー／上矢印キー：
+  - Dropdown Menu Popupが開き、Selected状態のDropdown OptionがActive状態になります
+
+#### focus が Dropdown Option にあるとき
+
+- 下矢印キー：
+  - 次のDropdown OptionがActive状態になります
+  - 次のDropdown Optionがない場合は、先頭のDropdown OptionがActive状態になります
+- 上矢印キー：
+  - 前のDropdown OptionがActive状態になります
+  - 前のDropdown Optionがない場合は、末尾のDropdown OptionがActive状態になります
+- Homeキー：
+  - 先頭のDropdown OptionがActive状態になります
+- Endキー：
+  - 末尾のDropdown OptionがActive状態になります
+- Enterキー：
+  - Active状態のDropdown OptionをSelected状態になります
+  - Dropdown Menu PopupがClose状態になります
+  - Dropdown Buttonにキーボードフォーカスが移動します
+- Escキー：
+  - Dropdown Menu PopupがClose状態になります
+  - Dropdown Buttonにキーボードフォーカスが移動します
+- Tabキー：
+  - Dropdown Menu PopupがClose状態になります
+  - Dropdownの次の要素にキーボードフォーカスが移動します
+
+### スクリーンリーダー
+
+- Dropdown Buttonにfocusしているとき、Dropdown Menu PopupのOpen/Close状態を読み上げます
+- Dropdown Optionにfocusしているとき、Selected状態を読み上げます
+
+## 見た目の仕様
+
+### Dropdown Button
+
+#### 幅
+
+##### 何も指定しない場合
+
+- Dropdownの文字列長によって、Dropdown Buttonの幅が伸長します
+- 幅に上限はありません
+
+##### 最大幅を指定した場合
+
+- Dropdownの文字列長によって、Dropdown Buttonの幅が伸長します
+- Dropdown Button Labelの文字列長が最大幅を超えた場合は、文字列が省略表示されます
+
+##### 幅を指定した場合
+
+- Dropdownの文字列長によらず、Dropdown Buttonの幅が固定されます
+- Dropdown Buttonの文字列長がDropdownの幅を超えた場合は、文字列が省略表示されます
+
+#### 高さ
+
+- 高さは固定値です
+
+#### カーソル
+
+- カーソルはリンクポインタです
+- Disabledの時は、not-allowedになります
+
+### Dropdown Menu Popup
+
+#### 幅
+
+##### 何も指定しない場合
+
+- Dropdown Optionの文字列長によって、Dropdown Menu Popupの幅が伸長します
+- 幅の下限は280pxです。幅に上限はありません
+
+##### 幅をそろえるオプションを指定した場合
+
+- Dropdown Menu Popupの幅がDropdown Buttonの幅と等しくなります
+- Dropdown Menu Popup内の文字列長がDropdown Menu popupの幅を超えた場合、横スクロールしてすべての文字列を確認できます
+
+#### 高さ
+
+- Dropdown Optionの個数によって伸長します
+- 画面からはみ出る場合は、縦スクロールしてすべてのオプションを確認できます
+
+#### 位置
+
+- Selected状態のDropdown Optionが画面外にある場合は画面に収まる位置までスクロールされます
+- `placement` を指定することでDropdown Menu Popupの表示位置を指定することができます
+  - `placement = 'top-start'`の場合、Dropdown Buttonの上側に左揃えで表示されます
+  - `placement = 'top-end'`の場合、Dropdown Buttonの上側に右揃えで表示されます
+  - `placement = 'bottom-start`の場合、Dropdown Buttonの下側に左揃えで表示されます
+  - `placement = 'bottom-end'`の場合、Dropdown Buttonの下側に右揃えで表示されます
+- `placement` を指定していない場合、Dropdown Buttonの位置を起点に、スペースが広い方に表示されます
+  - 右上のスペースが広い場合、Dropdown Buttonの上側に左揃えで表示されます
+  - 左上のスペースが広い場合、Dropdown Buttonの上側に右揃えで表示されます
+  - 右下のスペースが広い場合、Dropdown Buttonの下側に左揃えで表示されます
+  - 左下のスペースが広い場合、Dropdown Buttonの下側に右揃えで表示されます
+
+### Dropdown Option
+
+#### 幅
+
+##### 何も指定しない場合
+
+- Dropdown Option Labelの文字列長によって、Dropdown Optionの幅が伸長します
+- 幅に上限はありません
+
+##### 最大幅を指定した場合
+
+- Dropdown Optionの文字列長によって、Dropdown Optionの幅が伸長します
+- Option Labelの文字列長が指定した最大幅を超えた場合は、以降の文字列は表示されません
+
+##### 幅を指定した場合
+
+- Dropdown Optionの文字列長によらず、Dropdown Optionの幅が固定されます
+- Dropdown Optionの文字列長が指定した幅を超えた場合は、以降の文字列は表示されません
+
+#### 高さ
+
+- 高さは固定値です
+
+#### カーソル
+
+- カーソルはリンクポインタです
+
+<Notes
+  variant={VARIANTS.INFO}
+  subtitle="使い方"
+  children="
+※今後充実させていくべき項目。
+**Dropdown の Label**
+Dropdown の役割を示すため、Label とセットで仕様しましょう。
+Label の提供方法：
+
+- 直前のテキストを Label とする
+- 直前の見出しを Label とする
+- 表の見出しセルを Label とする
+- Placeholder Label Option を Label とする
+  "
+/>
+
+## 複数のオプションから 1 つを選択するコンポーネントの使い分け
+
+[RadioButton | 複数のオプションから 1 つを選択するコンポーネントの使い分け](?path=/docs/components-radio--docs#複数のオプションから-1-つを選択するコンポーネントの使い分け)
+
+<Stories />

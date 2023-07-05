@@ -1,0 +1,67 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as ShimaShimaListStories from '../stories/ShimaShimaList.stories';
+import anatomy from './images/anatomy.png';
+
+<Meta title="Components/ShimaShimaList" of={ShimaShimaListStories} />
+
+# ShimaShimaList
+
+[Figma](https://www.figma.com/file/73iDlwTUsZNgarlcz2n2Mz/Anatomy%E3%81%AE%E5%9B%B3?node-id=601%3A1071)
+
+## 概要
+
+数の多い要素を、視覚的にわかりやすく表示するリストです。
+
+リストの最後のボタンを押すことで、一定個数ずつリストを読み込んで表示します。
+
+## 構成
+
+<img src={anatomy} alt="ShimaShimaListの構成図" />
+
+- ListItem
+  - 縦に並ぶ個々の要素です
+  - 行ごとに背景色が変わります
+- MoreButton
+  - ListItemをさらに読み込むボタンです
+  - 最後のListItemとして表示されます
+  - MoreButtonの表示・非表示を指定できます
+- ButtonLabel
+  - MoreButtonを押すとなにが起こるかを説明したテキストです
+
+## 操作の仕様
+
+### マウス
+
+- MoreButtonをクリック
+  - 割り当てられたアクションが実行されます
+
+### キーボード
+
+- MoreButtonでエンター・スペース
+  - 割り当てられたアクションが実行されます
+
+## 見た目の仕様
+
+### 幅
+
+- ListItemの幅は、要素の幅に応じて伸長します
+- MoreButtonの幅は、ButtonLabelの文字列長に応じて伸長します
+
+### 高さ
+
+- ListItemの高さは、要素の高さによって伸長します
+- MoreButtonの高さは、任意の高さに設定できます
+
+### 位置
+
+- MoreButtonは、左揃えか中央ぞろえを指定できます
+
+### フォーカスインジケーター
+
+- MoreButtonは、ブラウザーデフォルトのフォーカスインジケーターです
+
+### カーソル
+
+- MoreButtonのカーソルはPointerです
+
+<Stories />

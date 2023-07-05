@@ -1,0 +1,44 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'github>cybozu/renovate-config',
+    ':maintainLockFilesWeekly',
+    'group:linters',
+    'group:definitelyTyped'
+  ],
+  npm: {
+    schedule: ['after 10pm on wednesday', 'before 5am on wednesday'],
+    packageRules: [
+      {
+        description: 'automerge minor updates of @types',
+        matchUpdateTypes: ['minor'],
+        automerge: true,
+        matchPackagePatterns: ['^@types']
+      },
+      {
+        description: 'automerge minor updates of @types',
+        matchUpdateTypes: ['minor'],
+        automerge: true,
+        matchPackagePatterns: ['^@*storybook']
+      },
+      {
+        description: 'automerge minor updates of lint tools',
+        matchUpdateTypes: ['minor'],
+        automerge: true,
+        matchPackageNames: ['eslint', 'prettier', '@cybozu/eslint-config'],
+        matchPackagePatterns: ['^eslint-config-', '^eslint-plugin-']
+      },
+      {
+        description: 'automerge minor updates of test tools',
+        matchUpdateTypes: ['minor'],
+        automerge: true,
+        matchPackageNames: ['jest', 'babel-jest', 'mockdate'],
+        matchPackagePatterns: ['^jest-', '^@testing-library']
+      }
+    ]
+  },
+  platformAutomerge: true,
+  nodenv: {
+    enabled: false
+  }
+}

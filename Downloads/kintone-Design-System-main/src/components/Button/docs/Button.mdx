@@ -1,0 +1,175 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as ButtonStories from '../stories/Button.stories';
+import anatomy from './images/anatomy.png';
+import primary from './images/primary.png';
+import normal from './images/normal.png';
+import deleteButton from './images/delete.png';
+import saveForm from './images/save_form.png';
+import defaultState from './images/default.png';
+import hover from './images/hover.png';
+import active from './images/active.png';
+import disabled from './images/disabled.png';
+import large from './images/large.png';
+import largeExample from './images/large_example.png';
+import medium from './images/medium.png';
+import mediumExample from './images/medium_example.png';
+import mediumExample2 from './images/medium_example_2.png';
+import small from './images/small.png';
+import smallExample from './images/small_example.png';
+import { Notes, VARIANTS } from '../../../docs/notes';
+
+<Meta title="Components/Button" of={ButtonStories} />
+
+# Button
+
+[Figma](https://www.figma.com/file/0EL4UsBtC46KFG7WkKreiYi5/%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components?node-id=9410%3A69260)
+
+## 概要
+
+ボタンは、ユーザーにアクションを実行してもらう時に使用するコンポーネントです。
+
+- 例：追加、保存、更新、キャンセルなど。
+
+## 構成
+
+<img src={anatomy} alt="Buttonコンポーネントの解剖図" width="500" />
+
+- Container
+  - ボタンの形を作る要素です。長方形で構成され、ラベルと背景色を持ちます。
+- Label
+  - ボタンのテキストラベルです。ボタンを押すことで実行されるアクションを示す文言を指定します。
+    Containerの中央に表示されます。
+
+## 種類
+
+### Primary
+
+- 画面上の主要なアクションを促す時に使用します。
+- ユーザーに何が重要なアクションかを伝えるために、1画面内での使用頻度は必要最小限にとどめてください。
+- ※ 1画面内で必ず使用しなければいけない訳ではありません。
+
+<img src={primary} alt="Primary Buttonの画像です" width="200" />
+
+### Normal
+
+- 汎用性があり、機能に対するアクションやPrimaryボタンの副次的な役割として使用します。
+  また、選択肢が複数存在する場合など、並列で使用できます。
+
+<img src={normal} alt="Normal Buttonの画像です" width="200" />
+
+### Delete
+
+- データ削除などの破壊的なアクションに対して、ユーザーに警告する時に使用します
+- 警告用途以外は、頻繁に使用しないでください。
+
+<img src={deleteButton} alt="Delete Buttonの画像です" width="200" />
+
+### Save from
+
+- フォームを一時保存する時に使用します。
+
+<img src={saveForm} alt="Save Form Buttonの画像です" width="200" />
+
+<Notes variant={VARIANTS.WARNING}>汎用的な使い方は現時点でしていません。</Notes>
+<Notes variant={VARIANTS.WARNING}>kintone Design SystemのButtonコンポーネントには存在しません。</Notes>
+
+## 状態
+
+### Default
+
+- 通常のスタイルです。
+
+<img src={defaultState} alt="Default状態のPrimary, Normal, Deleteボタン" />
+
+### Hover
+
+- マウスカーソルがボタン上に触れた時のスタイルです。
+
+<img src={hover} alt="Hover状態のPrimary, Normal, Deleteボタン" />
+
+### Active
+
+- 選択した時のスタイルです。
+
+<img src={active} alt="Active状態のPrimary, Normal, Deleteボタン" />
+
+### Disabled
+
+- 操作が無効な時のスタイルです。
+
+<img src={disabled} alt="Disabled状態のPrimary, Normal, Deleteボタン" />
+
+### Focus
+
+- Active状態のスタイルに対して、各ブラウザ毎に設定されているアウトラインが表示されます。
+
+## サイズ
+
+レイアウト上の都合や情報の強弱、重要度の違いを伝える時に使い分けます。
+
+| 種類   | 画像                                                                 | 説明                                                                                                                                                                                                                                                                                                                                                                                   |
+| :----- | :------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Large  | <img src={large} alt="LargeサイズのPrimary, Normal, Deleteボタン" /> | 一番大きなサイズです。ページやダイアログ全体など、主要となるアクションに対して使用します。<br /> 例：保存、キャンセルなど <br /> <img src={largeExample} alt="ダイアログのスクリーンショット" width="400"/>                                                                                                                                                                            |
+| Medium | <img src={medium} alt="MediumサイズのPrimary, Normalボタン" />       | 通常のサイズです。各機能に対する基本的なアクションに使用します。<br />また、アプリ設定画面などレイアウトの都合上 Large では対応できない場合にも使用します。<br /> 例：<br /> <img src={mediumExample} alt="JavaScript/CSSカスタマイズのURL指定で追加の保存ボタン" width="400"/> <img src={mediumExample2} alt="アプリ設定のレコードのアクセス権画面のスクリーンショット" width="400"/> |
+| Small  | <img src={small} alt="SmallサイズのPrimary, Normal, Deleteボタン" /> | 最も小さいサイズです。レイアウトの都合上 Medium では対応できない時に使用します。<br />例：<br /> <img src={smallExample} alt="ConfirmDeletePopupのボタン" width="400"/>                                                                                                                                                                                                                |
+
+<Notes
+  children="
+  このほかに以下の例外が画面上に存在していることが確認されています
+自分が作ったスレッドアクションの「キャンセル」/「削除する」（横幅 60px、縦幅10px）
+"
+/>
+<Notes
+  variant={VARIANTS.WARNING}
+  children="
+  Smallの縦幅は現在36pxですが、32pxに修正される予定です。
+[参考](https://github.com/kintone-private/kintone-Design-System/issues/1135#issuecomment-1411551898)
+"
+/>
+
+## 操作の仕様
+
+### マウス
+
+- Container内をクリックすると、ボタンに割り当てられたアクションを実行します
+- Labelが省略表示されている時、ホバーすると全文が表示されます
+
+### キーボード
+
+- Tabキーでボタンにフォーカスできます（disabledの状態を除く）
+- フォーカスがある時、エンターキーおよびスぺースキーでボタンに割り当てられたアクションを実行できます
+
+### スクリーンリーダー
+
+- フォーカスした時、ボタンのラベルを読み上げます
+- フォーカスがある時、エンターキーおよびスペースキーでボタンに割り当てられたアクションを実行できます
+
+## 見た目の仕様
+
+### 横幅はラベルに対して可変
+
+サイズに応じて指定されている最小幅と最大幅の範囲内で、ボタンの横幅はラベルに応じて可変です。
+
+### ラベルが最大幅を超える場合
+
+最大幅が存在し、ラベルがボタンの最大幅を超える場合、省略記号(…)を文末に表示し、ホバー時にツールチップでラベルの全文字列を表示します。
+
+### カーソル
+
+disabled以外のすべての状態のとき、カーソルはリンクポインターを表示します。
+
+### クリック範囲
+
+Containerの大きさが、クリック可能範囲です。
+
+<Notes
+  children="
+一応、ボタンのクリック可能範囲エリアは、44px 以上が推奨されてたりします。
+
+- [Web Content Accessibility Guidelines (WCAG) 2.1](https://waic.jp/docs/WCAG21/#target-size)
+- [モバイルサイトに最適なボタンサイズは？使いやすいモバイルサイトを目指して |
+  ビジネスと IT 活用に役立つ情報](https://www.asobou.co.jp/blog/web/mobile-tap-size)
+  "
+/>
+
+<Stories />

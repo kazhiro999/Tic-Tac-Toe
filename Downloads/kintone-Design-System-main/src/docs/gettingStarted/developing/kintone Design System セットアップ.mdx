@@ -1,0 +1,110 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title='gettingStarted/developing/kintone Design System セットアップ' />
+
+# kintone Design System セットアップ
+
+## kintone Design System (kDS) をインストール（一度だけ実施）
+
+1. ターミナルを開きます。
+2. kDS をインストールするディレクトリに移動します。例えば、`workspace`ディレクトリにインストールする場合は次のコマンドを実行します。
+
+```bash
+mkdir ~/workspace
+cd ~/workspace
+```
+
+3. kDS をインストールするコマンドを実行します。
+
+```bash
+git clone git@github.com:kintone-private/kintone-Design-System.git
+```
+
+## Homebrew のインストール（一度だけ実施）
+
+1. Homebrew をインストールしていない場合はインストールします。次のコマンドを実行して、バージョン番号が出力されない場合は、インストールが必要です。
+
+```bash
+brew --version
+```
+
+インストールする場合は、[Homebrew の公式 HP](https://brew.sh/)に行って、「Install Homebrew」の下にあるコマンドをコピーしてターミナルに張り付けて実行します。
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+2. Homebrew がインストールされているか確認します。次のコマンドを実行して、バージョン番号が出力されることを確認してください。
+
+```bash
+brew --version
+```
+
+## nodenv をインストール（一度だけ実施）
+
+1. nodenv をインストールしていない場合はインストールします。次のコマンドを実行して、バージョン番号が出力されない場合は、インストールが必要です。
+
+```bash
+nodenv --version
+```
+
+インストールする場合は、次のコマンドをターミナルに張り付けて実行します。
+
+```bash
+brew install nodenv
+eval "$(nodenv init -)"
+```
+
+2. nodenv の設定をシェルの設定ファイルに追記します。
+
+```bash
+cp ~/.zshrc ~/.zshrc.org
+echo 'PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"' >> ~/.zshrc
+echo 'eval "$(nodenv init -)"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+3. nodenv がインストールされているか確認します。次のコマンドを実行して、バージョン番号が出力されることを確認してください。
+
+```bash
+nodenv --version
+```
+
+## node のインストール（一度だけ実施）
+
+1. kDS の実行に必要な node をインストールします。<a href="https://github.com/kintone-private/kintone-Design-System/blob/main/.node-version">.node-version</a>のファイルに書かれているバージョン以上をインストールします。たとえば、.node-version に「18.14.0」と書かれている場合は、次のコマンドを順にターミナルに張り付けて実行します。
+
+```bash
+cd ~/workspace/kintone-Design-System
+nodenv install 18.14.0
+nodenv local 18.14.0
+```
+
+2. kDS の実行に必要なパッケージをインストールします。
+
+```bash
+npm ci
+```
+
+## Storybook を起動
+
+Storybook を起動すると、ドキュメントやコンポーネントを確認できます。
+
+1. ターミナルを開きます。
+2. kDS をインストールしたディレクトリに移動します。
+
+```bash
+cd ~/workspace/kintone-Design-System
+```
+
+3. 次のコマンドを実行してしばらく待つと、Storybook が起動します。
+
+```bash
+npm run storybook
+```
+
+## 困ったときは
+
+[#kintone-design-system_kds](https://cybozu.slack.com/archives/C02NWSGMZB8)で@kintone-design-system-team へメンションしてください。
+
+ドキュメントのどの手順で困っているか伝えていただけるとスムーズです。

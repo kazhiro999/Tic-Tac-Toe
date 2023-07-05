@@ -1,0 +1,48 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title='guidelines/デザイン検討時に助かるもの' />
+
+# デザイン検討時に助かるもの
+
+## 参考画面サイズ
+
+### PC
+
+1280 × 720 px <br/>
+参考：https://sharedoc.atlassian.net/wiki/spaces/kintoneappsettingsteam/pages/3013115926/KLOG-5457+Reactone
+
+### モバイル
+
+375 × 667px <br/>
+参考：https://cybozu.slack.com/archives/C04NKHS6ETA/p1678953178090289
+
+## kintone っぽいデザインってなに
+
+現状「kintoneぽいデザインを作るもの」の決まりはありません。<br/>
+また、ページ毎にデザインがバラバラなので厳密に守る必要は現在はありません。<br/>
+
+ただしkDSがベストプラクティスの整備を進めているので参照してください。<br/>
+「kintoneっぽさ」に固執するとデザイン検討の幅が制限され、良いUIを生み出すチャンスが狭まるため、既存のデザインに引っ張られすぎずに必要な部分だけ守って柔軟にUIに落とし込みたいです。<br/>
+
+注意点としては「なんでこれやってるんだっけ？」の意図を説明できなければならないので、「根拠があれば残す + kDSにドキュメント化して気づいたら良いUIが増えている」という世界観を目指したいです。<br/>
+
+参考：https://cybozu.slack.com/archives/C02N891C4CE/p1682049252681939
+
+以下にルールとしてはまとまっていないですが、暗黙知としてあるものをまとめます。<br/>
+（ここに載っていないもので「これはどうなんだろう」というものがあれば、Slackの [#kintone-design-wakaran](https://cybozu.slack.com/archives/C04NKHS6ETA) で質問してください）
+
+- Font size
+  - 基本は`14px`相当（`0.875rem`）
+  - 最小は`10px`相当（たぶん）
+  - 参考：https://bozuman.cybozu.com/k/2963/show#record=1511
+- Line height
+  - 基本は`1.5`
+- 余白・サイジング
+  - 基本的には`8px`の倍数になっています
+
+## 日時の形式
+
+- アプリのフィールドの値：日付はハイフン区切り
+- それ以外：日付はスラッシュ区切り([SmartDateTimeFormat](https://github.dev.cybozu.co.jp/kintone/kintone/blob/develop/src/main/webapp/static/js/cybozu/i18n/smartdatetimeformat.js)による)
+  - 今日の日時の場合、日付は省略され、時刻のみが表示される
+  - 今年の日付の場合、年が省略される

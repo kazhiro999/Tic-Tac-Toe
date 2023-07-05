@@ -1,0 +1,130 @@
+import { Meta } from '@storybook/addon-docs';
+import generateNewTokens from './images/generate_new_tokens.png';
+import newPAT from './images/new_PAT.png';
+import generatedPAT from './images/generated_PAT.png';
+import configureSSO from './images/configure_SSO.png';
+import openFigmaTokens from './images/open_figma_tokens.png';
+import enterCredentialsOnFigmaTokens from './images/enter_credentials_on_figma_tokens.png';
+import editCredentials from './images/edit_credentials.png';
+import figmaTokensAdmin from './images/figma_tokens_admin.png';
+
+<Meta title='gettingStarted/designing/Figma Tokens セットアップ' />
+
+# Figma Tokens セットアップ
+
+## 無料プラン＆Pro プラン共通の手順
+
+### GitHub で Personal access token(PAT)を生成する
+
+1. [GitHub の Personal access tokens(classic)画面](https://github.com/settings/tokens)を開く
+2. 「Generate new token」を押し、プルダウンメニューから「Generate new token(classic)」を選ぶ
+
+<img
+  src={generateNewTokens}
+  alt="プルダウンメニューから「Generate new token(classic)」を選んでいるスクリーンショット"
+  width="300"
+/>
+
+3. 必要に応じて認証を行う
+4. 以下の情報を入力する
+
+| 項目          | 入力する値の例                                                    |
+| :------------ | :---------------------------------------------------------------- |
+| Note          | Figma Tokens                                                      |
+| Expiration    | 現在から 1 年後の日付など（※そのときに PAT の再登録が必要になる） |
+| Select scopes | 「repo」にチェック                                                |
+
+<img
+  src={newPAT}
+  alt="PATの必要情報を入力しているスクリーンショット"
+  width="600"
+/>
+
+5. 画面下部の「Generate token」を押す
+6. 表示されたPATをコピーする（一度しか表示されないので注意）
+
+<img
+  src={generatedPAT}
+  alt="生成されたPATが表示されているスクリーンショット。PATは墨塗になっている。"
+  width="700"
+/>
+
+7. 「Configure SSO」を押し、プルダウンメニューから「kintone-private」を選ぶ
+
+<img
+  src={configureSSO}
+  alt="Configure SSOを押してプルダウンメニューが開いているスクリーンショット"
+  width="300"
+/>
+
+8. 切り替わった画面で「Continue」を押す
+
+### Figma Tokens を起動する
+
+1. Figmaの[kintone-ui](https://www.figma.com/file/700C41AgyFQyF4DT0X7jyi/)を開く
+2. 「Resources」アイコンを押す
+3. 表示されたパネル上部の「Plugin」タブを選ぶ
+4. 「Figma Tokens」を検索する
+5. 検索されたメニューアイテムをホバーして「Run」を押す
+
+<img
+  src={openFigmaTokens}
+  alt="Figma Tokensを起動するためTokens Studio for Figmaを検索したスクリーンショット"
+  width="300"
+/>
+
+### Figma Tokens に GitHub で生成した PAT を登録する
+
+1. 「Enter credentials」を押す
+
+<img
+  src={enterCredentialsOnFigmaTokens}
+  alt="Figma Tokensで「Enter credentials」ボタンが表示されているスクリーンショット"
+  width="300"
+/>
+
+2. 以下の情報を入力する
+
+| 項目                                                      | 入力する値の例                        |
+| :-------------------------------------------------------- | :------------------------------------ |
+| Note                                                      | (任意。GitHub のユーザー名など)       |
+| Personal Access Token                                     | (GitHub で生成した PAT をコピーする)  |
+| Repository (owner/repo)                                   | kintone-private/kintone-Design-System |
+| Branch                                                    | main                                  |
+| File Path (e.g. tokens.json) or Folder Path (e.g. tokens) | src/designTokens/tokens.json          |
+| baseUrl(optional)                                         | (空欄)                                |
+
+<img
+  src={editCredentials}
+  alt="editCredentialsに必要情報を入力したスクリーンショット"
+  width="300"
+/>
+
+3. 「Save credentials」を押す
+4. 「Pull from GitHub?」ダイアログが表示されるので「Yes」を押す
+5. Tokensタブを開き、Figma Tokensが利用可能になっていることを確認する
+
+## Pro プランの追加手順
+
+### Figma Tokens で新しいユーザーを追加する（Figma Tokens の管理者向け）
+
+1. [Tokens Studio のログイン画面](https://account.tokens.studio/email-login)を開く
+2. メールアドレス「is@cybozu.co.jp」を入力する
+3. Submitボタンを押す
+4. Team membersの画面が開く
+
+<img
+  src={figmaTokensAdmin}
+  alt="Team membersの画面のスクリーンショット"
+  width="700"
+/>
+
+5. 追加するユーザーがFigmaで利用しているメールアドレスを入力して「Invite」ボタンを押す
+6. 割り当てられたトークンをユーザーに伝える
+
+### Figma Tokens にトークンを登録する（ユーザー向け）
+
+1. Figma Tokensを開く
+2. Settingsタブを開く
+3. 「License key」にFigma Tokensの管理者に伝えられたトークンを入力する
+4. 「Add license key」を押す

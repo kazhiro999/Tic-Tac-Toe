@@ -1,0 +1,55 @@
+import { Meta } from '@storybook/addon-docs';
+import { Notes, VARIANTS } from './notes';
+import storybookDocsTab from './images/storybook_docs_tab.png';
+
+<Meta title='kintone-uiとは？' />
+
+# kintone-uiとは？
+
+kintone-uiとは、kintoneのさまざまな画面で使われているコンポーネントをまとめた共通コンポーネント集です。<br/>
+kintone-uiは **Figma・実装・ドキュメント**の3つの形式で提供されています。これらは表現の形式が異なるだけで同じ対象を指しています。
+
+[【録画】kintone-ui とは？(25分35秒)](https://cybozu.sharepoint.com/:v:/s/VideoPortal/EePKJZAhaCpNjArqtwzdILUBO5WkI0Bik55cA4hdhN7pCA?e=Y9CCIE)
+
+## kintone-uiの形式
+
+### Figma
+
+kintone画面をデザインするときに使うkintone-uiのFigmaファイルです。
+
+- [Figmaファイル(kintone-ui)](https://www.figma.com/file/700C41AgyFQyF4DT0X7jyi/kintone-ui?type=design&node-id=34%3A3&t=ElAXcoXyVBWbb7O9-1)
+- [kintone-ui利用マニュアル(Figma)](?path=/docs/gettingstarted-designing-kintone-ui-利用マニュアル-figma--docs)
+
+<Notes subtitle="kintone UI Design Component" children="
+
+- kintone-uiのほかに「[kintone UI Design Component](https://www.figma.com/file/giGOxQP14cAhVgxUaqoLXA/%E2%9C%A8-%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components-(Copy)?type=design&node-id=9410%3A69640&t=ElAXcoXyVBWbb7O9-1)」というFigmaファイルもあります。これはkintone Design Systemを構築する前から作成されていた「過去の遺産」です。kintone Design Systemチームではメンテしていません。徐々にkintone-uiに置き換えようとしています。
+- ただし、Closure側のデザインをするときには、今でもkintone UI Design Componentを使います。kintone-uiは現在整備中でコンポーネントが足りていないからです。
+" />
+
+### 実装
+
+kintoneを実装するときに使うkintone-uiのReactコードです。
+
+- [GitHubレポジトリ(kintone-ui)](https://github.com/kintone-private/kintone-Design-System)
+- [npmパッケージ(kintone-ui)](https://github.com/kintone-private/kintone-Design-System/pkgs/npm/kintone-ui)
+- [参考: kDSと周辺技術](https://github.com/kintone-private/kintone-Design-System/discussions/1318)
+
+<Notes variant={VARIANTS.WARNING} subtitle="開発メンバーによる呼び名の違い" children="
+kintoneの開発メンバーによっては、kintone-uiの実装のことをkintone Design System(kDS)と呼ぶことがあります。しかしkDSは正確な呼び名ではありません。kDSにはkintone-ui以外の成果物（例：デザイン指針をまとめたドキュメント）も含まれるからです。正しい呼び名を啓発していきましょう。
+" />
+
+### ドキュメント
+
+kintone-uiの仕様が書かれたドキュメントです。<br/>
+各コンポーネントの概要、状態、操作の仕様、見た目の仕様などがまとめられています（例: [Buttonのドキュメント](https://main--6213012788ff34003ab11e18.chromatic.com/?path=/docs/components-button--normal-size-large)）。<br/>
+ドキュメントを開く手順は以下のとおりです:<br/>
+
+- [kintone Design System の Storybook](https://main--6213012788ff34003ab11e18.chromatic.com/) を開きます。
+- コンポーネント名のメニューを展開し、先頭に表示される「Docs」リンクを押します。
+
+<img src={storybookDocsTab} alt="スクリーンショット:ドキュメントを開く手順" />
+
+## kintone-uiの適用範囲
+
+**kintone-uiはReact化された画面のみで利用されています。**Closureの画面では利用されていません。<br/>
+この理由は、もともとkintone-uiが、画面のReact化を目標としたフロリア（フロントエンドリアーキテクチャプロジェクト）の取り組みの一環として作成されたからです。

@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "emitDeclarationOnly": true,
+    "declarationDir": "./types"
+  },
+  "exclude": [
+    "node_modules",
+    "src/**/*.test.tsx",
+    "src/**/*.stories.tsx",
+    "src/**/*.test.ts",
+    "src/**/**/test",
+    "src/**/**/testing",
+    "./jest.setup.ts",
+    "./jest.axe-helper.ts"
+  ]
+}

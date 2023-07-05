@@ -1,0 +1,52 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as FormFieldMessageStories from '../stories/FormFieldMessage.stories';
+import { Notes, VARIANTS } from '../../../docs/notes';
+
+import anatomy from './images/anatomy.png';
+import success from './images/success.png';
+import error from './images/error.png';
+
+<Meta title="Components/FormFieldMessage" of={FormFieldMessageStories} />
+
+# FormFieldMessage
+
+## 概要
+
+FormFieldMessageは他のフォームコンポーネントと組み合わせて、エラー内容などのユーザーにとって重要な情報を伝えるテキストです。
+
+## 構成
+
+<img src={anatomy} alt="FormFielMessageのanatomyの図" />
+
+- Message
+  - ユーザーに伝えたい情報を持つテキストです
+- MessageContainer
+  - FormFieldMessageの形を作る要素です。長方形で構成され、Messageと背景色を持ちます
+
+## 種類
+
+### Error
+
+- ユーザーの入力値が不正なときに使用します
+- MessageContainerの背景色は赤、Message文字色は白です
+
+<img src={error} alt="Error FormFieldMessageのスクリーンショット" />
+
+### Success
+
+- ユーザーの入力値が正常なときに使用します
+- MessageContainerの背景色は緑、Messageの文字色は白です
+
+<img src={success} alt="Success FormFieldMessageのスクリーンショット" />
+
+## 見た目の仕様
+
+### 幅
+
+- MessageContainerの幅は親要素の100%です
+
+### 折り返し
+
+- Messageの長さがMessageContainerの幅を超える場合、Messageは折り返します
+
+<Stories />

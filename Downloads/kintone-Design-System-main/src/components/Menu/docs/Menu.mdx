@@ -1,0 +1,198 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as MenuStories from '../stories/Menu.stories';
+
+import active from './images/active.png';
+import anatomy from './images/anatomy.png';
+import close from './images/close.png';
+import focused from './images/focused.png';
+import open from './images/open.png';
+
+<Meta title="Components/Menu" of={MenuStories} />
+
+# Menu
+
+[Figma](https://www.figma.com/file/0EL4UsBtC46KFG7WkKreiYi5/%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components?node-id=9491%3A7547)
+
+## 概要
+
+Menuは、ナビゲーションやUIを制御するオプションリストを提示します。
+スペースの制約がある時に用いられます。
+
+## 構成
+
+<img src={anatomy} alt="Menuのanatomyの図" />
+
+- MenuButton
+  - MenuPopupを開閉するIconButtonです
+  - IconはそれぞれのMenuによって異なります
+- MenuPopup
+  - 0個以上のMenuItemを持つContainerです。
+- MenuItem
+  - クリック可能なMenuの選択肢です
+  - MenuItemには、MenuLinkItemとMenuActionItemの2つの種類があります
+- MenuLinkItem
+  - リンクのふるまいをするMenuItemです
+- MenuActionItem
+  - ボタンのふるまいをするMenuItemです
+- ItemLabel
+  - MenuItemの選択肢となるテキストです
+- MenuSeparator
+  - MenuItemを視覚的に区切る線です
+
+## 状態
+
+### Close
+
+- MenuPopupが閉じている状態です
+
+<img src={close} alt="close状態のスクリーンショット" />
+
+### Open
+
+- MenuPopupが開いている状態です
+
+<img src={open} alt="open状態のスクリーンショット" />
+
+### Focused(MenuButton)
+
+- MenuButtonにフォーカスした状態です
+- MenuButtonにマウスでフォーカスしたとき、背景色が変化します
+- MenuButtonにキーボードでフォーカスしたとき、背景色が変化し、ブラウザ標準のフォーカスインジケーターが表示されます
+
+<img src={focused} alt="focused状態のスクリーンショット" />
+
+### Active
+
+- MenuItemが操作対象になっている状態です。
+- 前景色と背景色が変化し、ブラウザ標準のフォーカスインジケーターが表示されます
+
+<img src={active} alt="active状態のスクリーンショット" />
+
+## 操作の仕様
+
+### マウス
+
+- MenuButtonをクリック
+  - MenuPopupが開閉します
+  - 割り当てられたアクションが実行されます
+- (triggerOnHoverがtrueのとき)
+  - MenuButtonをホバー
+    - MenuPopupがOpen状態になります
+  - MenuButton,MenuPopupからマウスリーブ
+    - MenuPopupがClose状態になります
+- MenuItemをホバー
+  - そのMenuItemがActive状態になります
+- MenuLinkItemをクリック
+  - 割り当てられたページに遷移します
+  - 同一タブで遷移する場合と、別タブで遷移する場合があります
+  - MenuPopupはClose状態になります
+- MenuActionItemをクリック
+  - 割り当てられたアクションが実行されます
+  - MenuPopupはClose状態になります
+- MenuPopupの枠外をクリック
+  - MenuPopupがClose状態になります
+
+### キーボード
+
+#### MenuButton にフォーカスがあるとき
+
+- エンター・スペース
+  - MenuPopupが開閉します
+  - フォーカスはMenuButtonで維持されます
+  - 割り当てられたアクションが実行されます
+- 下矢印
+  - MenuPopupがOpen状態の時、先頭のMenuItemがActive状態になります
+  - MenuPopupがClose状態の時、MenuPopupがOpen状態になり、先頭のMenuItemがActive状態になります
+- 上矢印
+  - MenuPopupがOpen状態の時、末尾のMenuItemがActive状態になります
+  - MenuPopupがClose状態の時、MenuPopupがOpen状態になり、末尾のMenuItemがActive状態になります
+- エスケープ
+  - MenuPopupがOpen状態の時Close状態になります
+- タブ
+  - MenuButtonからフォーカスが外れます
+  - MenuPopupがClose状態になります
+
+#### MenuItem にフォーカスがあるとき
+
+- 下矢印
+  - 次のMenuItemがActive状態になります
+  - 末尾の場合は先頭のMenuItemがActive状態になります
+- 上矢印
+  - 前のMenuItemがActive状態になります
+  - 先頭の時は末尾のMenuItemがActive状態になります
+- MenuLinkItemでエンター
+  - 割り当てられたページに画面遷移します
+  - 同一タブで開く場合と別タブで開く場合があります
+  - MenuPopupがClose状態になります
+- MenuActionItemでエンター・スペース
+  - 割り当てられたアクションが実行されます
+  - MenuPopupがClose状態になります
+- エスケープ
+  - MenuPopupがClose状態になります
+  - MenuButtonがFocused状態になります
+- タブ
+  - MenuPopupがClose状態になります
+  - 次のフォーカス可能要素に移動します
+- Home
+  - 先頭のMenuItemがActive状態になります
+- End
+  - 末尾のMenuItemがActive状態になります
+
+### スクリーンリーダー
+
+- MenuButtonにフォーカスしている時、MenuPopupの開閉状態を読み上げます
+- MenuButtonにフォーカスしている時、Menuの役割を伝えるラベルが読み上げられます
+  - ラベルの内容はMenuが使用される場所によって異なります
+
+## 見た目の仕様
+
+### MenuButton
+
+#### 幅
+
+- 任意の幅を設定できます
+
+#### 高さ
+
+任意の高さを設定できます。
+
+#### アイコン
+
+- 任意のIconを設定できます
+
+#### カーソル
+
+- hoverしたとき、カーソルはpointerになります
+
+#### ツールチップ
+
+- ブラウザ標準のツールチップで、Menuの役割が表示されます
+
+### MenuPopup
+
+#### 幅
+
+- 280pxで固定です
+
+#### 高さ
+
+- MenuItemの数によって伸長します
+- ブラウザの描画範囲内に表示しきれない場合は見切れます
+- MenuPopup内にスクロールは発生しません
+
+### MenuItem
+
+#### 幅
+
+- 278pxで固定です
+- ItemLabelが幅を超過する場合は折り返されます
+
+#### 高さ
+
+- ItemLabelの折り返しによって伸長します
+
+#### カーソル
+
+- hoverしたとき、カーソルはpointerになります
+
+<Stories />

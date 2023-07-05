@@ -1,0 +1,142 @@
+import { Meta } from '@storybook/addon-docs';
+import { Notes, VARIANTS } from '../notes';
+
+<Meta title="designTokens/Typography" />
+
+# Typography
+
+## Typography 一覧
+
+[Figma](https://www.figma.com/file/700C41AgyFQyF4DT0X7jyi/kintone-Component-Library?node-id=2402%3A1783&t=RYWjR7zYpeuYQP0e-1)
+
+## Font Size
+
+<Notes
+  variant={VARIANTS.INFO}
+  children="
+フォントサイズはremで指定してください。
+ただしFigmaは製品制約上pxしか指定できないので、エンジニアにはremで実装してもらうように伝えてください。
+"
+/>
+
+### Token
+
+以下の表は、一貫したUIを提供するためにkintoneで使えるフォントサイズの一覧です。
+
+| rem    | px  |
+| ------ | --- |
+| 0.625  | 10  |
+| 0.75   | 12  |
+| 0.8125 | 13  |
+| 0.875  | 14  |
+| 1      | 16  |
+| 1.125  | 18  |
+| 1.25   | 20  |
+| 1.5    | 24  |
+| 1.75   | 28  |
+| 2      | 32  |
+| 2.65   | 42  |
+
+[一覧表（Figma）](https://www.figma.com/file/700C41AgyFQyF4DT0X7jyi/kintone-ui?type=design&node-id=2498%3A1911&t=jykcUNDWRWOdrcHb-1)
+
+### kintone で推奨される Font Size
+
+- 本文：0.875rem (14px)
+- アプリ設定画面のページ見出し：1.25rem (20px)
+- アプリ設定画面のフィールドラベル：0.875rem (14px)
+
+（参照先）
+
+- [KLOG-1743 「ポータルのデザイン調整（フォントサイズの調整）」](https://bozuman.cybozu.com/k/2963/show#record=1743&tabcode=tab-pg)
+- [「タイトル・ラベルのサイズと構成カラー」p.24](https://bozuman.cybozu.com/g/cabinet/view.csp?hid=17412&fid=189006)
+
+#### 参考情報
+
+- Font Size の単位は、em や rem などの相対単位が推奨されています。
+- WCAG（Web Content Accessibility Guidelines）における最小 Font Size についての記載はありませんが、<br/>
+  様々な Web サービスでは、コンテンツの最小 Font Size を 16px と指定しています。
+
+（参照先）
+
+- [WCAG 1.4.4: Resize Text](https://waic.jp/translations/UNDERSTANDING-WCAG20/visual-audio-contrast-scale.html)
+- [Accessible Web](https://accessibleweb.com/question-answer/minimum-font-size/)
+
+### Global tokens
+
+<Notes
+  variant={VARIANTS.DANGER}
+  children="
+現在このデザイントークンは検討中です。
+  "
+/>
+
+トークン名は `typography.fontSize.{index}` で記述します。例えば `typography.fontSize.1` という名前です。
+
+### Semantic tokens
+
+<Notes
+  variant={VARIANTS.DANGER}
+  children="
+現在このデザイントークンは検討中です。
+  "
+/>
+
+トークン名は `typography.fontSize.{property}.{modifiers}` で記述します。modifiersは省略可能です。<br/>
+例えば `typography.fontSize.button.large` という名前です。
+
+<Notes
+  children="
+propertyはコンポーネントに依存しない名前が入ることが望ましいです。
+    "
+/>
+
+## Font Family
+
+<Notes
+  variant={VARIANTS.DANGER}
+  children="
+現在、このデザイントークンは整備中です。Figmaでも実装でも提供されていません。
+現在利用できるデザイントークンは以下です。
+
+- [Figma](<https://www.figma.com/file/giGOxQP14cAhVgxUaqoLXA/%E2%9C%A8-%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components-(Copy)?type=design&node-id=9410-69640&t=dFgxnftazbLyG0S0-0>)
+- [実装](https://github.com/kintone-private/kintone-Design-System/blob/main/src/designTokens/index.ts)
+  "
+/>
+
+### Global tokens
+
+トークン名は `typography.fontFamily.{lang}` で記述します。例えば `typography.fontFamily.ja` という名前です。
+
+### Semantic tokens
+
+トークン名は `typography.fontFamily.{property}.{lang}` で記述します。例えば `typography.fontFamily.text.ja` という名前です。<br />
+
+## Line Height
+
+<Notes
+  variant={VARIANTS.DANGER}
+  children="
+現在、このデザイントークンは整備中です。Figmaでも実装でも提供されていません。
+現在利用できるデザイントークンは以下です。
+
+- [Figma](<https://www.figma.com/file/giGOxQP14cAhVgxUaqoLXA/%E2%9C%A8-%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components-(Copy)?type=design&node-id=9410-69640&t=dFgxnftazbLyG0S0-0>)
+- [実装](https://github.com/kintone-private/kintone-Design-System/blob/main/src/designTokens/index.ts)
+  "
+/>
+
+### Global tokens
+
+トークン名は `typography.lineHeight.{index}` で記述します。例えば `typography.lineHeight.1` という名前です。
+
+### Semantic tokens
+
+トークン名は `typography.lineHeight.{property}.{modifiers}` で記述します。modifiersは省略可能です。<br />
+例えば `typography.lineHeight.text` という名前です。
+
+## リンク
+
+### Figma
+
+Figmaのkintone Design Systemで公開しています。
+
+- [Figma](https://www.figma.com/file/700C41AgyFQyF4DT0X7jyi/kintone-Component-Library?node-id=2402%3A1783&t=RYWjR7zYpeuYQP0e-1)

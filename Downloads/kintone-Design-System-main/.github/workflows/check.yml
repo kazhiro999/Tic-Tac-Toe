@@ -1,0 +1,24 @@
+# .github/workflows/check.yml
+
+# Workflow name
+name: 'check'
+
+# Event for the workflow
+on: push
+
+# List of jobs
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.node-version'
+          registry-url: https://npm.pkg.github.com/
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm install
+      - name: Run check
+        run: npm run check

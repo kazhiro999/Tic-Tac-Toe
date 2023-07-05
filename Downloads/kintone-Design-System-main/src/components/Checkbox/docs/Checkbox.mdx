@@ -1,0 +1,133 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as CheckboxStories from '../stories/Checkbox.stories';
+
+import anatomy from './images/anatomy.svg';
+import checkbox from './images/Checkbox.svg';
+import checked from './images/Checked.svg';
+import focused from './images/Focused.svg';
+import unchecked from './images/Unchecked.svg';
+import disabledChecked from './images/disabledChecked.svg';
+import disabledUnchecked from './images/disabledUnchecked.png';
+
+<Meta title="Components/Checkbox" of={CheckboxStories} />
+
+# Checkbox
+
+[Figma](https://www.figma.com/file/0EL4UsBtC46KFG7WkKreiYi5/%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components?node-id=9410%3A69636)
+
+## 概要
+
+Checkboxはフォームや設定項目のひとつの選択肢です。
+
+以下の用途で用いられます：
+
+- フォーム要素の複数の選択肢
+- 単一の設定項目の有効・無効
+- テーブルの行選択
+
+## 構成
+
+<img src={anatomy} alt="Checkboxコンポーネントの解剖図" width="500" />
+
+- Checkbox Container
+  - Checkboxのクリック領域です
+  - Checkbox InputとCheckbox Labelを持ちます
+- Checkbox Input
+  - Checkboxの入力状態を示します
+- Checkbox Label
+  - Check/Uncheck状態にする情報を示すテキストです
+  - Checkbox Inputの右に表示されます
+  - Checkboxをテーブルの行選択で用いる場合は、例外的にCheckbox Labelはありません
+
+## 状態
+
+### Unchecked
+
+- 通常の状態です
+- チェックマークがつかない灰色の枠が表示されます
+- 文字色は黒色です
+
+<img src={unchecked} alt="unchecked状態のスクリーンショット" width="200" />
+
+### Checked
+
+- チェックマークがついた青色の枠が表示されます
+- 文字色は黒色です
+
+<img src={checked} alt="checked状態のスクリーンショット" width="200" />
+
+### Disabled
+
+- チェックを切り替えることができない無効な状態です
+- 文字色は灰色です
+
+<img src={disabledUnchecked} alt="unchekedでdisabled状態のスクリーンショット" />
+<img src={disabledChecked} alt="checkedでdisabled状態のスクリーンショット" />
+
+### Hover
+
+- Unchecked / Checked状態でhoverするとカーソルがpointerになります
+- Disabled状態でhoverするとカーソルがnot-allowedになります
+
+### Focused
+
+- Unchecked / Checked状態でfocusすると、Checkbox Containerに青色の枠がつきます
+- Disabled状態の時はfocusできません
+
+<img src={focused} alt="focused状態のスクリーンショット" width="200" />
+
+## 操作の仕様
+
+### マウス
+
+- Checkbox Labelがない時、Checkbox Container内をhoverするとCheckboxの役割がツールチップで表示されます
+- Checkbox Container内をクリックすると、Unchecked / Checked状態が切り替わります（Disableではないとき）
+
+### キーボード
+
+Disabledではない時：
+
+- Tabキーを押すと、フォーカスしてFocused状態になります
+- スペースキーを押すと、Unchecked / Checked状態が切り替わります
+- （エンターキーを押しても、Unchecked / Checked状態は切り替わりません）
+
+### スクリーンリーダー
+
+- Unchecked / Checked状態を読み上げます
+- CheckboxLabelがあるとき、CheckboxLabelを読み上げます
+- CheckboxLabelがないとき、ツールチップを読み上げます
+- Disabled状態を読み上げます
+
+## 見た目の仕様
+
+### 幅
+
+- 最小幅は20pxです
+- Checkbox Labelの文字列長にあわせて伸長します
+- 最大幅はありません
+
+### 高さ
+
+- 高さは固定で20pxです
+
+### 余白
+
+- CheckboxInputとCheckboxLabelの間の余白は、デフォルトよりも少し多めに確保することもできます
+
+### カーソル
+
+- カーソルはpointerです
+
+### フォーカスインジケーター
+
+- キーボードでfocusした時のみ、Checkbox Containerに1pxの青い枠線がつきます
+
+### ツールチップ
+
+- Checkbox Labelがない時、Checkbox Containerをhoverすると、Checkboxの役割がブラウザ標準のツールチップで表示されます。
+
+### クリック範囲
+
+- Checkbox Containerがクリック範囲です
+
+<Stories />

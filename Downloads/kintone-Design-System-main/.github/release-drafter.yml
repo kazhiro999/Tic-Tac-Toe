@@ -1,0 +1,71 @@
+name-template: '$RESOLVED_VERSION 🌈'
+tag-template: '$RESOLVED_VERSION'
+categories:
+  - title: '💥 Breaking'
+    labels:
+      - 'major'
+      - 'breaking'
+  - title: '🚀 Features'
+    labels:
+      - 'feature'
+      - 'enhancement'
+      - 'minor'
+  - title: '🐛 Bug Fixes'
+    labels:
+      - 'fix'
+      - 'bugfix'
+      - 'bug'
+  - title: '🧰 Maintenance'
+    label: 'chore'
+  - title: '📝 Other'
+  - title: '⬆️ Dependencies'
+    collapse-after: 3
+    labels:
+      - 'dependencies'
+      - 'renovate'
+exclude-labels:
+  - 'skip-changelog'
+change-template: '- $TITLE @$AUTHOR (詳しい変更内容・利用チームへの申し送りは[#$NUMBER]($URL)を参照)'
+version-resolver:
+  major:
+    labels:
+      - 'major'
+      - 'breaking'
+  minor:
+    labels:
+      - 'feature'
+      - 'minor'
+  patch:
+    labels:
+      - 'patch'
+  default: patch
+template: |
+  $CHANGES
+
+  **Full Changelog**: [$PREVIOUS_TAG...$RESOLVED_VERSION](https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...$RESOLVED_VERSION)
+  [Release Note Link](https://github.com/$OWNER/$REPOSITORY/releases/tag/$RESOLVED_VERSION)
+autolabeler:
+  - label: feature
+    branch:
+      - '/^feat(ure)?[/-].+/'
+    title:
+      - '/^feat:/'
+  - label: bug
+    branch:
+      - '/^fix[/-].+/'
+    title:
+      - '/^fix:/'
+  - label: chore
+    branch:
+      - '/^chore[/-].+/'
+  - label: refactor
+    branch:
+      - '/(refactor|refactoring)[/-].+/'
+  - label: documentation
+    branch:
+      - '/doc(umentation)[/-].+/'
+    files:
+      - '*.md'
+  - label: enhancement
+    branch:
+      - '/(enhancement|improve)[/-].+/'

@@ -1,0 +1,90 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title='contributing/バージョニングポリシー' />
+
+# バージョニングポリシー
+
+kintone-uiのバージョニング方針です。
+
+## Semantic Versioning に従う
+
+基本的に [Semantic Versioning](https://semver.org/) に従います。
+
+Semantic Versioningは大きく3つのタイプがあります。
+
+- MAJOR version
+  - 互換性のない変更
+- MINOR version
+  - 機能を追加
+  - 互換性のある変更
+- PATCH version
+  - バグ修正
+
+Semantic Versioningでは基本的なパターンを紹介していますが、Design Systemsではデザインやドキュメントの変更もあるので、次の項では各バージョンに値する変更を追加します。
+
+## MAJOR version
+
+### 開発
+
+- コンポーネントの責務の変更
+  - 例えばポップアップを開閉ボタンとセットで提供する、ダイアログヘッダーを隠蔽し非公開にするなど。使い方が変わり互換性がなくなるため
+- コンポーネントの削除
+  - 互換性がなくなるため
+- Propsの変更
+  - 必須のPropsが追加されたり、廃止された場合は後方互換性がなくなるのでメジャーバージョンアップとする。Propsの名前変えたい（alternativeTextではなくaltにしたい）などもこれに該当する
+
+### デザイン
+
+- デザイントークンの削除、大きな変更
+  - トークンの使い方が変わる・色やサイズが変わるなど。
+- 動作や見た目の大きな変更
+  - 例えば通知が上からではなく、右下から表示されるなど体験が大きく変わるもの
+
+### ドキュメント
+
+基本的にドキュメントの変更でMAJOR versionが上がることはない。
+
+## MINOR version
+
+### 開発
+
+- コンポーネントの追加
+- コンポーネント軽微な挙動の変更
+  - ホバーの色を変える、フォーカスの位置を変える、コントラストを高める、アイコンを変えるなど。そのコンポーネント内で完結するもの
+- optionalのPropsを追加
+- キーボード操作などアクセシビリティの実装
+  - コンポーネントそのものは変わらないが機能が追加されるので
+  - DOMの変更もその一つ
+- リファクタ
+  - コードの安全性が保たれなくなるので
+
+### デザイン
+
+- デザイントークンの追加
+
+### ドキュメント
+
+- ドキュメントに新たな章や項を追加したとき
+
+## PATCH version
+
+### 開発
+
+- コンポーネントの軽微なバグ修正
+  - 動作、機能、CSSがほぼ変わらない
+- テストやStorybookの追加、削除
+
+### デザイン
+
+- ほぼ見た目が変わらないような修正
+  - shadowを濃くするとか
+
+### ドキュメント
+
+- 文言修正とか
+
+## 参考資料
+
+- [バージョニングポリシー – React](https://ja.reactjs.org/docs/faq-versioning.html)
+- [Versioning Design Systems](https://medium.com/eightshapes-llc/versioning-design-systems-48cceb5ace4d)
+- [kDS タスク バージョニングについて方針を決める #56](https://github.com/kintone-private/kintone-design-system/issues/56)

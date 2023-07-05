@@ -1,0 +1,33 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as SpinnerStories from '../stories/Spinner.stories';
+import { Notes, VARIANTS } from '../../../docs/notes';
+
+import anatomy from './images/anatomy.png';
+
+<Meta title="Components/Spinner" of={SpinnerStories} />
+
+# Spinner
+
+[Figma](https://www.figma.com/file/0EL4UsBtC46KFG7WkKreiYi5/%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components?node-id=10848%3A7550)
+
+## 概要
+
+Spinnerはユーザーアクションが実行中であること、またはシステムが読み込み中であることを示します。
+
+## 構成
+
+<img src={anatomy} alt="Anatomy の図" />
+
+- Spinner
+  - 読み込み中を表現するアイコンです。アニメーションによって回転します。
+
+## 操作の仕様
+
+- Spinnerは閲覧専用のコンポーネントです。ユーザーの操作を受け付けません。
+
+## スクリーンリーダー
+
+- Spinnerには代替テキストを指定できます。
+- Spinnerに代替テキストを指定しないと、スクリーンリーダーはSpinnerを無視します。
+
+<Stories />

@@ -1,0 +1,136 @@
+import { Meta } from '@storybook/addon-docs';
+import { Notes, VARIANTS } from '../../notes';
+
+<Meta title='contributing/documentation/ドキュメント編集の概要' />
+
+# ドキュメント編集の概要
+
+## この文章のコンセプト
+
+- 誰に: kintone開発チームのメンバーに
+- 何を: kDSのドキュメントを編集する手順が実践できそうだ
+
+と言ってほしい。
+
+## ドキュメントを編集する
+
+GitHubの画面上から編集する方法と、任意のエディタで編集する方法があります。<br/>
+それぞれマニュアルが用意されているので必要に応じて参照してください。
+
+- [任意のエディタで編集する](?path=/docs/contributing-documentation-ドキュメント編集手順（任意のエディタで行う場合）--docs)
+- [GitHub の画面上で編集する](?path=/docs/contributing-documentation-ドキュメント編集手順（github-の画面上で行う場合）--docs)
+
+初回の場合は以下のドキュメントも併せて参照してください。
+
+- [コントリビューションに必要な権限を得る](?path=/docs/contributing-コントリビューションに必要な権限を得る--docs)
+
+## 編集するドキュメントファイルを探す
+
+### COMPONENTS に属するドキュメントを修正する場合
+
+`src/components/${コンポーネント名}/docs` 以下にあるmdxファイルを開きます。<br/>
+たとえば、Buttonのコンポーネントドキュメントを編集するには以下のmdxファイルを開きます。<br/>
+`src/components/Button/docs/Button.mdx`
+
+### COMPONENTS に属さないドキュメントを修正する場合
+
+`src/docs` 以下にあるmdxファイルを開きます。
+
+たとえば、このドキュメントを編集するには以下のドキュメントを開きます。<br/>
+`src/docs/contributing/documentation/ドキュメント編集手順.mdx`
+
+## ドキュメントを書く
+
+### ドキュメントの雛形
+
+ドキュメントを新規に作成する場合は、以下の雛形をコピー＆ペーストします。<br />
+ページタイトルは、ドキュメントのファイル名に揃えます。<br />
+Metaタグのtitleは必須属性です。サイドバーに表示されるものなので、ページタイトルに揃えます。
+
+```md
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title='ページタイトル' />
+
+# ページタイトル
+
+ドキュメントの本文
+```
+
+### ドキュメントの記法
+
+markdown記法（[GitHub flavored markdown](https://github.github.com/gfm/)）が利用できます。
+
+### ドキュメントのルール
+
+- 文体は敬体にします
+- コンポーネント名、コンポーネントの種類、コンポーネントの状態は、各コンポーネントのdocsの記述に合わせて英字表記にします
+
+{/*ドキュメントのルールの整備が必要*/}
+
+### 注釈をつける方法
+
+Notesコンポーネントを使用して、文中に注釈をつけることができます。
+
+注釈には、補足情報・注意・警告の3つの種類があります。<br/>
+また、サブタイトルを付けることができます。<br/>
+※ 注釈の本文(Notesタグで囲んでいる部分)は中括弧とバッククォートでくくることを推奨します。
+
+以下にそれぞれの注釈の使用例を示します。
+
+```md
+import { Notes } from 'src/docs/notes';
+
+<Notes subtitle="Buttonの補足情報">Buttonの補足情報詳細。</Notes>
+```
+
+<Notes subtitle="Buttonの補足情報">Buttonの補足情報詳細。</Notes>
+
+```md
+import { Notes, VARIANTS } from 'src/docs/notes';
+
+<Notes variant={VARIANTS.WARNING} subtitle="Buttonの注意情報">
+  {`注意情報の詳細。`}
+</Notes>
+```
+
+<Notes variant={VARIANTS.WARNING} subtitle="Buttonの注意情報">
+  {`注意情報の詳細。`}
+</Notes>
+
+```md
+import { Notes, VARIANTS } from 'src/docs/notes';
+
+<Notes variant={VARIANTS.DANGER} subtitle="Buttonの警告情報">
+  {`警告情報の詳細。`}
+</Notes>
+```
+
+<Notes variant={VARIANTS.DANGER} subtitle="Buttonの警告情報">
+  {`警告情報の詳細。`}
+</Notes>
+
+### 画像を挿入する方法
+
+ドキュメントファイルと同じディレクトリにあるimagesディレクトリに画像を入れます。imagesディレクトリがない場合は新規作成します。<br />
+画像の名前は任意で構いません。ただし日本語を含めません。<br />
+
+GitHubの画面上で画像を挿入する場合は、あらかじめ画像をアップロードする必要があります。<br />
+[画像をアップロードする - ドキュメント編集手順（GitHubの画面上で行う場合）](?path=/docs/contributing-documentation-ドキュメント編集手順（github-の画面上で行う場合）--docs#画像をアップロードする)を参照してから、下記の手順に従ってください。
+
+ドキュメントの先頭で、画像をインポートします。<br />
+画像の名前が「kintoneLogo.png」の場合、以下の文をドキュメントの先頭に記述することで画像をインポートできます。
+
+```ts
+import kintoneLogo from './images/kintoneTeam.png';
+```
+
+挿入したい箇所にimg要素で画像を指定します。<br />
+alt属性を使うことで画像の代替テキストを指定します。省略してはいけません。<br />
+width属性とheight属性を使うことで画像の大きさを指定できます。省略可能です。
+
+img要素を使って画像「kintoneLogo」を指定する場合は、以下のように書きます。<br />
+
+```html
+<img src={kintoneLogo} alt="kintoneのロゴ" width={300} height={200}/>
+```

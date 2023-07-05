@@ -1,0 +1,132 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as TabsStories from '../stories/Tabs.stories';
+import { Notes, VARIANTS } from '../../../docs/notes';
+
+import anatomy from './images/anatomy.png';
+import selectedFocused from './images/selected_focused.png';
+import selected from './images/selected.png';
+import unselectedFocused from './images/unselected_focused.png';
+import unselected from './images/unselected.png';
+
+<Meta title="Components/Tabs" of={TabsStories} />
+
+# Tabs
+
+## 概要
+
+関連性のあるコンテンツをグループ化し、情報を整理して提示する時に用います。
+かならずひとつのグループのみが表示され、他のグループは非表示になります。
+グループを切り替えるとき、画面遷移することなく即座に切り替わります。
+ユーザーは関連性の高いコンテンツに集中でき、適宜切り替えながら効率的にタスクを進めることができます。
+タブは認知付加軽減、情報取得・フォーム入力効率化の効果が期待できます。
+
+## 構成
+
+<img src={anatomy} alt="Tabs の Anatomy の図" />
+
+- Tab
+  - 長方形で構成され、ボーダーと背景色を持ちます
+  - 「選択」することでTabpanelに表示されるコンテンツのコンテキストを表す文言を持ちます
+- TabList
+  - Tabをグルーピングした要素です
+  - TabList内でTabが1つだけ「選択」状態となります
+- TabPanel
+  - 「選択」されたTabに対応する情報を表示します
+  - shadowを持たない場合もあります
+
+## 状態
+
+### 選択
+
+背景色が白色になります。
+TabList内のTabのうち、1つだけが「選択」状態です。
+
+<img src={selected} alt="選択状態のタブのスクリーンショット" />
+
+### 未選択
+
+背景色が灰色になります。
+TabList内のTabのうち「選択」状態以外のすべてのTabは「未選択」状態です。
+
+<img src={unselected} alt="未選択状態のタブのスクリーンショット" />
+
+### Hover
+
+マウスポインタの形状が変化します。
+
+### Focus
+
+#### キーボードフォーカス
+
+キーボードでフォーカスしたときには、ブラウザデフォルトのフォーカスインジケーターが表示されます。
+
+「選択」状態のTabにキーボードでフォーカスした場合：
+
+<img
+  src={selectedFocused}
+  alt="選択状態のタブにフォーカスしたスクリーンショット"
+/>
+
+「未選択」状態のTabにキーボードでフォーカスした場合：
+
+<img
+  src={unselectedFocused}
+  alt="未選択状態のタブにフォーカスしたスクリーンショット"
+/>
+
+<Notes variant={VARIANTS.WARNING}>
+  {`執筆時点で「キーボードフォーカス」のスタイルがサポートされているのは「ブックマーク」のタブのみです。`}
+</Notes>
+
+#### キーボード以外でのフォーカス
+
+キーボード以外でフォーカスしたときには、スタイルは変化しません。
+
+## 操作の仕様
+
+### マウス
+
+- Tabをクリックまたはタップすると、クリックしたTabが「選択」状態になり、他のTabは「未選択」状態になります
+
+### キーボード
+
+| 操作            | 効果                                                                                                                                                                                                        |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| →               | <ul><li>現在の Tab の直後の Tab を「選択」状態にして、フォーカスします</li><ul><li>他の Tab を「未選択」状態にします</li></ul><li>現在の Tab が TabList 末尾の Tab であれば、効果ありません</li></ul>       |
+| ←               | <ul> <li>現在の Tab の直前の Tab を「選択」状態にして、フォーカスします</li> <ul> <li>他の Tab を「未選択」状態にします</li> </ul> <li>現在の Tab が TabList 先頭の Tab であれば、効果ありません </li></ul> |
+| Tab             | <ul><li>Tab にフォーカスしていないときは「選択」状態の Tab にフォーカスします</li><li>Tab にフォーカスしているときは、TabPanel にフォーカスします</li></ul>                                                 |
+| Shift 　+　 Tab | <ul><li>Tab にフォーカスしていないときは「選択」状態の Tab にフォーカスします</li><li>Tab にフォーカスしているときは、TabList 直前のフォーカス可能な要素にフォーカスします</li></ul>                        |
+
+### スクリーンリーダー
+
+- Tabにフォーカスした時、タブの選択状態を読み上げます
+
+## 見た目の仕様
+
+### 幅
+
+- 幅には最小値があります。最大値はありません
+- 幅はタブ内部のテキストに合わせて伸長します
+
+### 高さ
+
+- 高さは固定値です
+
+### カーソル
+
+- カーソルはリンクポインターを表示します
+
+### クリック範囲
+
+- Tab全体がクリック可能範囲です
+
+### TabList の表示
+
+- TabListは基本的にTabPanelに対して左揃えで表示します
+- 右揃えの場合もあります
+
+<Notes variant={VARIANTS.WARNING}>
+  {`執筆時点で、右揃えの TabList はユーザー選択ダイアログのみです`}
+</Notes>
+
+<Stories />

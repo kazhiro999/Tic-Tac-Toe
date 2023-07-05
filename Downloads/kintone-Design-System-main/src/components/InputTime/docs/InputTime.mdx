@@ -1,0 +1,232 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as InputTimeStories from '../stories/InputTime.stories';
+import { Notes, VARIANTS } from '../../../docs/notes';
+
+import active from './images/active.png';
+import anatomy from './images/anatomy.png';
+import close from './images/close.png';
+import datetime from './images/datetime.png';
+import emptyTimeBox from './images/emptyTimeBox.png';
+import focused from './images/focused.png';
+import notation12 from './images/notation12.png';
+import notation24 from './images/notation24.png';
+import open from './images/open.png';
+
+<Meta title="Components/InputTime" of={InputTimeStories} />
+
+# InputTime
+
+[Figma](https://www.figma.com/file/0EL4UsBtC46KFG7WkKreiYi5/%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components?node-id=9410%3A71756)
+
+## 概要
+
+InputTimeは、特定の日付・時刻・日時をポップアップから選択できるテキストフィールドです。
+テキストフィールド内に直接入力することもできます。
+
+## 構成
+
+<img src={anatomy} alt="InputTimeのanatomyの図" />
+
+- TimeBox
+  - ユーザーが手動で時刻を入力できるテキストフィールドです
+- TimeInputText
+  - 時刻を示すテキストです
+  - 左からHour・Minute・AMPMの順に、0詰めで表示されます
+- Hour
+  - TimeInputTextで時にあたるテキストです
+- Minute
+  - TimeInputTextで分にあたるテキストです
+- AMPM
+  - TimeInputTextで午前または午後を区別するテキストです
+- ListboxPopup
+  - 時間を選択するためのドロップダウンです
+  - 30分単位で表示されます
+- ListboxOption
+  - 選択可能なアイテムです
+- ListboxOptionLabel
+  - ListboxOptionのテキストラベルです
+
+## 種類
+
+### Time (Notation 12)
+
+<img src={notation12} alt="notation12のスクリーンショット" />
+
+- 時刻を12時間表記で表示します
+- TimeInputTextの中には、Hour・Minuteの右隣にAMPMの表示がつきます
+
+### Time (Notation 24)
+
+<img src={notation24} alt="notation24のスクリーンショット" />
+
+- 時刻を24時間表記で表示します
+
+<Notes>
+  {`時間表示の変更は、グローバルヘッダーにある歯車アイコン「設定メニューを表示する」内の「個人設定」から「時刻表記」で変更ができます。デフォルトは24 時間表記です。`}
+</Notes>
+
+<Notes
+  variant={VARIANTS.WARNING}
+  children={`
+  Date と Time のフィールドがセットになった、Date&Time も存在します
+![Date&Timeのスクリーンショット](${datetime})
+`}
+/>
+
+## 状態
+
+### Empty (Timebox)
+
+<img src={emptyTimeBox} alt="Empty のスクリーンショット" width="200" />
+
+- TimeBoxに値が設定されていません
+- 一度Empty状態でなくなるとEmpty状態には戻りません
+
+### Close (ListboxPopup)
+
+<img src={close} alt="close状態のスクリーンショット" />
+
+- ListboxPopupは閉じています
+- TimeBoxにTimeInputTextが入力されます
+
+### Open (ListboxPopup)
+
+<img src={open} alt="open状態のスクリーンショット" />
+
+- ListboxPopupは開いています
+
+### Focused（Hour / Minute / AMPM）
+
+<img src={focused} alt="focused状態のスクリーンショット" />
+
+- Hour、Minute、AMPMのいずれかをフォーカスしています
+
+### Active（ListboxOption）
+
+<img src={active} alt="active状態のスクリーンショット" />
+
+- ListboxOptionをホバーまたはフォーカスしています
+
+## サイズ
+
+| 種類               | サイズ      | スクリーンショット                                            |
+| ------------------ | ----------- | ------------------------------------------------------------- |
+| Time (Notation 12) | 88.77 \* 32 | <img src={notation12} alt="notation12のスクリーンショット" /> |
+| Time (Notation 24) | 56.75 \* 32 | <img src={notation24} alt="notation24のスクリーンショット" /> |
+
+## 操作の仕様
+
+### マウス
+
+- TimeInputTextをクリック
+  - ListboxPopupが開閉します※
+- ListboxOptionにホバー
+  - そのListboxOptionがActive状態になりフォーカスがあたります
+- ListboxOptionをクリック
+  - TimeBoxの値に、そのListboxOptionが選択されます
+  - ListboxPopupが閉じます
+- ListboxPopupの外をクリック
+  - ListboxPopupが閉じます
+
+<Notes
+  variant={VARIANTS.WARNING}
+  children="
+ListboxPopup が Open 状態になった直後、ListOption が Active 状態になるかどうかは環境による
+
+- スクリーンリーダー利用している時：ListOption が Active 状態になる
+- スクリーンリーダーを利用していない時：ListOption が Active 状態にならない"
+/>
+
+### キーボード
+
+#### 全体のフォーカス順序
+
+- Tabキーを押すと、Hour、Minute、AMPM、見えない開閉ボタンの順にフォーカスされます
+- 矢印左右キーを押すと、Hour、Minute、AMPMの順にフォーカスされます
+
+#### 「Hour」「Minutes」にフォーカスしているとき
+
+- 矢印上下キーを押すと、ListboxPopupを開かずに値が変更されます
+  - ↓ キーで値が1増えます
+  - ↑ キーで値が1減ります
+  - 値が最大値より大きくなると、値が0に変更されます
+  - 値が最小値より小さくなると、値が最大値に変更されます
+- Homeキーを押すと、最小値に変更されます
+- Endキーを押すと、最大値に変更されます
+- 数字キーを押すと、数値が入力されます
+  - 値が最大値より大きくなると、十の位が0に変更されます
+
+#### 「AMPM」にフォーカスしているとき
+
+- 矢印上下キーを押すと、値をListboxPopupを開かずに値が切り替わります
+- aキーを押すと、AMに切り替わります
+- pキーを押すと、PMに切り替わります
+
+#### 「見えない開閉ボタン」にフォーカスしているとき
+
+- EnterキーまたはSpaceキーまたは矢印上下キーを押すと、ListboxPopupが開きます。
+
+<Notes
+  variant={VARIANTS.WARNING}
+  children="
+ListboxPopup が Open 状態になった直後、ListOption が Active 状態になるかどうかは環境による
+
+- スクリーンリーダー利用している時：ListOption が Active 状態になる
+- スクリーンリーダーを利用していない時（Reactone）：ListOption が Active 状態になる
+- スクリーンリーダーを利用していない時（kintone Design System の Storybook）：ListOption が Active 状態にならない"
+/>
+
+#### 「ListOption」にフォーカスしているとき
+
+- 矢印上下キーを押すと、Active状態ListboxOptionが移動し、そのListboxOptionにフォーカスがあたります
+- EnterキーまたはSpaceキーを押すと、ListboxOptionを選択できます。フォーカスはHourに移動します
+- ESCキーを押すと、ListboxPopupが閉じます。フォーカスはHourに移動します
+
+#### 「ListboxPopup」が閉じるとき
+
+- ListboxOptionにフォーカスしているとき、フォーカスを移動するとListboxPopupは閉じます
+- ListboxOptionにフォーカスしていないとき、Hour、Minute、AMPM以外にフォーカスを移動するとListboxPopupは閉じます
+
+### スクリーンリーダー
+
+- Timebox内にフォーカスが移動すると、Hour、Minutes、AMPMを総称するTimeboxのLabelが読み上げられます
+  - 「時刻」というaria-labelが設定されています
+- Hour、Minutes、AMPMにフォーカスした時、編集可能であること、値が変更できることを通知します
+- 見えないボタンにフォーカスした時、ListboxPopupがopenかcloseかを読み上げます
+
+## 見た目の仕様
+
+### 横幅
+
+- TimeBoxの横幅は固定です
+
+### 高さ
+
+- TimeBoxの高さは固定です
+- ListboxOptionには最大の高さがありListboxOptionの個数が最大の高さを超えるとき、ListboxOptionはスクロールします
+
+### カーソル
+
+- TimeBoxにhoverしたとき、カーソルはI-beamになります
+- ListboxOptionにhoverしたとき、カーソルはlink pointerになります
+
+### フォーカスインジケーター
+
+- Hour・Minute・AMPMの順に濃い青色の背景色でフォーカスがあたっている間、それらを含んでいるTimeBoxの背景色は薄い青色で表示されます。
+- フォーカスのあたったListboxOptionは背景色が薄い青色となります
+- ListboxOptionにフォーカスがあたっているときは、TimeBoxにフォーカスはあたりません
+
+### クリック範囲
+
+- TimeBoxとListboxPopupがクリック範囲です
+
+### 位置
+
+- ListboxOptionが画面外にある場合は、画面に収まる位置までスクロールされます
+
+### ListboxPopup のスクロール
+
+- ListboxPopupを開いた直後、ListboxPopupは、入力されている時刻に最も近いListOptionがListboxPopupの中央に見える位置までスクロールされます。
+  - Empty状態のときはスクロールされません。
+
+<Stories />

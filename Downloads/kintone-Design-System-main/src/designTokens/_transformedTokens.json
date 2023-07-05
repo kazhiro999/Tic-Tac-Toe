@@ -1,0 +1,158 @@
+{
+  "color": {
+    "text": {
+      "white": {
+        "value": "#ffffff",
+        "type": "color"
+      },
+      "accent": {
+        "value": "#0176D3",
+        "type": "color"
+      },
+      "neutral": {
+        "disabled": {
+          "value": "#747474",
+          "type": "color"
+        }
+      }
+    },
+    "background": {
+      "accent": {
+        "default": {
+          "value": "#0176D3",
+          "type": "color"
+        },
+        "hover": {
+          "value": "#0B5CAB",
+          "type": "color"
+        }
+      },
+      "danger": {
+        "default": {
+          "value": "#D83A00",
+          "type": "color"
+        },
+        "hover": {
+          "value": "#AA3001",
+          "type": "color"
+        }
+      },
+      "action": {
+        "default": {
+          "value": "#FAFCFF",
+          "type": "color"
+        },
+        "hover": {
+          "value": "#C8D6DF",
+          "type": "color"
+        }
+      },
+      "neutral": {
+        "disabled": {
+          "value": "#c9c9c9",
+          "type": "color"
+        }
+      }
+    },
+    "border": {
+      "action": {
+        "value": "#E2E4E7",
+        "type": "color"
+      }
+    }
+  },
+  "typography": {
+    "lineHeight": {
+      "text": {
+        "value": "150%",
+        "type": "lineHeights"
+      }
+    },
+    "fontSize": {
+      "button": {
+        "large": {
+          "value": "1rem",
+          "type": "fontSizes"
+        },
+        "medium": {
+          "value": "1rem",
+          "type": "fontSizes"
+        },
+        "small": {
+          "value": "0.75rem",
+          "type": "fontSizes"
+        }
+      }
+    },
+    "fontFamily": {
+      "text": {
+        "en": {
+          "value": "'HelveticaNeueW02-45Ligh', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif",
+          "type": "fontFamilies"
+        },
+        "ja": {
+          "value": "'メイリオ', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif",
+          "type": "fontFamilies"
+        },
+        "zh": {
+          "value": "'微软雅黑', 'Microsoft YaHei', '新宋体', NSimSun, STHeiti, Hei, 'Heiti SC', sans-serif",
+          "type": "fontFamilies"
+        },
+        "zhTW": {
+          "value": "'微軟正黑體', 'Microsoft JhengHei', '新宋体', NSimSun, STHeiti, Hei, 'Heiti SC', sans-serif",
+          "type": "fontFamilies"
+        }
+      }
+    }
+  },
+  "spacing": {
+    "button": {
+      "large": {
+        "value": "1rem",
+        "type": "spacing"
+      },
+      "medium": {
+        "value": "1rem",
+        "type": "spacing"
+      },
+      "small": {
+        "value": "0.5rem",
+        "type": "spacing"
+      }
+    }
+  },
+  "size": {
+    "button": {
+      "large": {
+        "minWidth": {
+          "value": "10rem",
+          "type": "sizing"
+        },
+        "height": {
+          "value": "3rem",
+          "type": "sizing"
+        }
+      },
+      "medium": {
+        "minWidth": {
+          "value": "7.5rem",
+          "type": "sizing"
+        },
+        "height": {
+          "value": "2.5rem",
+          "type": "sizing"
+        }
+      },
+      "small": {
+        "minWidth": {
+          "value": "6rem",
+          "type": "sizing"
+        },
+        "height": {
+          "value": "2rem",
+          "type": "sizing"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title='gettingStarted/developing/Storybook の使い方' />
+
+# Storybook の使い方
+
+kintone Design Systemでは [Storybook](https://storybook.js.org/) を利用したコンポーネントカタログを提供しています。
+
+## story の確認方法
+
+- 以下のコマンドを実行すると、ブラウザが自動起動してStorybookが表示されます。
+
+  ```bash
+  npm run storybook
+  ```
+
+## CI
+
+- chromaticをCIで回しており、スナップショットに差分がある場合はGitHubのCIステータスで確認が必要となります。
+- 差分に問題がない場合は、acceptしてスナップショットの基準を更新します。
+
+## story の作り方
+
+- [CSF3](https://storybook.js.org/blog/component-story-format-3-0/)で記述します。
+- シンプルに表示を確認する目的のstoryはXXX.stories.tsxファイルに記述します。
+- 動作を検証する目的のstoryはXXX.test.stories.tsxファイルに記述します。
+- 機能が大きい場合は、複数ファイルに分割します。
+- 影響範囲を狭めるためにも、screenを使わずにwithin(canvasElement)を使います。 (dialogなどはscreenが必要になります)
+- 要素の取得は `getBy*` ではなく `await findBy*` を使って期待する状態を待ちます。
+  - 要素が消えることを待つ場合は以下のパターンを推奨します。
+
+    ```ts
+    await waitFor(() => {
+      expect(queryBy*(...)).toBeNull();
+    })
+    ```
+
+- storyが期待する状態をexpectで確認していくと良いでしょう。  
+  エラーが発生したときにUI testがエラーとなります。
+- queriesとしてByTestIdを使う場合は、他のqueriesで取得できないかを意識しましょう。([参考](https://testing-library.com/docs/react-testing-library/cheatsheet/#queries))
+  - queriesは第二引数でより条件を絞るためのoptionが使えますので、あわせて利用するとよいかもしれません。
+- コールバックハンドラーなどpropsの呼び出しを確認したい場合は [actions アドオン](https://storybook.js.org/docs/react/essentials/actions)を利用します。  
+  利用方法は主に以下になります。
+  - storiesファイルのmeta(default export)にargTypesを追加する
+  - アドオンからaction関数をimportしてargsに渡す
+  - (.storybook/preview.tsに正規表現で指定する方法もありますが、kDSではうまく動作できず見送っています。)
+
+## story のドキュメント
+
+- コンポーネントを説明するドキュメントを準備します。
+- 編集手順の詳細は [ドキュメント編集の概要](./src/docs/contributing/documentation/ドキュメント編集の概要.mdx) を参照してください。

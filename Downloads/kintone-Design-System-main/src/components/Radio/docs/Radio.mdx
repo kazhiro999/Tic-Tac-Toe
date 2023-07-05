@@ -1,0 +1,161 @@
+import { Stories, Meta } from '@storybook/blocks';
+import * as RadioStories from '../stories/Radio.stories';
+
+import anatomy from './images/anatomy.png';
+import checkedDisabled from './images/checked_disabled.png';
+import checkedFocused from './images/checked_focused.png';
+import checked from './images/checked.png';
+import uncheckedDisabled from './images/unchecked_disabled.png';
+import uncheckedFocused from './images/unchecked_focused.png';
+import unchecked from './images/unchecked.png';
+
+<Meta title="Components/Radio" of={RadioStories} />
+
+# RadioButton
+
+[Figma](https://www.figma.com/file/0EL4UsBtC46KFG7WkKreiYi5/%F0%9F%8E%A8--%F0%9F%92%BB--kintone-UI-Design-Components?node-id=9410%3A69637)
+
+## 概要
+
+RadioButtonは複数のオプションの中から1つだけオプションをチェックできるリストです。
+
+## 構成
+
+<img src={anatomy} alt="anatomyの図" />
+
+- RadioButtonContainer
+  - RadioButtonのクリック領域です
+  - RadioButtonInputとRadioButtonLabelを持ちます
+- RadioButtonInput
+  - RadioButtonの入力状態を示します
+- RadioButtonLabel
+  - Check/Uncheck状態にする情報を示すテキストです
+  - RadioButtonInputの右に表示されます
+
+## 状態
+
+### Unchecked
+
+<img src={unchecked} alt="Unchecked のスクリーンショット" />
+
+- チェックされていない状態です
+- RadioButtonInputには、灰色の円が表示されます
+- 文字色は黒色です
+
+### Checked
+
+<img src={checked} alt="Checked のスクリーンショット" />
+
+- チェックされている状態です
+- RadioButtonInputには、灰色の円の中に青色に塗りつぶされた円が表示されます
+- 文字色は黒色です
+
+### Disabled
+
+DisabledかつUnchecked：
+
+<img
+  src={uncheckedDisabled}
+  alt="Disabled かつ Unchecked のスクリーンショット"
+/>
+
+DisabledかつChecked：
+
+<img src={checkedDisabled} alt="Disabled かつ Checked のスクリーンショット" />
+
+- 無効な状態です
+- フォーカスできません
+- Unchecked状態とChecked状態を切り替えることはできません
+- Disabled状態かつChecked状態のとき、RadioButtonInputには、灰色の円が表示されます
+- Disabled状態かつUnchecked状態のとき、RadioButtonInputには、灰色の円の中に灰色に塗りつぶされた円が表示されます
+- 文字色は灰色です
+
+## 操作の仕様
+
+### マウス
+
+Disabled状態ではないとき：
+
+- RadioContainerをクリック
+  - クリックしたRadioButtonがChecked状態になりフォーカスします
+  - 他のRadioButtonはUnchecked状態になります
+
+### キーボード
+
+Disabled状態ではないとき：
+
+- Tabキー
+  - RadioGroup外にフォーカスしているときは、Checked状態のRadioButtonにフォーカスします
+  - RadioGroup内にフォーカスしているときは、RadioGroup外の要素にフォーカスします
+- スペースキー
+  - フォーカスしているRadioButtonがUnchecked状態のときChecked状態になります
+  - 他のRadioButtonはUnchecked状態になります
+- ↓ キーまたは → キー
+  - 現在のRadioButtonがUnchecked状態になります
+  - RadioGroup内の次のRadioButtonがChecked状態になりフォーカスします<br />
+    ただし、現在のRadioButtonがRadioGroup内の末尾のRadioButtonであるときは、先頭のRadioButtonがChecked状態になりフォーカスします
+- ↑ キーまたは ← キー
+  - 現在のRadioButtonがUnchecked状態になります
+  - RadioGroup内の前のRadioButtonがChecked状態になりフォーカスします<br />
+    ただし、現在のRadioButtonがRadioGroup内の先頭のRadioButtonであるときは、末尾のRadioButtonがChecked状態になりフォーカスします
+
+### スクリーンリーダー
+
+- RadioButtonLabelを読み上げます
+- Unchecked / Checked状態を読み上げます
+- Disabled状態を読み上げます
+
+## 見た目の仕様
+
+### 幅
+
+- RadioButtonLabelの幅は文字列長にあわせて伸長します。最大幅はありません
+
+### 高さ
+
+- 高さは固定で20pxです
+
+### カーソル
+
+- Disabled状態でないときにホバーすると、カーソルがpointerになります
+- Disabled状態のときにホバーすると、カーソルがnot-allowedになります
+
+### フォーカスインジケーター
+
+- RadioButtonContainerに青色の枠がつきます
+
+<img src={uncheckedFocused} alt="Unchecked のフォーカスインジケーター" />
+<img src={checkedFocused} alt="Checked のフォーカスインジケーター" />
+
+### クリック範囲
+
+- RadioButtonContainerがクリック範囲です
+
+## 複数のオプションから 1 つを選択するコンポーネントの使い分け
+
+複数のオプションから1つを選択するコンポーネントには以下がある。
+
+- RadioButton
+- Dropdown
+- Combobox
+
+これらのコンポーネントは以下の観点をふまえて総合的に使い分ける。
+
+- **オプションの数**
+  - オプションが少なければ（5個以下）、RadioButtonを推奨する
+  - オプションが多ければ（7個以上）、Dropdownを推奨する
+  - オプションが6個のとき、強く推奨するコンポーネントはない。他の観点も参照して判断する
+- **デフォルトの推奨オプション**
+  - デフォルトの推奨オプションがなければ、RadioButtonを推奨する
+  - デフォルトの推奨オプションがあれば、Dropdownを推奨する
+- **オプション同士を詳細に比較する必要性**
+  - オプションを詳細に比較する場合（例：金額と人数など複数の数量）は、RadioButtonを推奨する
+  - オプションを詳細に比較しない場合（例：曜日・月・単純な数量）は、Dropdownを推奨する
+- **迅速な選択の必要性（アンケートなど）**
+  - 迅速な選択が必要な場合は、RadioButtonを推奨する
+  - 迅速な選択が必要でない場合は、Dropdownを推奨する
+- **値をコピー＆ペーストする必要性**
+  - 値をコピー＆ペーストする必要がある場合は、Comboboxを推奨する
+  - 値をコピー＆ペーストする必要がない場合は、RadioButtonまたはDropdownを推奨する
+
+<Stories />

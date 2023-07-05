@@ -1,0 +1,31 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title='gettingStarted/designing/kintone-ui 利用マニュアル(Figma)' />
+
+# kintone-ui 利用マニュアル(Figma)
+
+kDSチームで提供・管理している[kintone-ui](https://www.figma.com/file/700C41AgyFQyF4DT0X7jyi/kintone-Component-Library?type=design)を使う際のマニュアルです。<br/>
+当ファイルはFigmaの「[kintone Design Team](https://www.figma.com/files/1149206479309431169/team/1149213525252343066) > [kintone_DesignSystem](https://www.figma.com/files/1149206479309431169/project/66109342) > [kintone-ui](https://www.figma.com/file/700C41AgyFQyF4DT0X7jyi/kintone-Component-Library?type=design)」から参照できます。
+利用時の注意事項は以下の通りです。
+
+## 1. コンポーネントライブラリのマスターファイルには触らない
+
+kDSでは、kintone-uiを「Single Source of Truth（信頼できる唯一の情報源）」としてマスターファイルと位置付けています。<br/>
+つまり、利用者全員がこのFigmaに基づいて意思決定を行うことを保証しています。<br/>
+もし無作為に編集されると過去に為されてきた決定にズレが生じてしまうことになるので、<br/>
+**利用者は kintone-ui のオブジェクトやコンポーネントにかけられたロックを外さないでください。**
+
+## 2. デザインバックログで必要になった際には、Assets からコピー＆ペーストで呼び出す
+
+kintone-uiはライブラリ公開されています。<br/>
+**利用者は以下の手順を踏んでください。**
+
+1. 編集中ファイルで左サイドバーにあるAssetsをクリック
+2. 右上のライブラリアイコンをクリック
+3. ライブラリモーダル内のYour teamsからkintone-uiのトグルボタンをONにする
+4. 左サイドバー内に表示されたコンポーネントから該当物をドラッグ＆ドロップする
+
+## 3. 何か編集が必要になった際には、kDS に相談
+
+kintone-uiで修正や追加がある場合は、kDSチームの [Slack チャンネル](https://cybozu.slack.com/archives/C02NWSGMZB8) にご連絡ください。<br/>
+**作業者はヘッダー中央の下矢印アイコンから「Create branch」を選択し、必ずブランチを切ってから作業してください。**

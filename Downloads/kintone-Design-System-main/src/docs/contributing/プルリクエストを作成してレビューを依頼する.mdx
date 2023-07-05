@@ -1,0 +1,39 @@
+import { Meta } from '@storybook/addon-docs';
+
+import pullRequest from './images/pullRequest.png';
+
+<Meta title='contributing/プルリクエストを作成してレビューを依頼する' />
+
+# プルリクエストを作成してレビューを依頼する
+
+## プルリクエストを作成する
+
+### プルリクエストのタイトルを入力する
+
+プルリクエストのタイトルは、具体的にしてください。<br/>
+例：「ButtonコンポーネントのHover状態に関するdocsを修正」
+
+### プルリクエストの Description に必要事項を記入する
+
+テンプレートに沿って必要事項を記入してください。<br/>
+「変更内容」の部分はレビュー時や、kDSの利用者がアップデート内容を確認する時などで参照されるので詳細に書いてください。<br/>
+「変更内容」以外の部分で記載すべき内容が不明な場合はレビュー依頼時にその旨をお伝えください。kDSチームで適宜判断して入力します。
+
+<img
+  src={pullRequest}
+  alt="プルリクエストのDescription入力欄のスクリーンショット"
+/>
+
+## レビューを依頼する
+
+### Slack でメンションする
+
+[Slack の #kintone-design-system_kds チャンネル](https://cybozu.slack.com/archives/C02NWSGMZB8)で@kintone-design-system-team宛にメンションしてレビューを依頼します。
+
+雛型を示します。
+
+```text
+@kintone-design-system-team
+コンポーネントドキュメントを更新したのでレビューをお願いします。
+プルリクエスト: https://github.com/kintone-private/kintone-Design-System/pull/xxxx
+```
